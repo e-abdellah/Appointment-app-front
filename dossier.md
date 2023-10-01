@@ -1,14 +1,14 @@
-# Voornaam Familienaam (Studentennummer)
+# Abdellah El Halimi Merroun (202291491)
 
 > Duid aan welke vakken je volgt en vermeld voor deze vakken de link naar jouw GitHub repository. In het geval je slechts één vak volgt, verwijder alle inhoud omtrent het andere vak uit dit document.
 > Lees <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet> om te weten hoe een Markdown-bestand opgemaakt moet worden.
 > Verwijder alle instructies (lijnen die starten met >).
 
-- [ ] Front-end Web Development
-  - <GITHUB_REPO_LINK_HIER>
+- [x] Front-end Web Development
+  - https://github.com/Web-IV/2324-frontendweb-AbdellahElh
   - <LINK_ONLINE_VERSIE_HIER>
-- [ ] Web Services: GITHUB URL
-  - <GITHUB_REPO_LINK_HIER>
+- [x] Web Services: GITHUB URL
+  - https://github.com/Web-IV/2324-webservices-AbdellahElh
   - <LINK_ONLINE_VERSIE_HIER>
 
 **Logingegevens**
@@ -29,7 +29,7 @@
 
 ## API calls
 
-> Maak hier een oplijsting van alle API cals in jouw applicatie. Groepeer dit per entiteit. Hieronder een voorbeeld.
+> Maak hier een oplijsting van alle API calls in jouw applicatie. Groepeer dit per entiteit. Hieronder een voorbeeld.
 > Dit is weinig zinvol indien je enkel Front-end Web Development volgt, verwijder dan deze sectie.
 > Indien je als extra Swagger koos, dan voeg je hier een link toe naar jouw online documentatie. Swagger geeft nl. exact (en nog veel meer) wat je hieronder moet schrijven.
 
