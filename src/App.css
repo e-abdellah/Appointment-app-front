@@ -1,0 +1,58 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  background-color: #1f2937;
+  color: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.navbar-items {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-item:hover {
+  text-decoration: underline;
+}
+
+.signin-button {
+  background-color: #6366f1;
+  color: #f8fafc;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.darkmode-container {
+  display: grid;
+  place-content: center;
+  padding: 1rem;
+}
+
+.slider-toggle {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 9999px;
+}
+
+.toggle-button {
+  text-align: center;
+  font-size: small;
+  font-weight: medium;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding-left: .75rem; 
+  padding-right: .875rem; 
+  padding-top: .75rem; 
+  padding-bottom:.375rem; 
+}

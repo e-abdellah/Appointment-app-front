@@ -7,6 +7,7 @@ let PATIENT_DATA = [
     postalCode: "54321",
     city: "Metropolitan City",
     condition: "Chest pain and shortness of breath",
+    birthdate: "2001-01-01T00:00:00.000Z"
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ let PATIENT_DATA = [
     postalCode: "12345",
     city: "Urbanville",
     condition: "Toothache and cavity",
+    birthdate: "2002-02-02T00:00:00.000Z"
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ let PATIENT_DATA = [
     postalCode: "67890",
     city: "Cityscape",
     condition: "Knee pain and difficulty walking",
+    birthdate: "2003-03-03T00:00:00.000Z"
   },
 ];
 

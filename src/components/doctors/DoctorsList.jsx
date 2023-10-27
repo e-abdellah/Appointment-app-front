@@ -5,7 +5,7 @@ const DoctorList = () => {
   const doctors = DOCTOR_DATA;
   
   return (
-    <div className="grid mt-3">
+    <div className="grid mt-3 ml-20">
       <div className="d-flex flex-column g-3">
         {doctors
           .sort((a, b) =>
