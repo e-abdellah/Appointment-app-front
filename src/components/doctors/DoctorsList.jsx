@@ -1,28 +1,19 @@
-import React from 'react';
+import React from "react";
+import DoctorCard from "./DoctorCard";
 import { DOCTOR_DATA } from "../../api/mock_data";
+import "./DoctorList.css";
 
-const DoctorList = () => {
-  const doctors = DOCTOR_DATA;
-  
+const DoctorCards = () => {
   return (
-    <div className="grid mt-3 ml-20">
-      <div className="d-flex flex-column g-3">
-        {doctors
-          .sort((a, b) =>
-            a.doctor.toUpperCase().localeCompare(b.doctor.toUpperCase())
-          )
-          .map((d) => (
-            <div className="card bg-light border-dark mb-4" key={d.id}>
-              <div className='card-body'>
-                <h5 className='card-title'>{d.doctor}</h5>
-                <p>Specialty: {d.specialty}</p>
-                <p>Number of patients: {d.numberOfPatients}</p>
-              </div>
-            </div>
-          ))}
+    <div className="doctorCards">
+      <h2 className="doctorCards__title">Some of our Great Doctors</h2>
+      <div className="doctorCards__list">
+        {DOCTOR_DATA.map((doctor) => (
+          <DoctorCard key={doctor.id} doctor={doctor} />
+        ))}
       </div>
     </div>
   );
 };
 
-export default DoctorList;
+export default DoctorCards;

@@ -10,7 +10,8 @@ const PatientList = () => {
   };
 
   return (
-    <div className="grid mt-20 ml-20"> {/* Add left margin */}
+    <div className="grid mt-20 mr-20 mb-20 ml-20"> 
+      <h1>Patient List</h1>
       <div className="d-flex flex-column g-3">
         {patients
           .sort((a, b) =>

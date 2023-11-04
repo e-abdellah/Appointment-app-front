@@ -3,23 +3,26 @@ import { APPOINTMENT_DATA } from "./api/mock_data";
 import PatientList from "./components/patients/PatientList";
 import DoctorList from "./components/doctors/DoctorsList";
 import BookingForm from "./components/patients/BookingForm";
-import SideBar from "./components/SideBar";
-import DarkMode from "./components/DarkMode";
-import NavBar from "./components/NavBar";
+import SideBar from "./components/navigation/SideBar";
+import NavBar from "./components/navigation/NavBar";
+import FindADoctor from "./components/pages/FindADoct/FindADoctor";
+import DoctorPage from "./components/pages/DoctorPage/DoctorPage";
 
 function App() {
   return (
-    <>
+    <div className="App">
       <NavBar />
-      <SideBar />
+      {/* <SideBar /> */}
       {/* <DarkMode /> */}
-      {APPOINTMENT_DATA.map((appointment, id) => (
+      {/* {APPOINTMENT_DATA.map((appointment, id) => (
         <Appointment key={id} {...appointment} />
-      ))}
-      <PatientList />
+      ))} */}
+      <FindADoctor />
       <DoctorList />
+      <PatientList />
+      <DoctorPage />
       <BookingForm />
-    </>
+    </div>
   );
 }
 

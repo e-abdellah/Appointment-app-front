@@ -30,7 +30,11 @@ const Patient = ({
             <p>Reason for last visit: {condition}</p>
           </div>
         )}
-        <button className="btn btn-primary" onClick={handleDelete}>
+        <button
+          className="btn btn-primary"
+          onClick={handleDelete}
+          style={{ backgroundColor: "var(--glacier-500)" }}
+        >
           Delete patient
         </button>
       </div>

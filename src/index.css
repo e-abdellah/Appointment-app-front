@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --glacier-50: #f1f8fa;
+  --glacier-100: #dceef1;
+  --glacier-200: #bddde4;
+  --glacier-300: #8fc5d1;
+  --glacier-400: #6eafbf;
+  --glacier-500: #3e889c;
+  --glacier-600: #377083;
+  --glacier-700: #325c6c;
+  --glacier-800: #2f4d5b;
+  --glacier-900: #2b424e;
+  --glacier-950: #182a34;
+}
+
+body {
+  background-color:var(--glacier-100); 
+}
+

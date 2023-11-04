@@ -1,0 +1,32 @@
+.doctorCards{
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.doctorCards__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.doctorCards :first-child {
+  margin-left: 5%;
+}
+
+.doctorCards :last-child {
+  margin-right: 10%;
+}
+
+.doctorCards__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  width: 100%;
+  color: #333;
+  
+}
+ .doctorCards__title h2{
+  margin-top: 2rem;
+ }

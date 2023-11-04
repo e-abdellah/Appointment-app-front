@@ -6,28 +6,16 @@ import "../App.css";
 const TOGGLE_CLASSES =
   "text-sm font-medium flex items-center gap-2 px-3 md:pl-3 md:pr-3.5 py-3 md:py-1.5 transition-colors relative z-10";
 
-const DarkMode = () => {
+const SliderToggle = () => {
   const [selected, setSelected] = useState("light");
 
-  return (
-    <div
-      className={`grid place-content-center px-4 transition-colors ${
-        selected === "light" ? "bg-slate-950" : "bg-slate-900"
-      }`}
-      style={{ height: "fit-content", width: "fit-content" }} // Adjust the size here
-    >
-      <SliderToggle selected={selected} setSelected={setSelected} />
-    </div>
-  );
-};
-
-const SliderToggle = ({ selected, setSelected }) => {
   return (
     <div className="relative flex w-fit items-center rounded-full">
       <button
         className={`${TOGGLE_CLASSES} ${
           selected === "light" ? "text-white" : "text-slate-300"
         }`}
+        style={{ transform: "scale(0.75)" }}
         onClick={() => {
           setSelected("light");
         }}
@@ -39,6 +27,7 @@ const SliderToggle = ({ selected, setSelected }) => {
         className={`${TOGGLE_CLASSES} ${
           selected === "dark" ? "text-white" : "text-slate-800"
         }`}
+        style={{ transform: "scale(0.75)" }}
         onClick={() => {
           setSelected("dark");
         }}
@@ -61,4 +50,4 @@ const SliderToggle = ({ selected, setSelected }) => {
   );
 };
 
-export default DarkMode;
+export default SliderToggle;

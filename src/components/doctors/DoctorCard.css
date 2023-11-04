@@ -1,0 +1,74 @@
+.doctorCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--glacier-200);
+}
+
+.doctorCard__photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 70%;
+}
+
+.doctorCard__name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.doctorCard__specialty-rating-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.doctorCard__specialty {
+  display: flex;
+  background-color: var(--glacier-300);
+  color: var(--glacier-100);
+  font-weight: bold;
+  padding: 5px;
+  margin-top: 10px;
+  margin-right: 30px;
+  border-radius: 5px;
+}
+
+.doctorCard__rating {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.doctorCard__rating > div {
+  margin-left: 10px;
+}
+
+.doctorCard__hospital-button-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.doctorCard__button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: black;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.doctorCard__button:hover {
+  background-color: var(--glacier-400);
+  color: white;
+}
