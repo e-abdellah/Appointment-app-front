@@ -1,49 +1,50 @@
-import React from 'react'
-import './navBar.css'
+import React from "react";
+import "./navBar.css";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div className='app__navbar'>
-        <div className='app__navBar-links'>
-            <div className='app__navBar-links_logo'>
-              <img src="../../../assets/imgs/logo.png" alt="logo" />
-            </div>
-            <div className='app__navBar-links_container'>
-            <p><a href="#home">Home</a></p>
-            <p><a href="#services">Services</a></p>
-            <p><a href="#FaD">Find a Doctor</a></p>
-            <p><a href="#contact">Contact</a></p>
-
-            </div>
+    <div className="app__navbar">
+      <div className="app__navBar-links">
+        <div className="app__navBar-links_logo">
+          <img src="../../../assets/imgs/logo.png" alt="logo" />
         </div>
-        <div className='app__navBar-sign'>
-          <p>Sign in</p>
-          <button type='button'>Sign Up</button>
+        <div className="app__navBar-links_container">
+          <NavLink
+            to="/"
+            className="app__navBar-links_container_link"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/services"
+            className="app__navBar-links_container_link"
+          >
+            Services
+          </NavLink>
+          <NavLink
+            to="/findADoctor"
+            className="app__navBar-links_container_link"
+          >
+            Find a Doctor
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className="app__navBar-links_container_link"
+          >
+            Contact
+          </NavLink>
         </div>
       </div>
-  )
-}
+      <div className="app__navBar-sign">
+        <p>Sign in</p>
+        <button type="button">Sign Up</button>
+      </div>
+    </div>
+  );
+};
 
-export default NavBar
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default NavBar;
 
 // import React from "react";
 // import { FaSignInAlt, FaSearch } from "react-icons/fa";

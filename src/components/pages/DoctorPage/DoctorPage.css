@@ -1,20 +1,68 @@
-.doctorPage {
+.doctor-page {
   display: flex;
-  justify-content: space-between;
-  padding: 2rem;
+  flex-direction: column;
+  align-items: center;
 }
 
-.doctorPage__left {
-  flex: 1;
-  margin-right: 2rem;
+.doctor-page__header {
+  /* background-color: #007BFF;
+  color: white; */
+  padding: 20px;
+  text-align: center;
+  width: 100%;
 }
 
-.doctorPage__timeSlot {
+.doctor-page__title {
+  margin: 0;
+}
+
+.doctor-page__main {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 80%;
 }
 
-.doctorPage__right {
-  flex: 1;
+.doctor-page__profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.doctor-page__photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.doctor-page__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-page__name {
+  margin: 0;
+  font-size: 24px;
+}
+
+.doctor-page__specialty {
+  margin: 0;
+  color: #6c757d;
+}
+
+.doctor-page__about {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.doctor-page__booking {
+  width: 100%;
+}
+
+.doctor-page__time-slot {
+  margin-bottom: 10px;
 }

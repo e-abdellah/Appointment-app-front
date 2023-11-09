@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem 6rem;
-  position: fixed;
+  position: fixed; 
   width: 100%;
   background-color: var(--glacier-800); 
   height: 7.5vh;
@@ -35,6 +35,26 @@
   flex-direction: row;
 }
 
+.app__navBar-links_container a {
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  text-transform: capitalize;
+  margin: 0 1rem;
+  cursor: pointer;  
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.app__navBar-links_container a.active {
+  color: #ff4820; 
+}
+
+.app__navBar-links_container a:hover {
+  color: #feaa98; 
+}
+
 .app__navBar-sign {
   display: flex;
   justify-content: flex-end;
@@ -44,8 +64,7 @@
   margin-bottom: 10px;
 }
 
-.app__navBar-links_container p, 
-.app__navBar-sign p{
+.app__navBar-sign p {
   color: #fff;
   font-weight: 500;
   font-size: 18px;
@@ -55,8 +74,7 @@
   cursor: pointer;  
 }
 
-.app__navBar-sign button,
-.app__navBar-menu_container button {
+.app__navBar-sign button {
   padding: 0.5rem 1rem;
   color: #fff;
   background-color: #ff4820;

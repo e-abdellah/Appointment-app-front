@@ -17,7 +17,7 @@ const validationSchema = Yup.object({
 const BookingForm = ({ onSaveBooking }) => {
   return (
     <div className="booking-form">
-      <h2 className="booking-form__title">Add Booking</h2>
+      <h2 className="booking-form__title">Book an Appointment</h2>
       <br />
       <Formik
         initialValues={{
@@ -43,7 +43,10 @@ const BookingForm = ({ onSaveBooking }) => {
                 type="text"
                 id="patient"
                 name="patient"
-                className={`booking-form__input ${errors.patient ? 'input-error' : ''}`}
+                placeholder="Enter your full name"
+                className={`booking-form__input ${
+                  errors.patient ? "input-error" : ""
+                }`}
               />
               <ErrorMessage
                 name="patient"
@@ -60,7 +63,9 @@ const BookingForm = ({ onSaveBooking }) => {
                 type="date"
                 id="date"
                 name="date"
-                className={`booking-form__input ${errors.date ? 'input-error' : ''}`}
+                className={`booking-form__input ${
+                  errors.date ? "input-error" : ""
+                }`}
               />
               <ErrorMessage
                 name="date"
@@ -77,7 +82,10 @@ const BookingForm = ({ onSaveBooking }) => {
                 type="text"
                 id="condition"
                 name="condition"
-                className={`booking-form__input ${errors.condition ? 'input-error' : ''}`}
+                placeholder="Enter your condition"
+                className={`booking-form__input ${
+                  errors.condition ? "input-error" : ""
+                }`}
               />
               <ErrorMessage
                 name="condition"
@@ -94,7 +102,10 @@ const BookingForm = ({ onSaveBooking }) => {
                 type="text"
                 id="address"
                 name="address"
-                className={`booking-form__input ${errors.address ? 'input-error' : ''}`}
+                placeholder="Enter your full address"
+                className={`booking-form__input ${
+                  errors.address ? "input-error" : ""
+                }`}
               />
               <ErrorMessage
                 name="address"

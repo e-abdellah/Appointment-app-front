@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaHome, FaHeart, FaUser, FaEnvelope } from "react-icons/fa"; // Example generic icons
+import { FaHome, FaHeart, FaUser, FaEnvelope } from "react-icons/fa"; 
 import "../../App.css";
 
 const SideBar = () => {

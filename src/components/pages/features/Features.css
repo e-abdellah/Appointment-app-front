@@ -4,6 +4,7 @@
   align-items: center;
   gap: 20px;
   margin-top: 50px;
+  height: 75vh;
 }
 
 .features-section__title-container {
@@ -23,6 +24,7 @@
   justify-content: center;
   gap: 20px;
   width: 100%;
+  /* height: 450px; */
 }
 
 .feature-card {
