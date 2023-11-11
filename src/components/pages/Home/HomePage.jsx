@@ -3,6 +3,7 @@ import './HomePage.css';
 import FAQSection from '../FaQ/FaQSection';
 import Features from '../features/Features';
 import Services from '../services/Services';
+import Footer from '../footer/Footer';
 
 const HomePage = () => {
   return (
@@ -27,6 +28,7 @@ const HomePage = () => {
       <Features />
       <Services />
       <FAQSection />
+      <Footer />
     </div>
   );
 };

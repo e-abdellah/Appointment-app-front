@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useRoutes, BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/notFound/NotFound";
 import Layout from "./components/Layout";
 import HomePage from "./components/pages/Home/HomePage";
 import FindADoctor from "./components/FindADoct/FindADoctor";
+import AboutUs from "./components/about/AboutUs";
 
 const routes = [
   {
@@ -14,6 +15,7 @@ const routes = [
     children: [
       { index: true, element: <HomePage /> },
       { path: "findADoctor", element: <FindADoctor /> },
+      { path: "about", element: <AboutUs /> },
       { path: "*", element: <NotFound /> },
     ],
   },

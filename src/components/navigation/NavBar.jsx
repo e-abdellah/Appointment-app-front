@@ -10,16 +10,10 @@ const NavBar = () => {
           <img src="../../../assets/imgs/logo.png" alt="logo" />
         </div>
         <div className="app__navBar-links_container">
-          <NavLink
-            to="/"
-            className="app__navBar-links_container_link"
-          >
+          <NavLink to="/" className="app__navBar-links_container_link">
             Home
           </NavLink>
-          <NavLink
-            to="/services"
-            className="app__navBar-links_container_link"
-          >
+          <NavLink to="/services" className="app__navBar-links_container_link">
             Services
           </NavLink>
           <NavLink
@@ -28,11 +22,8 @@ const NavBar = () => {
           >
             Find a Doctor
           </NavLink>
-          <NavLink
-            to="/contact"
-            className="app__navBar-links_container_link"
-          >
-            Contact
+          <NavLink to="/about" className="app__navBar-links_container_link">
+            About Us
           </NavLink>
         </div>
       </div>

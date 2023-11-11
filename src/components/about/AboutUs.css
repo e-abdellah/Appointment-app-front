@@ -1,0 +1,53 @@
+.about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.about-us__header {
+  padding-top: 5%;
+  padding-left: 6%;
+  margin-bottom: 5%;
+}
+
+.about-us__content,
+.about-us__why-healthCare,
+.about-us__our-culture,
+.about-us__expertise {
+  margin-bottom: 5%;
+  padding-left: 5%;
+}
+
+.about-us__header {
+  margin-bottom: 0;
+}
+
+.about-us__team-image img {
+  width: 50%;
+  height: auto;
+}
+
+.about-us__text,
+.about-us__why-healthCare p,
+.about-us__our-culture p,
+.about-us__expertise p {
+  font-size: 18px;
+  line-height: 1.6;
+  width: 60%;
+}
+
+.about-us__header,
+.about-us__team h2,
+.about-us__why-healthCare h2,
+.about-us__our-culture h2,
+.about-us__expertise h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.about-us__expertise {
+  padding-left: 5%; 
+}
