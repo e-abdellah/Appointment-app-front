@@ -17,7 +17,7 @@ const NavBar = () => {
             Services
           </NavLink>
           <NavLink
-            to="/findADoctor"
+            to="/doctors"
             className="app__navBar-links_container_link"
           >
             Find a Doctor

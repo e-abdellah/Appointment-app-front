@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const DoctorCard = ({ doctor }) => {
   return (
     <div className="doctorCard">
-      <Link to={`/doctor/${doctor.id}`}>
+      <Link to={`/doctors/${doctor.id}`}>
         <img
           src={doctor.photo}
           alt={doctor.doctor}
@@ -26,7 +26,7 @@ const DoctorCard = ({ doctor }) => {
       </div>
       <div className="doctorCard__hospital-button-container">
         <p className="doctorCard__hospital">{doctor.hospital}</p>
-        <Link to={`/doctor/${doctor.id}`}>
+        <Link to={`/doctors/${doctor.id}`}>
           <button className="doctorCard__button">
             <div className="icon-container">
               <IoArrowForward size={24} />

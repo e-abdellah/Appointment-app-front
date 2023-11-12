@@ -27,7 +27,10 @@ const BookingForm = ({ onSaveBooking }) => {
           address: "",
         }}
         validationSchema={validationSchema}
+        validateOnBlur={true}
+        validateOnChange={true}
         onSubmit={(values, { resetForm, setSubmitting }) => {
+
           onSaveBooking(values);
           resetForm();
           setSubmitting(false);

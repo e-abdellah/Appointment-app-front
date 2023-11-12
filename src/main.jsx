@@ -7,6 +7,9 @@ import Layout from "./components/Layout";
 import HomePage from "./components/pages/Home/HomePage";
 import FindADoctor from "./components/FindADoct/FindADoctor";
 import AboutUs from "./components/about/AboutUs";
+import DoctorPage from "./components/pages/doctorPage/DoctorPage";
+import Services from "./components/pages/services/Services";
+import Contact from "./components/pages/contact/Contact";
 
 const routes = [
   {
@@ -14,8 +17,11 @@ const routes = [
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "findADoctor", element: <FindADoctor /> },
+      { path: "services", element: <Services /> },
+      { path: "doctors", element: <FindADoctor /> },
+      { path: "doctors/:id", element: <DoctorPage /> },
       { path: "about", element: <AboutUs /> },
+      { path: "contact", element: <Contact /> },
       { path: "*", element: <NotFound /> },
     ],
   },

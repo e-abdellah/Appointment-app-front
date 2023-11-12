@@ -3,7 +3,6 @@ import DoctorCard from "../doctors/DoctorCard";
 import { DOCTOR_DATA } from "../../api/mock_data";
 import "./FindADoctor.css";
 import DoctorList from "../doctors/DoctorsList";
-import DoctorPage from "../pages/doctorPage/DoctorPage";
 
 const FindADoctor = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -28,33 +27,31 @@ const FindADoctor = () => {
 
   return (
     <>
-    <div className="findADoctor">
-      <h1 className="findADoctor__title">Find a Doctor</h1>
-      <div className="findADoctor__searchBar">
-        <input
-          type="text"
-          placeholder="Search by doctor name or specialty"
-          className="findADoctor__searchInput"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
+      <div className="findADoctor">
+        <h1 className="findADoctor__title">Find a Doctor</h1>
+        <div className="findADoctor__searchBar">
+          <input
+            type="text"
+            placeholder="Search by doctor name or specialty"
+            className="findADoctor__searchInput"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+        </div>
+        <div className="findADoctor__results">
+          {hasSearched && searchResults.length === 0 ? (
+            <div className="alert alert-info">No doctor found</div>
+          ) : (
+            searchResults.map((doctor) => (
+              <DoctorCard key={doctor.id} doctor={doctor} />
+            ))
+          )}
+        </div>
       </div>
-      <div className="findADoctor__results">
-        {hasSearched && searchResults.length === 0 ? (
-          <div className="alert alert-info">No doctor found</div>
-        ) : (
-          searchResults.map((doctor) => (
-            <DoctorCard key={doctor.id} doctor={doctor} />
-          ))
-        )}
+      <div>
+        <DoctorList />
       </div>
-    </div>
-    <div>
-      <DoctorList />
-      <DoctorPage doctorData={DOCTOR_DATA[0]} />
-</div>
     </>
-    
   );
 };
 

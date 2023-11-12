@@ -26,7 +26,7 @@ const HomePage = () => {
         </div>
       </div>
       <Features />
-      <Services />
+      {/* <Services /> */}
       <FAQSection />
       <Footer />
     </div>
