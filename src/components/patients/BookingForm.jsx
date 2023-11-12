@@ -50,6 +50,7 @@ const BookingForm = ({ onSaveBooking }) => {
                 className={`booking-form__input ${
                   errors.patient ? "input-error" : ""
                 }`}
+                data-cy="name_input"
               />
               <ErrorMessage
                 name="patient"
@@ -69,6 +70,7 @@ const BookingForm = ({ onSaveBooking }) => {
                 className={`booking-form__input ${
                   errors.date ? "input-error" : ""
                 }`}
+                data-cy="date_input"
               />
               <ErrorMessage
                 name="date"
@@ -89,6 +91,7 @@ const BookingForm = ({ onSaveBooking }) => {
                 className={`booking-form__input ${
                   errors.condition ? "input-error" : ""
                 }`}
+                data-cy="condition_input"
               />
               <ErrorMessage
                 name="condition"
@@ -109,6 +112,7 @@ const BookingForm = ({ onSaveBooking }) => {
                 className={`booking-form__input ${
                   errors.address ? "input-error" : ""
                 }`}
+                data-cy="address_input"
               />
               <ErrorMessage
                 name="address"
@@ -122,6 +126,7 @@ const BookingForm = ({ onSaveBooking }) => {
                   type="submit"
                   className="booking-form__button"
                   disabled={isSubmitting}
+                  data-cy="submit_form"
                 >
                   Add Booking
                 </button>
