@@ -1,0 +1,24 @@
+.terms {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  padding-top: 7.5%;
+}
+
+.terms__title {
+  color: #333;
+  font-size: 2em;
+}
+
+.terms__subtitle {
+  color: #666;
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+.terms__text {
+  color: #333;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-top: 10px;
+}

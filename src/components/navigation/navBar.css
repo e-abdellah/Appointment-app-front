@@ -1,4 +1,4 @@
-.app__navbar {
+.app-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,13 +10,13 @@
   z-index: 1000; 
 }
 
-.app__navBar-links {
+.app-navbar-links {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.app__navBar-links_logo {
+.app-navbar-links__logo {
   margin-right: 2rem;
   width: 7.5vh; 
   height: 7.5vh; 
@@ -24,18 +24,18 @@
   overflow: hidden; 
 }
 
-.app__navBar-links_logo img {
+.app-navbar-links__logo img {
   width: 100%; 
   height: 100%; 
   object-fit: cover; 
 }
 
-.app__navBar-links_container {
+.app-navbar-links__container {
   display: flex;
   flex-direction: row;
 }
 
-.app__navBar-links_container a {
+.app-navbar-links__container-link {
   color: #fff;
   font-weight: 500;
   font-size: 18px;
@@ -47,15 +47,15 @@
   transition: color 0.3s ease;
 }
 
-.app__navBar-links_container a.active {
+.app-navbar-links__container-link.active {
   color: #ff4820; 
 }
 
-.app__navBar-links_container a:hover {
+.app-navbar-links__container-link:hover {
   color: #feaa98; 
 }
 
-.app__navBar-sign {
+.app-navbar-sign {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -64,7 +64,7 @@
   margin-bottom: 10px;
 }
 
-.app__navBar-sign p {
+.app-navbar-sign p {
   color: #fff;
   font-weight: 500;
   font-size: 18px;
@@ -74,7 +74,7 @@
   cursor: pointer;  
 }
 
-.app__navBar-sign button {
+.app-navbar-sign button {
   padding: 0.5rem 1rem;
   color: #fff;
   background-color: #ff4820;
@@ -85,5 +85,5 @@
   outline: none;
   border-radius: 5px;
   margin-left: 1rem;
-  cursor: pointer;	
+  cursor: pointer;  
 }

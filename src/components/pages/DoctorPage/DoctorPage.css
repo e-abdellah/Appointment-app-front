@@ -22,8 +22,8 @@
 }
 
 .doctor-page__main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   padding: 20px;
   width: 80%;
@@ -37,13 +37,7 @@
   margin-bottom: 5%;
 }
 
-
-.doctor-page__card {
-  /* width: 50%; */
-}
-
 .doctor-page__about {
-  /* width: 50%; */
   align-self: center;
 }
 
@@ -52,6 +46,10 @@
   font-weight: bold;
   margin-top: 10;
   margin-bottom: 10px;
+}
+
+.doctor-page__card {
+  width: 50%;
 }
 
 .doctor-page__booking {
@@ -69,9 +67,50 @@
   font-size: 24px;
   font-weight: bold;
   margin-top: 10px;
+  padding-bottom: 2rem;
 }
 
 .doctor-page__time-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Increase this value to add more space */
+}
+
+.doctor-page__time-slots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.doctor-page__time-slots__title {
+  font-size: 24px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
+/* .time-slot__day {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.time-slot__time {
+  font-size: 16px;
+}
+
+.time-slot__button {
+  width: 100px;
+  height: 40px;
+  margin-top: 10px;
+  background-color: #007BFF;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.time-slot__button:disabled {
+  background-color: #CCCCCC;
+  cursor: not-allowed;
+} */

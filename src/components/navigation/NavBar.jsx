@@ -1,35 +1,37 @@
 import React from "react";
-import "./navBar.css";
+import "./NavBar.css";
 import { NavLink } from "react-router-dom";
+import { FaSignInAlt, FaSearch } from "react-icons/fa";
+import SliderToggle from "../SliderToggle"; // Import the SliderToggle component
 
 const NavBar = () => {
   return (
-    <div className="app__navbar">
-      <div className="app__navBar-links">
-        <div className="app__navBar-links_logo">
+    <div className="app-navbar">
+      <div className="app-navbar-links">
+        <div className="app-navbar-links__logo">
           <img src="../../../assets/imgs/logo.png" alt="logo" />
         </div>
-        <div className="app__navBar-links_container">
-          <NavLink to="/" className="app__navBar-links_container_link">
+        <div className="app-navbar-links__container">
+          <NavLink to="/" className="app-navbar-links__container-link">
             Home
           </NavLink>
-          <NavLink to="/services" className="app__navBar-links_container_link">
+          <NavLink to="/services" className="app-navbar-links__container-link">
             Services
           </NavLink>
-          <NavLink
-            to="/doctors"
-            className="app__navBar-links_container_link"
-          >
+          <NavLink to="/doctors" className="app-navbar-links__container-link">
             Find a Doctor
           </NavLink>
-          <NavLink to="/about" className="app__navBar-links_container_link">
+          <NavLink to="/about" className="app-navbar-links__container-link">
             About Us
           </NavLink>
         </div>
       </div>
-      <div className="app__navBar-sign">
+      <div className="app-navbar-sign">
         <p>Sign in</p>
         <button type="button">Sign Up</button>
+      </div>
+      <div className="app-navbar-toggle">
+        <SliderToggle className="dark-mode-toggle" />
       </div>
     </div>
   );

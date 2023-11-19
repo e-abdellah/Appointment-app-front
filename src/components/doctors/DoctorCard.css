@@ -22,14 +22,13 @@
   margin-top: 10px;
 }
 
-.doctorCard__specialty-rating-container {
+.doctorCard__speciality-rating-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-
-.doctorCard__specialty {
+.doctorCard__speciality {
   display: flex;
   background-color: var(--glacier-300);
   color: var(--glacier-100);

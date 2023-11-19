@@ -15,8 +15,8 @@ const DoctorCard = ({ doctor }) => {
       </Link>
 
       <h2 className="doctorCard__name">{doctor.doctor}</h2>
-      <div className="doctorCard__specialty-rating-container">
-        <div className="doctorCard__specialty">{doctor.specialty}</div>
+      <div className="doctorCard__speciality-rating-container">
+        <div className="doctorCard__speciality">{doctor.speciality}</div>
         <div className="doctorCard__rating">
           <IoStarSharp size={24} color="yellow" />
           <span>{` ${doctor.rating}`}</span>{" "}

@@ -10,6 +10,8 @@ import AboutUs from "./components/about/AboutUs";
 import DoctorPage from "./components/pages/doctorPage/DoctorPage";
 import Services from "./components/pages/services/Services";
 import Contact from "./components/pages/contact/Contact";
+import PrivacyPolicy from "./components/pages/privacy&Terms/PrivacyPolicies";
+import TermsAndConditions from "./components/pages/privacy&terms/Terms&Conditions";
 
 const routes = [
   {
@@ -21,7 +23,10 @@ const routes = [
       { path: "doctors", element: <FindADoctor /> },
       { path: "doctors/:id", element: <DoctorPage /> },
       { path: "about", element: <AboutUs /> },
+
       { path: "contact", element: <Contact /> },
+      { path: "privacy-policy", element: <PrivacyPolicy /> },
+      { path: "terms-of-service", element: <TermsAndConditions /> },
       { path: "*", element: <NotFound /> },
     ],
   },
