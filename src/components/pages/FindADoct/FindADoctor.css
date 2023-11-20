@@ -21,7 +21,7 @@
 .findADoctor__searchInput {
   flex-grow: 1;
   padding: 0.5rem;
-  border: 1px solid #cbd5e0;
+  /* border: 1px solid #cbd5e0; */
   border-radius: 0.25rem;
 }
 

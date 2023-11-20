@@ -1,7 +1,6 @@
 import React from "react";
 import "./AboutUs.css";
-import teamImage from "../../../assets/imgs/team.jpg";
-import Footer from "../pages/footer/Footer";
+import teamImage from "../../../../assets/imgs/team.jpg";
 
 const AboutUs = () => {
   return (
@@ -54,8 +53,8 @@ const AboutUs = () => {
         <h2>Expertise</h2>
         <p>
           We never stop improving our services. As our customer deserves the
-          best medical experience, we see it as our duty to deliver
-          innovative solutions.
+          best medical experience, we see it as our duty to deliver innovative
+          solutions.
         </p>
       </div>
       <div className="about-us__team">
@@ -69,9 +68,6 @@ const AboutUs = () => {
           the best healthcare services to our patients.
         </p>
       </div>
-      <footer>
-        <Footer />
-      </footer>
     </div>
   );
 };

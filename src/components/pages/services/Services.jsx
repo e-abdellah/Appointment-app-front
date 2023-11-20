@@ -1,6 +1,5 @@
 import React from "react";
 import "./Services.css";
-import Footer from "../footer/Footer";
 
 const Services = () => {
   return (
@@ -55,9 +54,6 @@ const Services = () => {
           life.
         </p>
       </div>
-      <footer className="footer">
-        <Footer />
-      </footer>
     </div>
   );
 };

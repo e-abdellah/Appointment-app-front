@@ -83,7 +83,7 @@ let APPOINTMENT_DATA = [
 let DOCTOR_DATA = [
   {
     id: 1,
-    doctor: "Dr. Olivia Anderson",
+    name: "Dr. Olivia Anderson",
     speciality: "Cardiologist",
     numberOfPatients: 3, // this week
     photo: doc1,
@@ -102,7 +102,7 @@ let DOCTOR_DATA = [
   },
   {
     id: 2,
-    doctor: "Dr. Michael Brown Smith",
+    name: "Dr. Michael Brown Smith",
     speciality: "Dentist",
     numberOfPatients: 2,
     photo: doc2,
@@ -121,7 +121,7 @@ let DOCTOR_DATA = [
   },
   {
     id: 3,
-    doctor: "Dr. John Davis Wilson",
+    name: "Dr. John Davis Wilson",
     speciality: "Orthopedic Surgeon",
     numberOfPatients: 1,
     photo: doc3,

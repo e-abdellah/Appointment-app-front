@@ -2,16 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useRoutes, BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
-import NotFound from "./components/notFound/NotFound";
 import Layout from "./components/Layout";
+
 import HomePage from "./components/pages/Home/HomePage";
-import FindADoctor from "./components/FindADoct/FindADoctor";
-import AboutUs from "./components/about/AboutUs";
-import DoctorPage from "./components/pages/doctorPage/DoctorPage";
 import Services from "./components/pages/services/Services";
+import FindADoctor from "./components/pages/FindADoct/FindADoctor";
+import DoctorPage from "./components/pages/doctorPage/DoctorPage";
+import AboutUs from "./components/pages/about/AboutUs";
 import Contact from "./components/pages/contact/Contact";
 import PrivacyPolicy from "./components/pages/privacy&Terms/PrivacyPolicies";
 import TermsAndConditions from "./components/pages/privacy&terms/Terms&Conditions";
+import NotFound from "./components/pages/notFound/NotFound";
 
 const routes = [
   {

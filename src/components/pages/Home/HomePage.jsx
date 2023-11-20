@@ -1,8 +1,7 @@
 import React from 'react';
 import './HomePage.css';
-import FAQSection from '../FaQ/FaQSection';
-import Features from '../features/Features';
-import Footer from '../footer/Footer';
+import FAQSection from '../../FaQ/FaQSection';
+import Features from '../../features/Features';
 
 const HomePage = () => {
   return (
@@ -25,9 +24,7 @@ const HomePage = () => {
         </div>
       </div>
       <Features />
-      {/* <Services /> */}
       <FAQSection />
-      <Footer />
     </div>
   );
 };
