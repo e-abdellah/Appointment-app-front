@@ -13,6 +13,10 @@ import Contact from "./components/pages/contact/Contact";
 import PrivacyPolicy from "./components/pages/privacy&Terms/PrivacyPolicies";
 import TermsAndConditions from "./components/pages/privacy&terms/Terms&Conditions";
 import NotFound from "./components/pages/notFound/NotFound";
+import { AuthProvider } from "./contexts/Auth.context";
+import Login from "./components/pages/login/Login";
+import PrivateRoute from "./components/PrivateRoute";
+import Logout from "./components/pages/logout/Logout";
 
 const routes = [
   {
@@ -20,9 +24,20 @@ const routes = [
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: "login", element: <Login /> },
+      { path: "logout", element: <Logout /> },
       { path: "services", element: <Services /> },
-      { path: "doctors", element: <FindADoctor /> },
-      { path: "doctors/:id", element: <DoctorPage /> },
+      // { path: "doctors", element: <FindADoctor /> },
+      // { path: "doctors/:id", element: <DoctorPage /> },
+      {
+        path: "doctors",
+        element: <PrivateRoute />,
+        children: [
+          { index: true, element: <FindADoctor /> },
+          { path: ":id", element: <DoctorPage /> },
+        ],
+      },
+
       { path: "about", element: <AboutUs /> },
 
       { path: "contact", element: <Contact /> },
@@ -40,8 +55,10 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <App />
+      </Router>
+    </AuthProvider>
   </React.StrictMode>
 );

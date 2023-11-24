@@ -1,10 +1,12 @@
 import React from "react";
 import "./NavBar.css";
-import { NavLink } from "react-router-dom";
-import { FaSignInAlt, FaSearch } from "react-icons/fa";
+import { NavLink, Link } from "react-router-dom";
 import SliderToggle from "../SliderToggle";
+import { useAuth } from "../../contexts/Auth.context";
 
 const NavBar = () => {
+  const { isAuthed } = useAuth();
+
   return (
     <div className="app-navbar">
       <div className="app-navbar-links">
@@ -26,12 +28,23 @@ const NavBar = () => {
           </NavLink>
         </div>
       </div>
-      <div className="app-navbar-sign">
-        <p>Sign in</p>
-        <button type="button">Sign Up</button>
-      </div>
-      <div className="app-navbar-toggle">
-        <SliderToggle className="dark-mode-toggle" />
+
+      <div className="app-navbar-container">
+        <div className="app-navbar-sign-container">
+          {isAuthed ? (
+            <Link to="/logout">Logout </Link>
+          ) : (
+            <Link to="/login">
+              <div className="app-navbar-sign">
+                <p>Sign in</p>
+                <button type="button">Sign Up</button>
+              </div>
+            </Link>
+          )}
+        </div>
+        <div className="app-navbar-toggle">
+          <SliderToggle className="dark-mode-toggle" />
+        </div>
       </div>
     </div>
   );

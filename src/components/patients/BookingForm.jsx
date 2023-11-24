@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./BookingForm.css";
+import CustomInput from "./CustomInput";
 
 const validationSchema = Yup.object({
   patient: Yup.string()
@@ -55,7 +55,7 @@ const BookingForm = ({ onSaveBooking, timeSlots }) => {
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors, setFieldValue, values }) => {
+        {({ isSubmitting, errors, touched, setFieldValue, values }) => {
           useEffect(() => {
             if (values.date) {
               const selectedDay = daysMap[values.date.getDay()];
@@ -73,116 +73,62 @@ const BookingForm = ({ onSaveBooking, timeSlots }) => {
 
           return (
             <Form>
-              <div className="booking-form__input-container">
-                <label htmlFor="patient" className="booking-form__label">
-                  Name and surname
-                </label>
-                <Field
-                  type="text"
-                  id="patient"
-                  name="patient"
-                  placeholder="Enter your full name"
-                  className={`booking-form__input ${
-                    errors.patient ? "input-error" : ""
-                  }`}
-                  data-cy="name_input"
-                />
-                <ErrorMessage
-                  name="patient"
-                  component="p"
-                  className="booking-form__error"
-                />
-              </div>
-              <div className="booking-form__input-container">
-                <label htmlFor="date" className="booking-form__label">
-                  Date
-                </label>
-                <DatePicker
-                  id="date"
-                  name="date"
-                  selected={values.date}
-                  onChange={(date) => setFieldValue("date", date)}
-                  minDate={new Date()}
-                  filterDate={isWorkingDay}
-                  className={`booking-form__input ${
-                    errors.date ? "input-error" : ""
-                  }`}
-                />
-                <ErrorMessage
-                  name="date"
-                  component="p"
-                  className="booking-form__error"
-                />
-              </div>
-              <div className="booking-form__input-container">
-                <label htmlFor="timeSlot" className="booking-form__label">
-                  Available Time Slots
-                </label>
-                <Field
-                  as="select"
-                  id="timeSlot"
-                  name="timeSlot"
-                  className="booking-form__input"
-                >
-                  {timeSlots &&
-                    timeSlots.map((slot, index) => (
-                      <option key={index} value={slot.time}>
-                        {/* {slot.day}:  */} {slot.time}
-                      </option>
-                    ))}
-                </Field>
-                <ErrorMessage
-                  name="timeSlot"
-                  component="p"
-                  className="booking-form__error"
-                />
-              </div>
-              <div className="booking-form__input-container">
-                <label htmlFor="condition" className="booking-form__label">
-                  Condition
-                </label>
-                <Field
-                  type="text"
-                  id="condition"
-                  name="condition"
-                  placeholder="Enter your condition"
-                  className={`booking-form__input ${
-                    errors.condition ? "input-error" : ""
-                  }`}
-                  data-cy="condition_input"
-                />
-                <ErrorMessage
-                  name="condition"
-                  component="p"
-                  className="booking-form__error"
-                />
-              </div>
-              <div className="booking-form__input-container">
-                <label htmlFor="address" className="booking-form__label">
-                  Address
-                </label>
-                <Field
-                  type="text"
-                  id="address"
-                  name="address"
-                  placeholder="Enter your full address"
-                  className={`booking-form__input ${
-                    errors.address ? "input-error" : ""
-                  }`}
-                  data-cy="address_input"
-                />
-                <ErrorMessage
-                  name="address"
-                  component="p"
-                  className="booking-form__error"
-                />
-              </div>
+              {/* Use CustomInput for each form field */}
+              <CustomInput
+                label="Name and surname"
+                name="patient"
+                type="text"
+                errors={errors}
+                touched={touched}
+                dataCy="name_input"
+              />
+              <CustomInput
+                label="Date"
+                name="date"
+                type="datepicker"
+                errors={errors}
+                touched={touched}
+                isWorkingDay={isWorkingDay}
+                dataCy="date_input"
+              />
+              <CustomInput
+                label="Available Time Slots"
+                name="timeSlot"
+                type="select"
+                errors={errors}
+                touched={touched}
+                dataCy="timeSlot_input"
+              >
+                {timeSlots &&
+                  timeSlots.map((slot, index) => (
+                    <option key={index} value={slot.time}>
+                      {slot.time}
+                    </option>
+                  ))}
+              </CustomInput>
+              <CustomInput
+                label="Condition"
+                name="condition"
+                type="text"
+                errors={errors}
+                touched={touched}
+                dataCy="condition_input"
+              />
+              <CustomInput
+                label="Address"
+                name="address"
+                type="text"
+                errors={errors}
+                touched={touched}
+                dataCy="address_input"
+              />
+
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="booking-form__button"
               >
-                Book
+                Book Appointment
               </button>
             </Form>
           );

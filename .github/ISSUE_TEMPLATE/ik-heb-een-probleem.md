@@ -1,17 +1,16 @@
 ---
 name: Ik heb een probleem
 about: Vraag onze hulp bij een probleem
-title: ''
+title: 'De pagina FindADoctor kan niet gezien worden'
 labels: ''
-assignees: ksa607, thomasaelbrecht
+assignees: ksa607
 
 ---
 
 > Zorg ervoor dat enkel jouw docent bij de assignees staat
 
 **Beschrijving**
-Beschrijf duidelijk en beknopt wat het probleem precies is.
-
+De FindADoctorPagina kan niet worden gezien (blanco) (http://localhost:5173/doctors) maar als ik een DoctorPage wil van een bepaald doctor openen (bvb: http://localhost:5173/doctors/1) werkt het wel
 **Probleem reproduceren**
 Stappen om het probleem te reproduceren:
 

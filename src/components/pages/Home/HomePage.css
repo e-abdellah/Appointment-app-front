@@ -33,14 +33,14 @@
 }
 
 .hero-text-container .btn {
-  font-size: 1.2em;
-  padding: 10px 20px;
-  border-radius: 5px;
-  padding: 0.5rem;
-  border: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
   background-color: var(--glacier-500);
   color: white;
-  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
 }
 
 .hero-text-container .btn:hover {

@@ -3,11 +3,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem 6rem;
-  position: fixed; 
+  position: fixed;
   width: 100%;
-  background-color: var(--glacier-800); 
+  background-color: var(--glacier-600);
   height: 7.5vh;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .app-navbar-links {
@@ -18,16 +18,16 @@
 
 .app-navbar-links__logo {
   margin-right: 2rem;
-  width: 7.5vh; 
-  height: 7.5vh; 
-  border-radius: 50%; 
-  overflow: hidden; 
+  width: 7.5vh;
+  height: 7.5vh;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .app-navbar-links__logo img {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .app-navbar-links__container {
@@ -42,17 +42,28 @@
   line-height: 25px;
   text-transform: capitalize;
   margin: 0 1rem;
-  cursor: pointer;  
+  cursor: pointer;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .app-navbar-links__container-link.active {
-  color: #ff4820; 
+  color: #ff4820;
 }
 
 .app-navbar-links__container-link:hover {
-  color: #feaa98; 
+  color: #feaa98;
+}
+
+.app-navbar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.app-navbar-sign-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .app-navbar-sign {
@@ -71,7 +82,8 @@
   line-height: 25px;
   text-transform: capitalize;
   margin: 0 1rem;
-  cursor: pointer;  
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .app-navbar-sign button {
@@ -85,5 +97,23 @@
   outline: none;
   border-radius: 5px;
   margin-left: 1rem;
-  cursor: pointer;  
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sign-in-text:hover,
+.app-navbar-sign button:hover {
+  color: #feaa98;
+  background-color: #e03a17;
+}
+
+.sign-in-text {
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 1rem;
+  transition: color 0.3s ease;
+}
+
+.sign-in-text:hover {
+  color: #feaa98;
 }
