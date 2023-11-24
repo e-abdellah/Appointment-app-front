@@ -17,7 +17,7 @@
   margin-bottom: 1rem;
   margin-left: 1rem;
   width: 100%;
-  color: #333;
+  color: var(--secondary_color);
 }
 .doctorCards__title h2 {
   margin-top: 2rem;

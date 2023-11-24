@@ -101,8 +101,7 @@ const FAQSection = () => {
           >
             <h3 className="faq-item__question-text">{q.question}</h3>
             <button className="faq-item__question-icon">
-              {" "}
-              <AiOutlinePlusCircle size={24} />{" "}
+              <AiOutlinePlusCircle size={24} />
             </button>
           </div>
           <div className="faq-item__answer">{q.answer}</div>

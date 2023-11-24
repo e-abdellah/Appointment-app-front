@@ -1,12 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { useRoutes, BrowserRouter as Router } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
+import { createRoot } from "react-dom/client";
 import Layout from "./components/Layout";
 
-import HomePage from "./components/pages/Home/HomePage";
+import HomePage from "./components/pages/home/HomePage";
 import Services from "./components/pages/services/Services";
-import FindADoctor from "./components/pages/FindADoct/FindADoctor";
+import FindADoctor from "./components/pages/findADoct/FindADoctor";
 import DoctorPage from "./components/pages/doctorPage/DoctorPage";
 import AboutUs from "./components/pages/about/AboutUs";
 import Contact from "./components/pages/contact/Contact";
@@ -17,8 +17,9 @@ import { AuthProvider } from "./contexts/Auth.context";
 import Login from "./components/pages/login/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Logout from "./components/pages/logout/Logout";
+import { ThemeProvider } from "./contexts/Theme.context";
 
-const routes = [
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
@@ -27,15 +28,12 @@ const routes = [
       { path: "login", element: <Login /> },
       { path: "logout", element: <Logout /> },
       { path: "services", element: <Services /> },
-      // { path: "doctors", element: <FindADoctor /> },
+      { path: "doctors", element: <FindADoctor /> },
       // { path: "doctors/:id", element: <DoctorPage /> },
       {
-        path: "doctors",
+        path: "doctors/:id",
         element: <PrivateRoute />,
-        children: [
-          { index: true, element: <FindADoctor /> },
-          { path: ":id", element: <DoctorPage /> },
-        ],
+        children: [{ index: true, element: <DoctorPage /> }],
       },
 
       { path: "about", element: <AboutUs /> },
@@ -46,19 +44,14 @@ const routes = [
       { path: "*", element: <NotFound /> },
     ],
   },
-];
+]);
 
-function App() {
-  let element = useRoutes(routes);
-  return element;
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <Router>
-        <App />
-      </Router>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </AuthProvider>
   </React.StrictMode>
 );

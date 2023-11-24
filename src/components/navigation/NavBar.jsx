@@ -1,7 +1,7 @@
 import React from "react";
 import "./NavBar.css";
 import { NavLink, Link } from "react-router-dom";
-import SliderToggle from "../SliderToggle";
+import SliderToggle from "../../contexts/SliderToggle";
 import { useAuth } from "../../contexts/Auth.context";
 
 const NavBar = () => {

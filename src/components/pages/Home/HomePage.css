@@ -2,7 +2,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: var(--glacier-100);
 }
 
 .hero-section {
@@ -21,13 +20,13 @@
 
 .hero-text-container h1 {
   font-size: 3em;
-  color: #333;
+  color: var(--secondary_color);
   margin-bottom: 20px; 
 }
 
 .hero-text-container p {
   font-size: 1.5em;
-  color: #666;
+  color: var(--header-color);
   max-width: 600px; 
   margin-bottom: 40px; 
 }

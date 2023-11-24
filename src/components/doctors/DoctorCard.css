@@ -6,7 +6,7 @@
   margin-bottom: 20px;
   padding: 20px;
   border-radius: 10px;
-  background-color: var(--glacier-200);
+  background-color: var(--card_color);
 }
 
 .doctorCard__photo {
@@ -20,6 +20,7 @@
   font-size: 24px;
   font-weight: bold;
   margin-top: 10px;
+  color: var(--secondary_color);
 }
 
 .doctorCard__speciality-rating-container {

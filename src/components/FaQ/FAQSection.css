@@ -35,7 +35,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: black;
+  color: var(--secondary_color);
   border-radius: 50%;
   padding: 10px;
 }

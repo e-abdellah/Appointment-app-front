@@ -1,9 +1,9 @@
 .footer {
-  background-color: var(--glacier-300);
+  background-color: var(--card_color);
   color: white;
   padding: 20px;
   text-align: center;
-  border-bottom: 20px solid var(--glacier-100);
+  border-bottom: 20px solid var(--body_bg);
 }
 
 .footer__container {

@@ -2,12 +2,10 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: var(--glacier-100);
 }
 
-.about-us__header{
+.about-us__header {
   padding-top: 7.5%;
-
 }
 .about-us__header,
 .about-us__why-healthCare,
@@ -23,7 +21,7 @@
 .about-us__expertise h2,
 .about-us__team h2 {
   font-size: 2em;
-  color: #333;
+  color: var(--secondary_color);
   margin-bottom: 10px;
 }
 
@@ -33,7 +31,7 @@
 .about-us__expertise p,
 .about-us__team p {
   font-size: 1em;
-  color: #666;
+  color: var(--header-color);
   margin-bottom: 10px;
 }
 
