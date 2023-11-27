@@ -20,8 +20,7 @@
   font-size: 24px;
   font-weight: bold;
   margin-top: 10px;
-  color: var(--secondary_color);
-}
+  color: var(--glacier-100)}
 
 .doctorCard__speciality-rating-container {
   display: flex;
@@ -31,7 +30,7 @@
 
 .doctorCard__speciality {
   display: flex;
-  background-color: var(--glacier-300);
+  background-color: var(--glacier-400);
   color: var(--glacier-100);
   font-weight: bold;
   padding: 5px;
