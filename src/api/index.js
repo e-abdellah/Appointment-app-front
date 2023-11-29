@@ -1,9 +1,8 @@
 import axiosRoot from "axios";
 
-// const baseUrl = "http://localhost:9000/api";
 const baseUrl = import.meta.env.VITE_API_URL;
 
-const axios = axiosRoot.create({
+export const axios = axiosRoot.create({
   baseURL: baseUrl,
   // headers: {
   //   "Content-Type": "application/json",
@@ -33,6 +32,16 @@ export const deleteById = async (url, { arg: id }) => {
   await axios.delete(url/{id});
 };
 
+export const post = async (url, { arg }) => {
+  const { data } = await axios.post(url, arg);
+  return data;
+};
+
+export const put = async (url, { arg }) => {
+  const { data } = await axios.put(url, arg);
+  return data;
+}
+
 // export const deleteById = async (url, id) => {
 //   await axiosInstance.delete(`${url}/${id}`);
 // };
@@ -45,13 +54,3 @@ export const deleteById = async (url, { arg: id }) => {
 //     data: values,
 //   });
 // };
-
-export const post = async (url, { arg }) => {
-  const { data } = await axios.post(url, arg);
-  return data;
-};
-
-export const put = async (url, { arg }) => {
-  const { data } = await axios.put(url, arg);
-  return data;
-}

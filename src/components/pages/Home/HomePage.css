@@ -21,21 +21,21 @@
 .hero-text-container h1 {
   font-size: 3em;
   color: var(--secondary_color);
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .hero-text-container p {
   font-size: 1.5em;
   color: var(--header-color);
-  max-width: 600px; 
-  margin-bottom: 40px; 
+  max-width: 600px;
+  margin-bottom: 40px;
 }
 
 .hero-text-container .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
   background-color: var(--glacier-500);
-  color: white;
+  color: var(--glacier-200);
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
@@ -44,6 +44,9 @@
 
 .hero-text-container .btn:hover {
   background-color: var(--glacier-700);
+  transform: translate(-4px, -4px);
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px var(--secondary_color);
 }
 
 .hero-image-container {

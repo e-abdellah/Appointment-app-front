@@ -1,29 +1,23 @@
-import { useEffect } from "react";
-import { useAuth } from "../../../contexts/Auth.context";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../contexts/Auth.context";
+import { Link } from "react-router-dom";
 import "./Logout.css";
 
-export default function Logout() {
-  const { isAuthed, logout } = useAuth();
+const Logout = () => {
+  const { logout } = useContext(AuthContext);
 
-  useEffect(() => {
+  const handleLogout = () => {
     logout();
-  }, [logout]);
-
-  if (isAuthed) {
-    return (
-      <div className="row">
-        <div className="col-12">
-          <h1>Logging out...</h1>
-        </div>
-      </div>
-    );
-  }
+  };
 
   return (
-    <div className="row">
-      <div className="col-12">
-        <h1>You were successfully logged out</h1>
-      </div>
+    <div className="logout">
+      <h1 className="logout__title">Are you sure you want to logout?</h1>
+      <Link to="/" onClick={handleLogout} className="logout__button">
+        Logout
+      </Link>
     </div>
   );
-}
+};
+
+export default Logout;

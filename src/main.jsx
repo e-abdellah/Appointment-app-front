@@ -25,16 +25,17 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "login", element: <Login /> },
+      { path: "patients/login", element: <Login /> },
+      { path: "doctors/login", element: <Login /> },
       { path: "logout", element: <Logout /> },
       { path: "services", element: <Services /> },
       { path: "doctors", element: <FindADoctor /> },
-      // { path: "doctors/:id", element: <DoctorPage /> },
-      {
-        path: "doctors/:id",
-        element: <PrivateRoute />,
-        children: [{ index: true, element: <DoctorPage /> }],
-      },
+      { path: "doctors/:doctorId", element: <DoctorPage /> }, //zonder private route
+      // {
+      //   path: "doctors/:id",
+      //   element: <PrivateRoute />,
+      //   children: [{ index: true, element: <DoctorPage /> }],
+      // },
 
       { path: "about", element: <AboutUs /> },
 

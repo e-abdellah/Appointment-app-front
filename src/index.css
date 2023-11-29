@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
 
 :root {
+  --transition-time: 1.5s;
+
   --glacier-50: #f1f8fa;
   --glacier-100: #dceef1;
   --glacier-200: #bddde4;
@@ -38,7 +40,9 @@ body {
   padding: 0;
   background-color: var(--body_bg);
   color: var(--body_color);
-  transition: background-color 0.3s, color 0.3s;
+  /* transition: background-color 0.3s, color 0.3s; */
+  transition: background-color var(--transition-time),
+    color var(--transition-time);
 }
 
 [theme="dark"] body {
@@ -55,7 +59,8 @@ body {
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
-  transition: all 0.3s;
+  transition: background-color var(--transition-time),
+    color var(--transition-time), border-color var(--transition-time);
 }
 
 .button:hover {
@@ -65,16 +70,24 @@ body {
   transform: translate(-4px, -4px);
   border-radius: 12px;
   box-shadow: 4px 4px 0px #000;
+  transition: background-color var(--transition-time),
+    color var(--transition-time), border-color var(--transition-time),
+    transform var(--transition-time);
 }
 
 .secondary-button {
   background-color: var(--glacier-200);
   color: var(--glacier-700);
+  transition: background-color var(--transition-time),
+    color var(--transition-time), border-color var(--transition-time);
 }
 
 .secondary-button:hover {
   background-color: var(--glacier-300);
   color: var(--glacier-800);
+  transition: background-color var(--transition-time),
+    color var(--transition-time), border-color var(--transition-time),
+    transform var(--transition-time);
 }
 
 @tailwind base;

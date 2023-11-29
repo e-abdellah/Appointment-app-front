@@ -1,5 +1,3 @@
-// Layout.js
-// import React from "react";
 import { Outlet } from "react-router";
 import NavBar from "./navigation/NavBar";
 import Footer from "./footer/Footer";

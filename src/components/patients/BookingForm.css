@@ -9,7 +9,7 @@
   font-weight: bold;
   margin-bottom: 1rem;
   width: 100%;
-  color: #333;
+  color: var(--secondary_color);
 }
 
 .booking-form__label {

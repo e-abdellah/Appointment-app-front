@@ -6,20 +6,21 @@ import {
   useContext,
   useEffect,
 } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import useSWRMutation from "swr/mutation";
 import * as api from "../api";
 
 const JWT_TOKEN_KEY = "jwtToken";
-3;
-const USER_ID_KEY = "userId";
-3;
+const PATIENT_ID_KEY = "patientId";
+const DOCTOR_ID_KEY = "doctorId";
+
 export const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem(JWT_TOKEN_KEY));
-  const [user, setUser] = useState(null);
+  const [patient, setPatient] = useState(null);
   const [ready, setReady] = useState(false);
   const [isAuthed, setIsAuthed] = useState(false);
 
@@ -27,60 +28,88 @@ export const AuthProvider = ({ children }) => {
     api.setAuthToken(token);
     setIsAuthed(Boolean(token));
     setReady(true);
-  }, [token])
+  }, [token]);
 
   const {
-    isMutating: loading,
+    isMutating: patientLoading,
     error,
-    trigger: doLogin,
-  } = useSWRMutation("users/login", api.post);
+    trigger: doPatientLogin,
+  } = useSWRMutation("patients/login", api.post);
+
+  const {
+    isMutating: doctorLoading,
+    doctorError,
+    trigger: doDoctorLogin,
+  } = useSWRMutation("doctors/login", api.post);
 
   const login = useCallback(
-    async (email, password) => {
+    async (email, password, role) => {
       try {
-        const { token, user } = await doLogin({
-          email,
-          password,
-        });
+        let loginResult;
+        if (role === "patient") {
+          loginResult = await doPatientLogin({ email, password });
+        } else if (role === "doctor") {
+          loginResult = await doDoctorLogin({ email, password });
+        } else {
+          throw new Error("Invalid role");
+        }
+
+        const { token, patient } = loginResult;
 
         setToken(token);
-        setUser(user);
+        setPatient(patient);
 
         localStorage.setItem(JWT_TOKEN_KEY, token);
-        3;
-        localStorage.setItem(USER_ID_KEY, user.id);
-        3;
 
-        return true;
+        if (role === "patient") {
+          localStorage.setItem(PATIENT_ID_KEY, patient.id);
+        } else if (role === "doctor") {
+          localStorage.setItem(DOCTOR_ID_KEY, patient.id);
+        }
+
+        return <Link to="/">Home</Link>;
       } catch (error) {
         console.error(error);
         return false;
       }
     },
-    [doLogin]
+    [doPatientLogin, doDoctorLogin]
   );
 
-  1;
   const logout = useCallback(() => {
     setToken(null);
-    setUser(null);
+    setPatient(null);
 
     localStorage.removeItem(JWT_TOKEN_KEY);
-    localStorage.removeItem(USER_ID_KEY);
+    localStorage.removeItem(PATIENT_ID_KEY);
+    localStorage.removeItem(DOCTOR_ID_KEY);
   }, []);
 
   const value = useMemo(
     () => ({
       token,
-      user,
+      patient,
       error,
-      loading,
-      ready, 
+      patientLoading,
+      doctorError,
+      doctorLoading,
+      ready,
       isAuthed,
       login,
       logout,
     }),
-    [token, user, error, loading, ready, isAuthed, login, logout]
+    [
+      token,
+      patient,
+      error,
+      patientLoading,
+      doctorError,
+      doctorLoading,
+      ready,
+      isAuthed,
+      login,
+      logout,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

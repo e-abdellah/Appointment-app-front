@@ -1,11 +1,44 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./NavBar.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import SliderToggle from "../../contexts/SliderToggle";
 import { useAuth } from "../../contexts/Auth.context";
 
 const NavBar = () => {
   const { isAuthed } = useAuth();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
+  const handleSignButtonClick = (event) => {
+    // Stop event propagation to prevent immediate closing
+    event.stopPropagation();
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleOptionClick = (role) => {
+    setShowDropdown(false);
+
+    console.log("Selected role:", role);
+
+    if (role === "patient") {
+      navigate("/patients/login");
+    } else if (role === "doctor") {
+      navigate("/doctors/login");
+    }
+  };
 
   return (
     <div className="app-navbar">
@@ -34,12 +67,31 @@ const NavBar = () => {
           {isAuthed ? (
             <Link to="/logout">Logout </Link>
           ) : (
-            <Link to="/login">
-              <div className="app-navbar-sign">
-                <p>Sign in</p>
-                <button type="button">Sign Up</button>
-              </div>
-            </Link>
+            <div className="app-navbar-sign">
+              <button
+                type="button"
+                className="app-navbar-sign__button"
+                onClick={(event) => handleSignButtonClick(event)}
+              >
+                Sign In
+              </button>
+              {showDropdown && (
+                <div className="app-navbar-sign__dropdown" ref={dropdownRef}>
+                  <button
+                    className="app-navbar-sign__dropdown-button"
+                    onClick={() => handleOptionClick("patient")}
+                  >
+                    Patient
+                  </button>
+                  <button
+                    className="app-navbar-sign__dropdown-button"
+                    onClick={() => handleOptionClick("doctor")}
+                  >
+                    Doctor
+                  </button>
+                </div>
+              )}
+            </div>
           )}
         </div>
         <div className="app-navbar-toggle">

@@ -7,7 +7,7 @@ import { useAuth } from "../../../contexts/Auth.context";
 import Error from "../../Error";
 import "./Login.css";
 
-const vallidationRules = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   email: Yup.string()
     .required("Required")
     .test("is-email", "Invalid email address", (value) =>
@@ -32,12 +32,11 @@ const Login = () => {
       console.log("Email:", email);
       console.log("Password:", password);
       console.log("Role:", role);
-
       const loggedIn = await login(email, password, role);
 
       if (loggedIn) {
         navigate({
-          pathname: `/`,
+          pathname: `/${role}s`, // Assuming your paths are like /patients or /doctors
           replace: true,
         });
       }
@@ -49,7 +48,7 @@ const Login = () => {
     <div className="login">
       <Formik
         initialValues={initialValues}
-        vallidationRules={vallidationRules}
+        validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           handleLogin(values);
           resetForm();
@@ -89,6 +88,26 @@ const Login = () => {
             />
             <ErrorMessage
               name="password"
+              component="div"
+              className="login__error"
+            />
+          </div>
+
+          <div className="login__input-container">
+            <label htmlFor="role" className="login__label">
+              Role
+            </label>
+            <Field
+              as="select"
+              id="role"
+              name="role"
+              className="login__input"
+            >
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+            </Field>
+            <ErrorMessage
+              name="role"
               component="div"
               className="login__error"
             />

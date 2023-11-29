@@ -69,12 +69,6 @@ const FAQSection = () => {
       answer:
         "If you experience technical difficulties, please contact our customer support team for assistance. You can find the contact information on the contact section.",
     },
-    {
-      id: 12,
-      question: "Is the platform accessible for people with disabilities?",
-      answer:
-        "Yes, we strive to make our platform accessible to all users. If you have specific accessibility concerns, please let us know, and we will do our best to accommodate your needs.",
-    },
   ];
 
   const handleQuestionClick = (id) => {

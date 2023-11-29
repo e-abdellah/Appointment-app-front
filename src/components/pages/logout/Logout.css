@@ -1,37 +1,24 @@
 .logout {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  background-color: #f0f0f0;
-  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg_color);
 }
 
 .logout__title {
-  font-size: 2em;
-  margin-bottom: 1em;
-  color: #333;
-  text-transform: uppercase;
-}
-
-.logout__text {
-  font-size: 1.2em;
-  margin-bottom: 2em;
-  color: #666;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .logout__button {
-  padding: 0.5em 1em;
-  font-size: 1em;
-  color: #fff;
-  background-color: #007bff;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: var(--secondary_color);
+  background-color: var(--glacier-500);
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.logout__button:hover {
-  background-color: #0056b3;
+  margin-bottom: 20px;
 }
