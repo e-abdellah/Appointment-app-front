@@ -7,7 +7,7 @@ export const axios = axiosRoot.create({
   // headers: {
   //   "Content-Type": "application/json",
   // },
-})
+});
 
 export const setAuthToken = (token) => {
   if (token) {
@@ -15,7 +15,7 @@ export const setAuthToken = (token) => {
   } else {
     delete axios.defaults.headers["Authorization"];
   }
-}
+};
 
 export const getById = async (url) => {
   const { data } = await axios.get(url);
@@ -29,28 +29,26 @@ export const getAll = async (url) => {
 };
 
 export const deleteById = async (url, { arg: id }) => {
-  await axios.delete(url/{id});
+  await axios.delete(`${url}/${id}`);
 };
 
 export const post = async (url, { arg }) => {
-  const { data } = await axios.post(url, arg);
+  const { data } = await axios.post(`${url}`, arg);
   return data;
 };
 
 export const put = async (url, { arg }) => {
-  const { data } = await axios.put(url, arg);
+  const { id, ...values } = arg;
+  const { data } = await axios.put(`${url}/${id}`, values);
   return data;
-}
+};
 
-// export const deleteById = async (url, id) => {
-//   await axiosInstance.delete(`${url}/${id}`);
-// };
-
-// export const save = async (url, { arg: body }) => {
-//   const { id, ...values } = body;
-//   await axios({
-//     method: id ? 'PUT' : 'POST',
-//     url: $url/${id ?? ''}`,
-//     data: values,
-//   });
-// };
+export const save = async (url, { arg: body }) => {
+  const { id, ...values } = body;
+  const response = await axios({
+    method: id ? "PUT" : "POST",
+    url: `${url}/${id ?? ""}`,
+    data: values,
+  });
+  return response.data;
+};

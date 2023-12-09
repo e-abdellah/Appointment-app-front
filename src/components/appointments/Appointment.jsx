@@ -1,7 +1,126 @@
-export default function appointment({ patient, condition, city, doctor }) {
+import React, { useState, useCallback, memo, useEffect } from "react";
+import { FiCheckCircle, FiXCircle, FiEdit2, FiTrash2 } from "react-icons/fi";
+import "./Appointment.css";
+
+const AppointmentMemoized = memo(function Appointment({
+  id,
+  description,
+  numberOfBeds,
+  condition,
+  date,
+  patient,
+  doctor,
+  onDelete,
+  onSave, 
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedAppointment, setEditedAppointment] = useState(null);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleDelete = useCallback(() => {
+    onDelete(id);
+  }, [id, onDelete]);
+
+  const handleSave = async () => {
+    if (!editedAppointment.description || !editedAppointment.numberOfBeds || !editedAppointment.condition || !editedAppointment.date || !editedAppointment.patient.name || !editedAppointment.doctor.name) {
+      alert('Please fill in all fields');
+      return;
+    }
+    const updatedAppointment = {
+      id: editedAppointment.id,
+      description: editedAppointment.description,
+      numberOfBeds: editedAppointment.numberOfBeds,
+      condition: editedAppointment.condition,
+      date: editedAppointment.date,
+      patientId: editedAppointment.patient.id,
+      doctorId: editedAppointment.doctor.id,
+    };
+    await onSave(updatedAppointment);
+    setIsEditing(false);
+  };
+   
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    setEditedAppointment({
+      id,
+      description,
+      numberOfBeds,
+      condition,
+      date,
+      patient,
+      doctor,
+    });
+  };
+
+  useEffect(() => {
+    setEditedAppointment({
+      id,
+      description,
+      numberOfBeds,
+      condition,
+      date,
+      patient,
+      doctor,
+    });
+  }, [id, description, numberOfBeds, condition, date, patient, doctor]);
+
   return (
-    <div className='text-bg-dark' style={{ textAlign: 'center' }}>
-      {patient} heeft {condition} en heeft een afspraak in {city} bij {doctor}
+    <div className="appointment">
+      {isEditing ? (
+        <>
+          {/* Render id as text, not editable */}
+          <p>Appointment Id: {editedAppointment.id}</p>
+          {/* Render input only for editable fields */}
+          <label>Description: <input type="text" value={editedAppointment.description} onChange={(e) => setEditedAppointment({...editedAppointment, description: e.target.value})} /></label>
+          <label>Number of Beds: <input type="number" value={editedAppointment.numberOfBeds} onChange={(e) => setEditedAppointment({...editedAppointment, numberOfBeds: e.target.value})} /></label>
+          <label>Condition: <input type="text" value={editedAppointment.condition} onChange={(e) => setEditedAppointment({...editedAppointment, condition: e.target.value})} /></label>
+          <label>Date: <input type="date" value={editedAppointment.date} onChange={(e) => setEditedAppointment({...editedAppointment, date: e.target.value})} /></label>
+          <label>Patient ID: <input type="text" value={editedAppointment.patient.id} onChange={(e) => setEditedAppointment({...editedAppointment, patient: {...editedAppointment.patient, id: e.target.value}})} /></label>
+          <label>Patient Name: <input type="text" value={editedAppointment.patient.name} onChange={(e) => setEditedAppointment({...editedAppointment, patient: {...editedAppointment.patient, name: e.target.value}})} /></label>
+          <label>Doctor ID: <input type="text" value={editedAppointment.doctor.id} onChange={(e) => setEditedAppointment({...editedAppointment, doctor: {...editedAppointment.doctor, id: e.target.value}})} /></label>
+          <label>Doctor Name: <input type="text" value={editedAppointment.doctor.name} onChange={(e) => setEditedAppointment({...editedAppointment, doctor: {...editedAppointment.doctor, name: e.target.value}})} /></label>
+        </>
+
+      ) : (
+        <>
+          <p>Appointment Id: {id}</p>
+          <p>Description: {description}</p>
+          <p>Number of Beds: {numberOfBeds}</p>
+          <p>Condition: {condition}</p>
+          <p>Date: {date}</p>
+          <p>Patient Id: {patient.id}</p>
+          <p>Patient Name: {patient.name}</p>
+          <p>Doctor Id: {doctor.id}</p>
+          <p>Doctor Name: {doctor.name}</p>
+        </>
+      )}
+      <div className="appointment-actions">
+        {isEditing ? (
+          <>
+            <button onClick={handleSave}>
+              <FiCheckCircle size={24} />
+            </button>
+            <button onClick={handleCancel}>
+              <FiXCircle size={24} />
+            </button>
+          </>
+        ) : (
+          <>
+            <button onClick={handleEdit}>
+              <FiEdit2 size={24} />
+            </button>
+            <button onClick={handleDelete}>
+              <FiTrash2 size={24} />
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
-}
+});
+
+export default AppointmentMemoized;

@@ -1,0 +1,40 @@
+.appointment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--card_color);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.appointment p {
+  box-sizing: border-box;
+  width: 100%;
+  color: var(--body_color);
+  padding: 10px;
+  border: 1px solid var(--glacier-300);
+  border-radius: 4px;
+}
+
+.appointment-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.appointment-button--edit,
+.appointment-button--remove {
+  border: none;
+  border-radius: 50%;
+  padding: 25px; 
+}
+
+.appointment-button--edit:hover {
+  color: #198754;
+}
+
+.appointment-button--remove:hover {
+  color: #dc3545;
+}

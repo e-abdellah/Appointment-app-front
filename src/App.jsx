@@ -2,7 +2,7 @@
 // import Appointment from "./components/appointments/Appointment";
 // import { APPOINTMENT_DATA } from "./api/mock_data";
 // import PatientList from "./components/patients/PatientList";
-// import DoctorList from "./components/doctors/DoctorsList";
+// import DoctorCards from "./components/doctors/DoctorCards";
 // import BookingForm from "./components/patients/BookingForm";
 // import SideBar from "./components/navigation/SideBar";
 // import NavBar from "./components/navigation/NavBar";
@@ -16,7 +16,7 @@
 //       <HomePage />
 //       <FindADoctor />
 //       <DoctorPage />
-//       <DoctorList />
+//       <DoctorCards />
 //       <BookingForm />
 //     </div>
 //   );
