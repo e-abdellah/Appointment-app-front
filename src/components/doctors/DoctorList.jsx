@@ -29,7 +29,7 @@ const DoctorList = () => {
   return (
     <>
       <Error error={error} />
-      <h1 className="doctor-list__title">Doctors</h1>
+      <h1 className="doctor-list__title">All Doctors</h1>
       <div className="doctor-list">
         {sortedDoctors.map((doctor) => (
           <div className="doctor-list__item" key={doctor.id}>

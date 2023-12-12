@@ -120,12 +120,14 @@ const DoctorMemoized = memo(function Doctor({
           <p>Rating: {rating}</p>
           <p>About: {about}</p>
           <p>Time Slots: {timeSlots.map(slot => `${slot.day}: ${slot.time}`).join(', ')}</p>
-          <button onClick={handleEdit}>
+          <div className="doctor-actions">
+          <button onClick={handleEdit} className="doctor-button doctor-button--edit">
             <FiEdit2 size={24} />
           </button>
-          <button onClick={handleDelete}>
+          <button onClick={handleDelete} className="doctor-button doctor-button--remove">
             <FiTrash2 size={24} />
           </button>
+          </div>
         </>
       )}
     </div>
