@@ -62,48 +62,26 @@ const NavBar = () => {
 
     console.log("Selected option:", option);
 
-    // if (option === "profile") {
-    //   // Determine the correct URL based on user's role and navigate to the profile page
-    //   const profileUrl =
-    //     user.role === "patient"
-    //       ? `/patients/${user.id}`
-    //       : `/doctors/${user.id}`;
-
-    //   // Make a GET request to the determined URL
-    //   fetch(profileUrl)
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         throw new Error(`HTTP error! Status: ${response.status}`);
-    //       }
-    //       // Handle the response as needed
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       console.log("Profile data:", data);
-    //       // Handle the profile data as needed
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching profile data:", error);
-    //       // Handle the error as needed
-    //     });
-    
-    // // } else if (option === "appointments") {
-    // //   // Link to the appointments page
-    // // } else if (option === "patients" && doctor) {
-    // //   // Link to the doctor's patients page
-    // // } else if (option === "doctors") {
-    // //   // return <Link to="/doctors">Doctors</Link>;
-    // // } else if (option === "logout") {
-    // //   // Link to the logout page
-    // // } else if (option === "patient-login") {
-    // //   // Link to the patient login page
-    // // } else if (option === "doctor-login") {
-    // //   // Link to the doctor login page
-    // // } else if (option === "patient-signup") {
-    // //   // Link to the patient signup page
-    // // } else if (option === "doctor-signup") {
-    // //   // Link to the doctor signup page
-    // }
+    // Replace 'to' prop with the appropriate URLs
+    if (option === "profile") {
+      // Link to the user's profile page
+    } else if (option === "appointments") {
+      // Link to the appointments page
+    } else if (option === "patients" && doctor) {
+      // Link to the doctor's patients page
+    } else if (option === "doctors") { // New Link to "Find a Doctor"
+      // return <Link to="/doctors">Doctors</Link>;
+    } else if (option === "logout") {
+      // Link to the logout page
+    } else if (option === "patient-login") {
+      // Link to the patient login page
+    } else if (option === "doctor-login") {
+      // Link to the doctor login page
+    } else if (option === "patient-signup") {
+      // Link to the patient signup page
+    } else if (option === "doctor-signup") {
+      // Link to the doctor signup page
+    }
   };
 
   return (
@@ -204,7 +182,7 @@ const NavBar = () => {
                   ref={profileDropdownRef}
                 >
                   <Link
-                    to="/patients/:patientId"
+                    to="/my-profile"
                     className="app-navbar-profile__dropdown-button"
                     onClick={() => handleOptionClick("profile")}
                   >

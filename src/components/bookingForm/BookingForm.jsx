@@ -1,139 +1,112 @@
-import React, { useEffect } from "react";
-import "react-datepicker/dist/react-datepicker.css";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import React from "react";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./BookingForm.css";
-import CustomInput from "../patients/CustomInput";
 
 const validationSchema = Yup.object({
-  patient: Yup.string()
-    .required("Required")
-    .min(2, "Must be at least 2 characters"),
-  date: Yup.date().required("Required"),
-  condition: Yup.string()
-    .required("Required")
-    .min(5, "Must be at least 5 characters"),
-  address: Yup.string().required("Required"),
-  timeSlot: Yup.string().required("Required"),
+  name: Yup.string().required().min(2),
+  date: Yup.date().required(),
+  condition: Yup.string().required().min(5),
+  description: Yup.string().required(),
 });
 
-const BookingForm = ({ onSaveBooking, timeSlots }) => {
-  const daysMap = {
-    Sunday: 0,
-    Monday: 1,
-    Tuesday: 2,
-    Wednesday: 3,
-    Thursday: 4,
-    Friday: 5,
-    Saturday: 6,
-  };
+const BookingForm = ({ onSaveBooking }) => {
+  const descriptions = [
+    "Choose an appointment type",
+    "Annual Health Checkup",
+    "Dental Cleaning",
+    "Orthopedic Consultation",
+    "Eye Exam",
+    "Allergy Consultation",
+    "Gastroenterology Checkup",
+    "Cardiology Follow-up",
+    "Pulmonology Evaluation",
+    "Neurology Consultation",
+  ];
 
-  const workingDays = timeSlots.map((slot) => daysMap[slot.day]);
-
-  const isWorkingDay = (date) => {
-    const day = date.getDay();
-    return workingDays.includes(day);
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: "Sophia Davis",
+      date: "2024-01-01",
+      description: descriptions[0],
+      condition: "Knee pain and difficulty walking",
+      numberOfBeds: 1,
+    },
+    validationSchema,
+    onSubmit: (values, { resetForm }) => {
+      onSaveBooking(values);
+      resetForm();
+    },
+  });
 
   return (
     <div className="booking-form">
       <h1 className="booking-form__title">Book an appointment</h1>
-      <Formik
-        initialValues={{
-          patient: "",
-          date: "",
-          condition: "",
-          address: "",
-          timeSlot: "",
-        }}
-        validationSchema={validationSchema}
-        validateOnBlur={true}
-        validateOnChange={true}
-        onSubmit={(values, { resetForm, setSubmitting }) => {
-          onSaveBooking(values);
-          resetForm();
-          setSubmitting(false);
-        }}
-      >
-        {({ isSubmitting, errors, touched, setFieldValue, values }) => {
-          useEffect(() => {
-            if (values.date) {
-              const selectedDay = daysMap[values.date.getDay()];
-              const selectedTimeSlot = timeSlots.find(
-                (slot) => slot.day === selectedDay
-              );
-              if (selectedTimeSlot) {
-                setFieldValue("timeSlot", selectedTimeSlot.time);
+      <form onSubmit={formik.handleSubmit}>
+        <div>
+          <label htmlFor="description" className="booking-form__label">
+            description
+          </label>
+          <select
+            id="description"
+            name="description"
+            onChange={formik.handleChange}
+            value={formik.values.description}
+            className={`booking-form__input ${
+              formik.errors.description ? "input-error" : ""
+            }`}
+          >
+            {descriptions.map((desc, index) => (
+              <option key={index} value={desc}>
+                {desc}
+              </option>
+            ))}
+          </select>
+          {formik.errors.description ? (
+            <div className="booking-form__error">
+              {formik.errors.description}
+            </div>
+          ) : null}
+        </div>
+        {["name", "date", "condition", "numberOfBeds"].map((field) => (
+          <div key={field}>
+            <label htmlFor={field} className="booking-form__label">
+              {field}
+            </label>
+            <input
+              id={field}
+              name={field}
+              type={
+                field === "date"
+                  ? "date"
+                  : field === "numberOfBeds"
+                  ? "number"
+                  : "text"
               }
-            } else {
-              // Set the default time slot to the first available slot
-              setFieldValue("timeSlot", timeSlots[0].time);
-            }
-          }, [values.date]);
-
-          return (
-            <Form>
-              {/* Use CustomInput for each form field */}
-              <CustomInput
-                label="Name and surname"
-                name="patient"
-                type="text"
-                errors={errors}
-                touched={touched}
-                dataCy="name_input"
-              />
-              <CustomInput
-                label="Date"
-                name="date"
-                type="datepicker"
-                errors={errors}
-                touched={touched}
-                isWorkingDay={isWorkingDay}
-                dataCy="date_input"
-              />
-              <CustomInput
-                label="Available Time Slots"
-                name="timeSlot"
-                type="select"
-                errors={errors}
-                touched={touched}
-                dataCy="timeSlot_input"
-              >
-                {timeSlots &&
-                  timeSlots.map((slot, index) => (
-                    <option key={index} value={slot.time}>
-                      {slot.time}
-                    </option>
-                  ))}
-              </CustomInput>
-              <CustomInput
-                label="Condition"
-                name="condition"
-                type="text"
-                errors={errors}
-                touched={touched}
-                dataCy="condition_input"
-              />
-              <CustomInput
-                label="Address"
-                name="address"
-                type="text"
-                errors={errors}
-                touched={touched}
-                dataCy="address_input"
-              />
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="booking-form__button"
-              >
-                Book Appointment
-              </button>
-            </Form>
-          );
-        }}
-      </Formik>
+              onChange={formik.handleChange}
+              value={formik.values[field]}
+              className={`booking-form__input ${
+                formik.errors[field] ? "input-error" : ""
+              }`}
+              placeholder={
+                field === "numberOfBeds"
+                  ? "Choose between a smaller or a larger room (if u have children)"
+                  : ""
+              }
+            />
+            {formik.errors[field] ? (
+              <div className="booking-form__error">{formik.errors[field]}</div>
+            ) : null}
+          </div>
+        ))}
+        <button
+          type="submit"
+          disabled={formik.isSubmitting}
+          className="booking-form__button"
+        >
+          Book Appointment
+        </button>
+      </form>
     </div>
   );
 };

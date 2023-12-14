@@ -1,19 +1,8 @@
-// import Userfront, { LoginForm } from "@userfront/toolkit/react";
-// Userfront.init("xbp49ddb");
-
-// const Login = () => {
-//   return <LoginForm />;
-// }
-
-// export default Login
-
-
-
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth.context";
 import Error from "../../components/Error";
 import "./Login.css";
@@ -27,27 +16,30 @@ const validationRules = Yup.object().shape({
   password: Yup.string().required("Password is required"),
   role: Yup.string().required("Role is required"),
 });
-const isPatientLogin = location.pathname.startsWith("/patients/login");
-
-const initialValues = {
-  email: "abdellah.elhalimimerroun@student.hogent.be",
-  password: "12345678",
-  role: isPatientLogin ? "patient" : "doctor",
-};
 
 const Login = () => {
   const { login, error, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isPatientLogin = location.pathname.startsWith("/patients/login");
+
+  const initialValues = {
+    email: isPatientLogin
+      ? "emily.smith@gmail.com"
+      : "abdellah.elhalimimerroun@student.hogent.be",
+    password: "12345678",
+    role: isPatientLogin ? "patient" : "doctor",
+  };
 
   const handleLogin = useCallback(
-    async ({ email, password, role }) => {
-      console.log("Email:", email);
-      console.log("Password:", password);
-      console.log("Role:", role);
+    async (values) => {
+      console.log("Values:", values);
 
-      const loggedIn = await login(email, password, role);
+      const loggedIn = await login(values.email, values.password, values.role);
 
       if (loggedIn) {
+        console.log("Logged in:", loggedIn);
         navigate({
           pathname: `/`,
           replace: true,

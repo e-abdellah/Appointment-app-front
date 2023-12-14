@@ -4,18 +4,16 @@ import * as Yup from "yup";
 import "./contact.css";
 
 const validationSchema = Yup.object({
-  firstName: Yup.string().required("Required"),
+  firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Required"),
   email: Yup.string()
-    .required("Required")
+    .required("Email is required")
     .test("is-email", "Invalid email address", (value) =>
       /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)
     ),
   phoneNumber: Yup.string()
-    .required("Required")
-    .test("Digits only", "The phone number must contain only digits", (value) =>
-      /^\d+$/.test(value)
-    ),
+    .required("Phone number is required")
+    .matches(/^\d+$/, "Please enter a valid phone number with only digits"),
   message: Yup.string().required("Required"),
 });
 
@@ -38,11 +36,12 @@ const Contact = () => {
           <h1 className="contact__title">Contact Us</h1>
           <Formik
             initialValues={{
-              firstName: "",
-              lastName: "",
-              email: "",
-              phoneNumber: "",
-              message: "",
+              firstName: "John",
+              lastName: "Doe",
+              email: "john.doe@student.hogent.be",
+              phoneNumber: "0123456789",
+              message:
+                "I recently experienced some concerning symptoms and would like to discuss them further during my upcoming appointment. The symptoms include [describe symptoms], and I would appreciate any guidance or insights you can provide. Thank you.",
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -55,6 +54,7 @@ const Contact = () => {
                 <Field
                   name="firstName"
                   type="text"
+                  placeholder="Enter your first name"
                   className="contact__input"
                 />
                 <ErrorMessage
@@ -66,7 +66,12 @@ const Contact = () => {
                 <label htmlFor="lastName" className="contact__label">
                   Last Name
                 </label>
-                <Field name="lastName" type="text" className="contact__input" />
+                <Field
+                  name="lastName"
+                  type="text"
+                  placeholder="Enter your last name"
+                  className="contact__input"
+                />
                 <ErrorMessage
                   name="lastName"
                   component="div"
@@ -76,7 +81,12 @@ const Contact = () => {
                 <label htmlFor="email" className="contact__label">
                   Email
                 </label>
-                <Field name="email" type="email" className="contact__input" />
+                <Field
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="contact__input"
+                />
                 <ErrorMessage
                   name="email"
                   component="div"
@@ -89,6 +99,7 @@ const Contact = () => {
                 <Field
                   name="phoneNumber"
                   type="text"
+                  placeholder="Enter your phone number"
                   className="contact__input"
                 />
                 <ErrorMessage
@@ -103,6 +114,7 @@ const Contact = () => {
                 <Field
                   name="message"
                   as="textarea"
+                  placeholder="Enter your message"
                   className="contact__input"
                 />
                 <ErrorMessage

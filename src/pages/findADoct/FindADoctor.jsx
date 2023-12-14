@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useSWR from "swr";
 import DoctorCard from "../../components/doctors/DoctorCard";
 import AsyncData from "../../components/AsyncData";
-import DoctorCards from "../../components/doctors/DoctorsCards";
+import DoctorCards from "../../components/doctors/DoctorCards";
 import "./FindADoctor.css";
 import { getAll } from "../../api";
 

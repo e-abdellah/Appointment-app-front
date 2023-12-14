@@ -52,6 +52,7 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   margin-bottom: 0.5rem;
+  color: black;
 }
 
 .contact__error {

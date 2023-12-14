@@ -24,6 +24,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 0.5rem;
+  color: black;
 }
 
 .booking-form__error {

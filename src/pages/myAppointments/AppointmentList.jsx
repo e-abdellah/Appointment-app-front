@@ -1,13 +1,15 @@
 import React from "react";
 import useSWR from "swr";
-import useSWRMutation from 'swr/mutation';
+import useSWRMutation from "swr/mutation";
 import { getAll, deleteById, put } from "../../api";
 import Appointment from "../../components/appointments/Appointment";
 import Error from "../../components/Error";
 import AsyncData from "../../components/AsyncData";
 import "./AppointmentList.css";
+import { useAuth } from "../../contexts/Auth.context";
 
 const AppointmentList = () => {
+  const { user } = useAuth();
   const {
     data: appointments = [],
     error,
@@ -17,14 +19,28 @@ const AppointmentList = () => {
     "appointments",
     deleteById
   );
-  const { trigger: updateAppointment } = useSWRMutation( 
-    "appointments",
-    put
-  );
+  const { trigger: updateAppointment } = useSWRMutation("appointments", put);
 
   if (isLoading) return <div>Loading...</div>;
 
-  const sortedAppointments = [...appointments].sort((a, b) => a.id - b.id);
+// Filter the appointments based on the user's role and ID
+const filteredAppointments = appointments.filter((appointment) => {
+  if (user.roles.includes("patient")) {
+    console.log("User roles and id:", user.roles, user.id);
+    return appointment.patient.id === user.id;
+  } else if (user.roles.includes("doctor")) {
+    console.log("User roles and id:", user.roles, user.id);
+    return appointment.doctor.id === user.id;
+  } else {
+    console.log("User roles and id:", user.roles, user.id);
+    return true; // If the user has no specific role, show all appointments
+  }
+});
+
+
+  const sortedAppointments = [...filteredAppointments].sort(
+    (a, b) => a.id - b.id
+  );
 
   return (
     <>
@@ -34,7 +50,11 @@ const AppointmentList = () => {
         {sortedAppointments.map((appointment) => (
           <div className="appointment-list__item" key={appointment.id}>
             <AsyncData loading={isLoading} error={error || deleteError}>
-              <Appointment {...appointment} onDelete={deleteAppointment} onSave={updateAppointment} /> 
+              <Appointment
+                {...appointment}
+                onDelete={deleteAppointment}
+                onSave={updateAppointment}
+              />
             </AsyncData>
           </div>
         ))}

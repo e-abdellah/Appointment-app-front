@@ -6,13 +6,13 @@ import {
   useContext,
   useEffect,
 } from "react";
-import { Link } from "react-router-dom";
 import useSWRMutation from "swr/mutation";
 import * as api from "../api";
 
 const JWT_TOKEN_KEY = "jwtToken";
 const PATIENT_ID_KEY = "patientId";
 const DOCTOR_ID_KEY = "doctorId";
+const ROLE_KEY = "role";
 
 export const AuthContext = createContext();
 
@@ -20,6 +20,9 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem(JWT_TOKEN_KEY));
+  const patientId = localStorage.getItem(PATIENT_ID_KEY);
+  const doctorId = localStorage.getItem(DOCTOR_ID_KEY);
+
   const [user, setUser] = useState(null);
   const [ready, setReady] = useState(false);
   const [isAuthed, setIsAuthed] = useState(false);
@@ -43,34 +46,38 @@ export const AuthProvider = ({ children }) => {
   } = useSWRMutation("doctors/login", api.post);
 
   const login = useCallback(
-    async (email, password, role) => {
+    async (email, password) => {
       try {
         let loginResult;
-        let user;
-        if (role === "patient") {
+        const url = window.location.href;
+
+        if (url.includes("/patients/login")) {
+          console.log("doPatientLogin");
           loginResult = await doPatientLogin({ email, password });
-          user = { ...loginResult.patient, role: "patient" };
-        } else if (role === "doctor") {
-          loginResult = await doDoctorLogin({ email, password });
-          user = { ...loginResult.doctor, role: "doctor" };
         } else {
-          throw new Error("Invalid role");
+          console.log("doDoctorLogin");
+          loginResult = await doDoctorLogin({ email, password });
         }
 
-        const { token } = loginResult;
+        const { token, user } = loginResult;
 
         setToken(token);
         setUser(user);
 
         localStorage.setItem(JWT_TOKEN_KEY, token);
+        localStorage.setItem(ROLE_KEY, user.roles[0]);
 
-        if (role === "patient") {
+        if (user.role === "patient") {
           localStorage.setItem(PATIENT_ID_KEY, user.id);
-        } else if (role === "doctor") {
+        }
+        if (user.role === "doctor") {
           localStorage.setItem(DOCTOR_ID_KEY, user.id);
         }
 
-        return <Link to="/">Home</Link>;
+        console.log("user", user);
+        console.log("user id:", user.id);
+
+        return true;
       } catch (error) {
         console.error(error);
         return false;
@@ -116,6 +123,7 @@ export const AuthProvider = ({ children }) => {
           registerResult = await doPatientRegister(data);
         } else if (role === "doctor") {
           console.log("Registering doctor..."); // Log the start of doctor registration
+          console.log(data);
           registerResult = await doDoctorRegister(data);
         } else {
           throw new Error("Invalid role");
@@ -151,6 +159,8 @@ export const AuthProvider = ({ children }) => {
     () => ({
       token,
       user,
+      patientId,
+      doctorId,
       error,
       patientLoading,
       doctorError,
@@ -168,6 +178,8 @@ export const AuthProvider = ({ children }) => {
     [
       token,
       user,
+      patientId,
+      doctorId,
       error,
       patientLoading,
       doctorError,

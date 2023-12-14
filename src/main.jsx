@@ -18,11 +18,11 @@ import Login from "./pages/login/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Logout from "./pages/logout/Logout";
 import { ThemeProvider } from "./contexts/Theme.context";
+import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import AppointmentList from "./pages/myAppointments/AppointmentList";
 import PatientList from "./pages/myPatients/PatientList";
 import DoctorList from "./components/doctors/DoctorList";
-import PatientProfile from "./pages/profile/PatientProfile";
 
 const router = createBrowserRouter([
   {
@@ -38,14 +38,11 @@ const router = createBrowserRouter([
       { path: "doctors/login", element: <Login /> },
       { path: "patients/register", element: <Register /> },
       { path: "doctors/register", element: <Register /> },
+      { path: "my-profile", element: <Profile /> },
       { path: "logout", element: <Logout /> },
       { path: "services", element: <Services /> },
       { path: "doctors", element: <FindADoctor /> },
-      {
-        path: "/patients/:patientId",
-        element: <PrivateRoute />,
-        children: [{ index: true, element: <PatientProfile /> }],
-      },
+      // { path: "doctors/:doctorId", element: <DoctorPage /> },
       {
         path: "doctors/:doctorId",
         element: <PrivateRoute />,
@@ -66,8 +63,12 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [{ index: true, element: <DoctorList /> }],
       },
+      {
+        path: "contact",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <Contact /> }],
+      },
       { path: "about", element: <AboutUs /> },
-      { path: "contact", element: <Contact /> },
       { path: "privacy-policy", element: <PrivacyPolicy /> },
       { path: "terms-of-service", element: <TermsAndConditions /> },
       { path: "*", element: <NotFound /> },

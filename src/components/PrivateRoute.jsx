@@ -2,10 +2,11 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/Auth.context";
 
 export default function PrivateRoute() {
-  const { ready, isAuthed, role } = useAuth();
+  const { ready, isAuthed, role } = useAuth(); // Assuming you have 'role' in your authentication context
   const { pathname } = useLocation();
 
   const getLoginPath = () => {
+    // Update this logic based on your application requirements
     if (role === "patient") {
       return `/patients/login?redirect=${pathname}`;
     } else if (role === "doctor") {

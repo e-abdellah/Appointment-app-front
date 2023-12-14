@@ -101,7 +101,7 @@ const AppointmentMemoized = memo(function Appointment({
       <div className="appointment-actions">
         {isEditing ? (
           <>
-            <button onClick={handleSave} >
+            <button onClick={handleSave}>
               <FiCheckCircle size={24} />
             </button>
             <button onClick={handleCancel}>
@@ -110,10 +110,10 @@ const AppointmentMemoized = memo(function Appointment({
           </>
         ) : (
           <>
-            <button onClick={handleEdit} className="appointment-button appointment-button--edit">
+            <button onClick={handleEdit}>
               <FiEdit2 size={24} />
             </button>
-            <button onClick={handleDelete} className="appointment-button appointment-button--cancel">
+            <button onClick={handleDelete}>
               <FiTrash2 size={24} />
             </button>
           </>

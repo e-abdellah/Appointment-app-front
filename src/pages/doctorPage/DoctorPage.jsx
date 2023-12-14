@@ -1,18 +1,49 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import BookingForm from "../../components/bookingForm/BookingForm";
 import "./DoctorPage.css";
 import useSWR from "swr";
 import AsyncData from "../../components/AsyncData";
-import { getById } from "../../api";
-import { useParams } from "react-router-dom";
+import { getById, save } from "../../api";
+import { useParams, useNavigate } from "react-router-dom";
 import DoctorCard from "../../components/doctors/DoctorCard";
+import { useAuth } from "../../contexts/Auth.context";
 
 const DoctorPage = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const { doctorId } = useParams();
-  const parsedDoctorId = Number(doctorId);
-  const apiUrl = `doctors/${parsedDoctorId}`;
+  const apiUrl = `doctors/${doctorId}`;
 
   const { data: doctorData, error } = useSWR(apiUrl, getById);
+
+  const handleSaveBooking = useCallback(
+    async (values) => {
+      if (!doctorData) return;
+
+      const { date, condition, description, numberOfBeds } = values;
+      try {
+        await save("appointments", {
+          arg: {
+            description: description,
+            numberOfBeds: numberOfBeds,
+            condition: condition,
+            date: date,
+            patientId: user.id,
+            doctorId: doctorId,
+          },
+        });
+
+        alert(
+          `Appointment saved successfully!\n\nDate: ${date}\nDescription: ${description}`
+        );
+
+        navigate("/my-appointments");
+      } catch (error) {
+        console.error("Error saving appointment:", error);
+      }
+    },
+    [user, doctorId, doctorData]
+  );
 
   if (error) {
     return <div>Error loading doctor data</div>;
@@ -22,12 +53,7 @@ const DoctorPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { id: doctorIdFromData, name, about, timeSlots } = doctorData;
-
-  const handleSaveBooking = (values) => {
-    // Do something with values
-    console.log(values);
-  };
+  const { name, about } = doctorData;
 
   return (
     <div className="doctor-page">
@@ -45,10 +71,7 @@ const DoctorPage = () => {
           <p className="doctor-page__about-text">{about}</p>
         </section>
         <section className="doctor-page__booking">
-          <BookingForm
-            onSaveBooking={handleSaveBooking}
-            timeSlots={timeSlots}
-          />
+          <BookingForm onSaveBooking={handleSaveBooking} />
         </section>
       </main>
     </div>

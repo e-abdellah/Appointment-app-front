@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -6,91 +6,21 @@ import { useAuth } from "../../contexts/Auth.context";
 import Error from "../../components/Error";
 import "./Register.css";
 
-// const TimeSlotsInput = ({ field, form }) => {
-//   const handleTimeSlotChange = (dayIndex, fieldIndex, value) => {
-//     form.setFieldValue(`doctor.timeSlots[${dayIndex}][${fieldIndex}]`, value);
-//   };
-
-//   const handleAvailabilityChange = (dayIndex, value) => {
-//     form.setFieldValue(`doctor.timeSlots[${dayIndex}].available`, value);
-//   };
-
-//   return (
-//     <div>
-//       {field.value.map((day, dayIndex) => (
-//         <div key={dayIndex}>
-//           <p>{day.day}</p>
-//           <div>
-//             <label>Available:</label>
-//             <input
-//               type="checkbox"
-//               checked={day.available}
-//               onChange={(e) =>
-//                 handleAvailabilityChange(dayIndex, e.target.checked)
-//               }
-//             />
-//           </div>
-//           <div>
-//             <label>Start Time:</label>
-//             <Field
-//               type="time"
-//               name={`doctor.timeSlots[${dayIndex}][0]`}
-//               onChange={(e) =>
-//                 handleTimeSlotChange(dayIndex, 0, e.target.value)
-//               }
-//               disabled={!day.available}
-//             />
-//           </div>
-//           <div>
-//             <label>End Time:</label>
-//             <Field
-//               type="time"
-//               name={`doctor.timeSlots[${dayIndex}][1]`}
-//               onChange={(e) =>
-//                 handleTimeSlotChange(dayIndex, 1, e.target.value)
-//               }
-//               disabled={!day.available}
-//             />
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
 const validationRules = Yup.object().shape({
-  doctor: Yup.object().shape({
-    email: Yup.string()
-      .required("Required")
-      .test("is-email", "Invalid email address", (value) =>
-        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)
-      ),
-    password: Yup.string().required("Password is required"),
-    name: Yup.string().required("Name is required"),
-  }),
-  patient: Yup.object().shape({
-    email: Yup.string()
-      .required("Required")
-      .test("is-email", "Invalid email address", (value) =>
-        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)
-      ),
-    password: Yup.string().required("Password is required"),
-    name: Yup.string().required("Name is required"),
-  }),
+  email: Yup.string()
+    .required("Required")
+    .test("is-email", "Invalid email address", (value) =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)
+    ),
+  password: Yup.string().required("Password is required"),
+  name: Yup.string().required("Name is required"),
 });
 
-const formConfig = {
-  doctor: [
-    { name: "email", label: "Email" },
-    { name: "password", label: "Password", type: "password" },
-    { name: "name", label: "Name" },
-  ],
-  patient: [
-    { name: "email", label: "Email" },
-    { name: "password", label: "Password", type: "password" },
-    { name: "name", label: "Name" },
-  ],
-};
+const formConfig = [
+  { name: "email", label: "Email" },
+  { name: "password", label: "Password", type: "password" },
+  { name: "name", label: "Name" },
+];
 
 const Register = () => {
   const { error, loading, register } = useAuth();
@@ -99,21 +29,11 @@ const Register = () => {
   const isDoctorRegister =
     window.location.pathname.startsWith("/doctors/register");
 
-  const initialValues = isDoctorRegister
-    ? {
-        doctor: {
-          email: "doctor@example.com",
-          password: "12345678",
-          name: "John Doe",
-        },
-      }
-    : {
-        patient: {
-          email: "patient@example.com",
-          password: "12345678",
-          name: "New Patient",
-        },
-      };
+  const initialValues = {
+    email: isDoctorRegister ? "doctor@example.com" : "patient@example.com",
+    password: "12345678",
+    name: isDoctorRegister ? "John Doe" : "New Patient",
+  };
 
   const handleRegister = useCallback(
     async (values) => {
@@ -127,20 +47,11 @@ const Register = () => {
         if (loggedIn) {
           console.log("Navigating...");
           navigate({
-            pathname: "/findADoctor",
+            pathname: "/",
             replace: true,
           });
           console.log("Registration successful");
         }
-        //   useEffect(() => {
-        //     if (loggedIn) {
-        //       navigate({
-        //         pathname: "/findADoctor",
-        //         replace: true,
-        //       });
-        //       console.log("Registration successful");
-        //     }
-        //   }, [loggedIn, navigate]);
       } catch (error) {
         console.error("Registration error:", error);
       }
@@ -153,7 +64,9 @@ const Register = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationRules}
-        onSubmit={handleRegister}
+        onSubmit={async (values) => {
+          await handleRegister(values);
+        }}
       >
         <Form className="login__form">
           <h1 className="login__title">
@@ -161,22 +74,22 @@ const Register = () => {
           </h1>
           <Error error={error} />
 
-          {formConfig[isDoctorRegister ? "doctor" : "patient"].map((field) => (
+          {formConfig.map((field) => (
             <div className="login__input-container" key={field.name}>
               <label htmlFor={field.name} className="login__label">
                 {field.label}
               </label>
               <Field
-                name={`${isDoctorRegister ? "doctor" : "patient"}.${
-                  field.name
-                }`}
+                name={field.name}
+                component={
+                  field.type === "timeslots" ? TimeSlotsInput : "input"
+                }
+                placeholder={field.label}
                 type={field.type || "text"}
                 className="login__input"
               />
               <ErrorMessage
-                name={`${isDoctorRegister ? "doctor" : "patient"}.${
-                  field.name
-                }`}
+                name={field.name}
                 component="div"
                 className="login__error"
               />
