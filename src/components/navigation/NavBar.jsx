@@ -203,7 +203,7 @@ const NavBar = () => {
                     (user.roles.includes("doctor") ||
                       user.roles.includes("admin")) && (
                       <Link
-                        to="/my-patients"
+                        to="/all-patients"
                         className="app-navbar-profile__dropdown-button"
                         onClick={() => handleOptionClick("patients")}
                       >
@@ -211,13 +211,13 @@ const NavBar = () => {
                       </Link>
                     )}
 
-                  {user && user.roles && user.roles.includes("admin") && (
+                  {user && user.roles && user.roles.includes("doctor") && (
                     <Link
                       to="/all-doctors"
                       className="app-navbar-profile__dropdown-button"
                       onClick={() => handleOptionClick("doctors")}
                     >
-                      All Doctors
+                      Doctors
                     </Link>
                   )}
 

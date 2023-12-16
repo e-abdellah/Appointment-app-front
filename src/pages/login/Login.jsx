@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth.context";
 import Error from "../../components/Error";
+import Loader from "../../components/loader/Loader";
 import "./Login.css";
 
 const validationRules = Yup.object().shape({
@@ -115,6 +116,8 @@ const Login = () => {
               </button>
             </div>
           </div>
+
+          {loading && <Loader />}
         </Form>
       </Formik>
     </div>

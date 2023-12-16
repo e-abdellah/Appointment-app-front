@@ -4,6 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../contexts/Auth.context";
 import Error from "../../components/Error";
+import Loader from "../../components/loader/Loader";
 import "./Register.css";
 
 const validationRules = Yup.object().shape({
@@ -103,8 +104,9 @@ const Register = () => {
                 className="login__button"
                 disabled={loading}
               >
-                Register
+                {loading ? "Registering..." : "Register"}
               </button>
+              {loading && <Loader />}
             </div>
           </div>
         </Form>

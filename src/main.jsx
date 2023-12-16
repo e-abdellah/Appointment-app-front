@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         children: [{ index: true, element: <AppointmentList /> }],
       },
       {
-        path: "my-patients",
+        path: "all-patients",
         element: <PrivateRoute />,
         children: [{ index: true, element: <PatientList /> }],
       },
