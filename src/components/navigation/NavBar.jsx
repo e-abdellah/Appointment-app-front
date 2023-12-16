@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./NavBar.css";
 import { NavLink, Link } from "react-router-dom";
 import SliderToggle from "../../contexts/SliderToggle";
 import { useAuth } from "../../contexts/Auth.context";
+import "./navBar.css";
 
 const NavBar = () => {
   const { isAuthed, user, doctor } = useAuth();
