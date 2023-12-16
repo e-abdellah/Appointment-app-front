@@ -35,7 +35,6 @@ const PatientMemoized = memo(function Patient({
       !editedPatient.city ||
       !editedPatient.birthdate
     ) {
-      // add email here
       alert("Please fill in all fields");
       return;
     }
@@ -110,7 +109,6 @@ const PatientMemoized = memo(function Patient({
               }
             />
           </label>{" "}
-          {/* add this line */}
           <label>
             Street:{" "}
             <input

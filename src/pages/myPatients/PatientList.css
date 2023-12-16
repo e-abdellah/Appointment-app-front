@@ -17,11 +17,12 @@
 }
 
 .patient-list__item {
-  width: calc(30% - 10px); 
+  width: calc(30% - 10px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border-radius: 0.25rem;
   margin-bottom: 20px;
+  /* color: black; */
 }

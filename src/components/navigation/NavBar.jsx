@@ -60,6 +60,8 @@ const NavBar = () => {
     setShowProfileDropdown(false);
     setShowSignUpDropdown(false);
 
+    console.log("User Role:", user?.roles); // Add this line to check the user's role
+
     // console.log("Selected option:", option);
 
     // // Replace 'to' prop with the appropriate URLs
@@ -196,16 +198,20 @@ const NavBar = () => {
                   >
                     Appointments
                   </Link>
-                  {user && user.role === "doctor" && (
-                    <Link
-                      to="/my-patients"
-                      className="app-navbar-profile__dropdown-button"
-                      onClick={() => handleOptionClick("patients")}
-                    >
-                      Patients
-                    </Link>
-                  )}
-                  {user && user.role === "doctor" && (
+                  {user &&
+                    user.roles &&
+                    (user.roles.includes("doctor") ||
+                      user.roles.includes("admin")) && (
+                      <Link
+                        to="/my-patients"
+                        className="app-navbar-profile__dropdown-button"
+                        onClick={() => handleOptionClick("patients")}
+                      >
+                        Patients
+                      </Link>
+                    )}
+
+                  {user && user.roles && user.roles.includes("admin") && (
                     <Link
                       to="/all-doctors"
                       className="app-navbar-profile__dropdown-button"
