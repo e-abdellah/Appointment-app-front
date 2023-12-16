@@ -11,7 +11,7 @@ import DoctorPage from "./pages/doctorPage/DoctorPage";
 import AboutUs from "./pages/about/AboutUs";
 import Contact from "./pages/contact/Contact";
 import PrivacyPolicy from "./pages/privacyTerms/PrivacyPolicies";
-import TermsConditions from "./pages/privacyterms/TermsConditions";
+import TermsOfService from "./pages/privacyTerms/TermsOfService";
 import NotFound from "./pages/notFound/NotFound";
 import { AuthProvider } from "./contexts/Auth.context";
 import Login from "./pages/login/Login";
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
       },
       { path: "about", element: <AboutUs /> },
       { path: "privacy-policy", element: <PrivacyPolicy /> },
-      { path: "terms-of-service", element: <TermsConditions /> },
+      { path: "terms-of-service", element: <TermsOfService /> },
       { path: "*", element: <NotFound /> },
     ],
   },
