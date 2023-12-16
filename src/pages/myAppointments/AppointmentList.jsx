@@ -23,24 +23,22 @@ const AppointmentList = () => {
 
   if (isLoading) return <div>Loading...</div>;
 
-// Filter the appointments based on the user's role and ID
-const filteredAppointments = appointments.filter((appointment) => {
-  if (user.roles.includes("patient")) {
-    console.log("User roles and id:", user.roles, user.id);
-    return appointment.patient.id === user.id;
-  } else if (user.roles.includes("doctor")) {
-    console.log("User roles and id:", user.roles, user.id);
-    return appointment.doctor.id === user.id;
-  } else {
-    console.log("User roles and id:", user.roles, user.id);
-    return true; // If the user has no specific role, show all appointments
-  }
-});
+  // Filter the appointments based on the user's role and ID
+  // const filteredAppointments = appointments.filter((appointment) => {
+  //   if (user.roles.includes("patient")) {
+  //     console.log("User roles and id:", user.roles, user.id);
+  //     return appointment.patient.id === user.id;
+  //   } else if (user.roles.includes("doctor")) {
+  //     console.log("User roles and id:", user.roles, user.id);
+  //     return appointment.doctor.id === user.id;
+  //   } else {
+  //     console.log("User roles and id:", user.roles, user.id);
+  //     return true; // If the user has no specific role, show all appointments
+  //   }
+  // });
 
-
-  const sortedAppointments = [...filteredAppointments].sort(
-    (a, b) => a.id - b.id
-  );
+  // const sortedAppointments = [...filteredAppointments].sort(
+  const sortedAppointments = appointments.sort((a, b) => a.id - b.id);
 
   return (
     <>

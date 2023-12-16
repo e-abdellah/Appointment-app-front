@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import BookingForm from "../../components/bookingForm/BookingForm";
 import "./DoctorPage.css";
 import useSWR from "swr";
