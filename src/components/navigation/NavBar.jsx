@@ -69,7 +69,8 @@ const NavBar = () => {
       // Link to the appointments page
     } else if (option === "patients" && doctor) {
       // Link to the doctor's patients page
-    } else if (option === "doctors") { // New Link to "Find a Doctor"
+    } else if (option === "doctors") {
+      // New Link to "Find a Doctor"
       // return <Link to="/doctors">Doctors</Link>;
     } else if (option === "logout") {
       // Link to the logout page
