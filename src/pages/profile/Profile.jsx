@@ -11,6 +11,9 @@ import "./Profile.css";
 const Profile = () => {
   const { user } = useAuth();
 
+  // Debug log to check the user roles
+  console.log('User roles:', user?.roles);
+
   const {
     data: userDetails,
     error,
@@ -23,7 +26,7 @@ const Profile = () => {
   const { trigger: updateDoctor } = useSWRMutation("doctors", put);
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div className="profile-error">Error: {error.message}</div>;
 
   return (
     <div className="profile-container">
@@ -45,7 +48,7 @@ const Profile = () => {
           />
         </div>
       ) : (
-        <div>No role assigned to user.</div>
+        null
       )}
     </div>
   );

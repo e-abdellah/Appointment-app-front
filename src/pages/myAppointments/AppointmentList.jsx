@@ -7,6 +7,7 @@ import Error from "../../components/Error";
 import AsyncData from "../../components/AsyncData";
 import "./AppointmentList.css";
 import { useAuth } from "../../contexts/Auth.context";
+import Loader from "../../components/loader/Loader";
 
 const AppointmentList = () => {
   const { user } = useAuth();
@@ -21,23 +22,8 @@ const AppointmentList = () => {
   );
   const { trigger: updateAppointment } = useSWRMutation("appointments", put);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
 
-  // Filter the appointments based on the user's role and ID
-  // const filteredAppointments = appointments.filter((appointment) => {
-  //   if (user.roles.includes("patient")) {
-  //     console.log("User roles and id:", user.roles, user.id);
-  //     return appointment.patient.id === user.id;
-  //   } else if (user.roles.includes("doctor")) {
-  //     console.log("User roles and id:", user.roles, user.id);
-  //     return appointment.doctor.id === user.id;
-  //   } else {
-  //     console.log("User roles and id:", user.roles, user.id);
-  //     return true; // If the user has no specific role, show all appointments
-  //   }
-  // });
-
-  // const sortedAppointments = [...filteredAppointments].sort(
   const sortedAppointments = appointments.sort((a, b) => a.id - b.id);
 
   return (

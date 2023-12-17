@@ -5,8 +5,8 @@ import { useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth.context";
 import Error from "../../components/Error";
-import Loader from "../../components/loader/Loader";
 import "./Login.css";
+import Loader from "../../components/loader/Loader";
 
 const validationRules = Yup.object().shape({
   email: Yup.string()
@@ -55,70 +55,75 @@ const Login = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationRules}
-        onSubmit={(values, { resetForm }) => {
-          handleLogin(values);
+        onSubmit={(values, { resetForm, setSubmitting }) => {
+          setSubmitting(true);
+          handleLogin(values).finally(() => {
+            setSubmitting(false);
+            resetForm();
+          });
           resetForm();
         }}
       >
-        <Form className="login__form">
-          <h1 className="login__title">
-            {isPatientLogin ? "Patient" : "Doctor"} Sign in
-          </h1>
-          <Error error={error} />
+        {({ isSubmitting }) => (
+          <Form className="login__form">
+            <h1 className="login__title">
+              {isPatientLogin ? "Patient" : "Doctor"} Sign in
+            </h1>
+            <Error error={error} />
 
-          <div className="login__input-container">
-            <label htmlFor="email" className="login__label">
-              Email
-            </label>
-            <Field
-              type="text"
-              id="email"
-              name="email"
-              placeholder="your@email.com"
-              className="login__input"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="login__error"
-            />
-          </div>
-
-          <div className="login__input-container">
-            <label htmlFor="password" className="login__label">
-              Password
-            </label>
-            <Field
-              type="password"
-              id="password"
-              name="password"
-              className="login__input"
-            />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="login__error"
-            />
-          </div>
-
-          <div className="login__buttons clearfix">
-            <div className="login__btn-group float-end">
-              <button
-                type="submit"
-                className="login__button login__button--primary"
-                disabled={loading}
-              >
-                Sign in
-              </button>
-
-              <button type="reset" className="login__button">
-                Cancel
-              </button>
+            <div className="login__input-container">
+              <label htmlFor="email" className="login__label">
+                Email
+              </label>
+              <Field
+                type="text"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                className="login__input"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="login__error"
+              />
             </div>
-          </div>
 
-          {loading && <Loader />}
-        </Form>
+            <div className="login__input-container">
+              <label htmlFor="password" className="login__label">
+                Password
+              </label>
+              <Field
+                type="password"
+                id="password"
+                name="password"
+                className="login__input"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="login__error"
+              />
+            </div>
+
+            <div className="login__buttons clearfix">
+              <div className="login__btn-group float-end">
+                <button
+                  type="submit"
+                  className="login__button login__button--primary"
+                  disabled={isSubmitting}
+                >
+                  Sign in
+                </button>
+
+                <button type="reset" className="login__button">
+                  Cancel
+                </button>
+              </div>
+            </div>
+            {isSubmitting && <Loader />}
+          </Form>
+        )}
       </Formik>
     </div>
   );

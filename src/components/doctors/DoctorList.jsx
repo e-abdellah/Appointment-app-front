@@ -1,6 +1,6 @@
 import React from "react";
 import useSWR from "swr";
-import useSWRMutation from 'swr/mutation';
+import useSWRMutation from "swr/mutation";
 import { getAll, deleteById, put } from "../../api";
 import Doctor from "./Doctor";
 import Error from "../Error";
@@ -19,14 +19,11 @@ const DoctorList = () => {
   );
   const { trigger: updateDoctor } = useSWRMutation("doctors", put);
 
-  if (isLoading)
-    return <Loader />;
+  if (isLoading) return <Loader />;
 
   let filteredDoctors = doctors;
-  if (user && user.roles.includes("patient") && !user.roles.includes("admin")) {
+  if (!user.roles.includes("admin")) {
     return <Unauthorized />;
-  } else if (user && user.roles.includes("doctor") && !user.roles.includes("admin")) {
-    filteredDoctors = doctors.filter((doctor) => doctor.id === user.id);
   }
 
   const sortedDoctors = [...filteredDoctors].sort((a, b) => a.id - b.id);
@@ -38,9 +35,13 @@ const DoctorList = () => {
       <div className="doctor-list">
         {sortedDoctors.map((doctor) => (
           <div className="doctor-list__item" key={doctor.id}>
-          <AsyncData loading={isLoading} error={error || deleteError}>
-            <Doctor {...doctor} onDelete={deleteDoctor} onSave={updateDoctor} /> 
-          </AsyncData>
+            <AsyncData loading={isLoading} error={error || deleteError}>
+              <Doctor
+                {...doctor}
+                onDelete={deleteDoctor}
+                onSave={updateDoctor}
+              />
+            </AsyncData>
           </div>
         ))}
       </div>

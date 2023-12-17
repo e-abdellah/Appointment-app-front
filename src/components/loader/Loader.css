@@ -3,6 +3,7 @@
   aspect-ratio: 1;
   background: #3fb8af;
   animation: l7-1 1s infinite alternate, l7-2 2s infinite alternate;
+  z-index: 9999;
 }
 @keyframes l7-1 {
   0%,
