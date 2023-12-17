@@ -19,6 +19,11 @@ const PatientList = () => {
   );
   const { trigger: updatePatient } = useSWRMutation("patients", put);
 
+  console.log("User:", user); // Debug log for user
+  console.log("Patients:", patients); // Debug log for patients
+  console.log("Loading status:", isLoading); // Debug log for loading status
+  console.log("Error:", error); // Debug log for error
+
   if (isLoading) return <Loader />;
 
   let filteredPatients = patients;
