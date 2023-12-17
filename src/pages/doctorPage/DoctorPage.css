@@ -2,13 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10%;
+  padding-top: 5%;
   padding-bottom: 5%;
 }
 
 .doctor-page__header {
   padding: 20px;
-  /* margin-left: 5%; */
   width: 100%;
 }
 

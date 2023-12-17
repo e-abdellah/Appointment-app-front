@@ -2,72 +2,29 @@ import React, { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import SliderToggle from "../../contexts/SliderToggle";
 import { useAuth } from "../../contexts/Auth.context";
-import DropdownButton from "./DropdownButton";
 import "./navBar.css";
 
 const NavBar = () => {
   const { isAuthed, user, doctor } = useAuth();
-  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-  const [showSignInDropdown, setShowSignInDropdown] = useState(false);
-  const [showSignUpDropdown, setShowSignUpDropdown] = useState(false);
-  const profileDropdownRef = useRef(null);
-  const signInDropdownRef = useRef(null);
-  const signUpDropdownRef = useRef(null);
+  const [activeDropdown, setActiveDropdown] = useState("");
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        (profileDropdownRef.current &&
-          !profileDropdownRef.current.contains(event.target)) ||
-        (signInDropdownRef.current &&
-          !signInDropdownRef.current.contains(event.target)) ||
-        (signUpDropdownRef.current &&
-          !signUpDropdownRef.current.contains(event.target))
-      ) {
-        setShowProfileDropdown(false);
-        setShowSignInDropdown(false);
-        setShowSignUpDropdown(false);
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setActiveDropdown("");
       }
     };
     document.addEventListener("click", handleClickOutside);
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [profileDropdownRef, signInDropdownRef, signUpDropdownRef]);
+  }, [dropdownRef]);
 
-  const handleProfileClick = (event) => {
+  const handleDropdownClick = (dropdownName) => (event) => {
     event.stopPropagation();
-    setShowProfileDropdown((prevState) => !prevState);
-    setShowSignInDropdown(false);
-    setShowSignUpDropdown(false);
+    setActiveDropdown((prevState) => (prevState === dropdownName ? "" : dropdownName));
   };
-
-  const handleSignInClick = (event) => {
-    event.stopPropagation();
-    setShowSignInDropdown((prevState) => !prevState);
-    setShowProfileDropdown(false);
-    setShowSignUpDropdown(false);
-  };
-
-  const handleSignUpClick = (event) => {
-    event.stopPropagation();
-    setShowSignUpDropdown((prevState) => !prevState);
-    setShowProfileDropdown(false);
-    setShowSignInDropdown(false);
-  };
-
-  const handleOptionClick = (option) => {
-    setShowSignInDropdown(false);
-    setShowProfileDropdown(false);
-    setShowSignUpDropdown(false);
-
-    console.log("User Role:", user?.roles);
-  };
-
-  useEffect(() => {
-    // Your logic to handleOptionClick after showProfileDropdown state is updated
-    console.log("User Role:", user?.roles);
-  }, [showProfileDropdown, user]);
 
   return (
     <div className="app-navbar">
@@ -90,80 +47,123 @@ const NavBar = () => {
           </NavLink>
         </div>
       </div>
-
       <div className="app-navbar-container">
         <div className="app-navbar-sign-container">
           {!isAuthed ? (
             <div className="app-navbar-sign">
-              <DropdownButton
-                showDropdown={showSignInDropdown}
-                setShowDropdown={setShowSignInDropdown}
-                dropdownRef={signInDropdownRef}
-                buttonText="Sign In"
-                dropdownOptions={[
-                  {
-                    key: "patient-signin",
-                    text: "Patient",
-                    path: "/patients/login",
-                  },
-                  {
-                    key: "doctor-signin",
-                    text: "Doctor",
-                    path: "/doctors/login",
-                  },
-                ]}
-                handleOptionClick={handleOptionClick}
-              />
-              <DropdownButton
-                showDropdown={showSignUpDropdown}
-                setShowDropdown={setShowSignUpDropdown}
-                dropdownRef={signUpDropdownRef}
-                buttonText="Sign Up"
-                dropdownOptions={[
-                  {
-                    key: "patient-signup",
-                    text: "Patient",
-                    path: "/patients/register",
-                  },
-                  {
-                    key: "doctor-signup",
-                    text: "Doctor",
-                    path: "/doctors/register",
-                  },
-                ]}
-                handleOptionClick={handleOptionClick}
-              />
+              <button
+                type="button"
+                className="app-navbar-sign__button"
+                onClick={handleDropdownClick("signIn")}
+              >
+                Sign In
+              </button>
+              {activeDropdown === "signIn" && (
+                <div
+                  className="app-navbar-sign__dropdown"
+                  ref={dropdownRef}
+                >
+                  <Link
+                    to="/patients/login"
+                    className="app-navbar-sign__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Patient
+                  </Link>
+                  <Link
+                    to="/doctors/login"
+                    className="app-navbar-sign__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Doctor
+                  </Link>
+                </div>
+              )}
+              <button
+                type="button"
+                className="app-navbar-sign__button"
+                onClick={handleDropdownClick("signUp")}
+              >
+                Sign Up
+              </button>
+              {activeDropdown === "signUp" && (
+                <div
+                  className="app-navbar-sign__dropdown"
+                  ref={dropdownRef}
+                >
+                  <Link
+                    to="/patients/register"
+                    className="app-navbar-sign__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Patient
+                  </Link>
+                  <Link
+                    to="/doctors/register"
+                    className="app-navbar-sign__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Doctor
+                  </Link>
+                </div>
+              )}
             </div>
           ) : (
-            <div className="app-navbar-profile" onClick={handleProfileClick}>
+            <div className="app-navbar-profile" onClick={handleDropdownClick("profile")}>
               <div
                 className="app-navbar-profile-photo"
                 style={{ backgroundImage: `url(${user?.photo})` }}
               />
-              <DropdownButton
-                showDropdown={showProfileDropdown}
-                setShowDropdown={setShowProfileDropdown}
-                dropdownRef={profileDropdownRef}
-                buttonText="Profile"
-                dropdownOptions={[
-                  { key: "profile", text: "Profile", path: "/my-profile" },
-                  {
-                    key: "appointments",
-                    text: "Appointments",
-                    path: "/my-appointments",
-                  },
-                  { key: "patients", text: "Patients", path: "/all-patients" },
-                  { key: "doctors", text: "Doctors", path: "/all-doctors" },
-                  { key: "logout", text: "Logout", path: "/logout" },
-                ]}
-                handleOptionClick={handleOptionClick}
-              />
+
+              {activeDropdown === "profile" && (
+                <div
+                  className="app-navbar-profile__dropdown"
+                  ref={dropdownRef}
+                >
+                  <Link
+                    to="/my-profile"
+                    className="app-navbar-profile__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Profile
+                  </Link>
+                  <Link
+                    to="/my-appointments"
+                    className="app-navbar-profile__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Appointments
+                  </Link>
+
+                  <Link
+                    to="/all-patients"
+                    className="app-navbar-profile__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Patients
+                  </Link>
+
+                  <Link
+                    to="/all-doctors"
+                    className="app-navbar-profile__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Doctors
+                  </Link>
+
+                  <Link
+                    to="/logout"
+                    className="app-navbar-profile__dropdown-button"
+                    onClick={() => setActiveDropdown("")}
+                  >
+                    Logout
+                  </Link>
+                </div>
+              )}
             </div>
           )}
         </div>
-        <div className="app-navbar-toggle">
-          <SliderToggle className="dark-mode-toggle" />
-        </div>
+        <SliderToggle />
       </div>
     </div>
   );
