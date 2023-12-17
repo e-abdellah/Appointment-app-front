@@ -32,7 +32,7 @@ const Profile = () => {
     <div className="profile-container">
       <h1 className="profile-title">Profile</h1>
       {user && user.roles && user.roles.length > 0 ? (
-        user.roles.includes("patient") ? (
+        user.roles.includes("PATIENT") ? (
           <div className="patient-profile-component">
             <Patient
               {...userDetails}
@@ -40,7 +40,7 @@ const Profile = () => {
               onSave={updatePatient}
             />
           </div>
-        ) : user.roles.includes("doctor") ? (
+        ) : user.roles.includes("DOCTOR") ? (
           <div className="doctor-profile-component">
             <Doctor
               {...userDetails}
