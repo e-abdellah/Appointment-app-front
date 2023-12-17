@@ -12,7 +12,7 @@ const Profile = () => {
   const { user } = useAuth();
 
   // Debug log to check the user roles
-  console.log('User roles:', user?.roles);
+  console.log("User roles:", user?.roles);
 
   const {
     data: userDetails,
@@ -31,24 +31,28 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <h1 className="profile-title">Profile</h1>
-      {user && user.roles.includes("patient") ? (
-        <div className="patient-profile-component">
-          <Patient
-            {...userDetails}
-            onDelete={deletePatient}
-            onSave={updatePatient}
-          />
-        </div>
-      ) : user.roles.includes("doctor") ? (
-        <div className="doctor-profile-component">
-          <Doctor
-            {...userDetails}
-            onDelete={deleteDoctor}
-            onSave={updateDoctor}
-          />
-        </div>
+      {user && user.roles && user.roles.length > 0 ? (
+        user.roles.includes("patient") ? (
+          <div className="patient-profile-component">
+            <Patient
+              {...userDetails}
+              onDelete={deletePatient}
+              onSave={updatePatient}
+            />
+          </div>
+        ) : user.roles.includes("doctor") ? (
+          <div className="doctor-profile-component">
+            <Doctor
+              {...userDetails}
+              onDelete={deleteDoctor}
+              onSave={updateDoctor}
+            />
+          </div>
+        ) : (
+          <div>No roles assigned to this user.</div>
+        )
       ) : (
-        null
+        <div>User or roles not available.</div>
       )}
     </div>
   );
