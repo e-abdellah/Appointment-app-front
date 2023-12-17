@@ -1,3 +1,24 @@
-.profile-page {
-  padding-top: 10%;
+.profile-container {
+  padding-top: 15%;
+  padding-bottom: 15%;
+}
+
+.profile-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  padding-left: 10%;
+  width: 100%;
+  color: var(--secondary_color);
+}
+
+
+
+.patient-profile-component,
+.doctor-profile-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 600px; 
 }

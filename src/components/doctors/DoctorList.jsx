@@ -5,26 +5,31 @@ import { getAll, deleteById, put } from "../../api";
 import Doctor from "./Doctor";
 import Error from "../Error";
 import AsyncData from "../AsyncData";
+import { useAuth } from "../../contexts/Auth.context";
 import "./DoctorList.css";
+import Loader from "../loader/Loader";
+import Unauthorized from "../unauthorized/Unauthorized";
 
 const DoctorList = () => {
-  const {
-    data: doctors = [],
-    error,
-    isLoading,
-  } = useSWR("doctors", getAll);
+  const { user } = useAuth();
+  const { data: doctors = [], error, isLoading } = useSWR("doctors", getAll);
   const { trigger: deleteDoctor, error: deleteError } = useSWRMutation(
     "doctors",
     deleteById
   );
-  const { trigger: updateDoctor } = useSWRMutation( 
-    "doctors",
-    put
-  );
+  const { trigger: updateDoctor } = useSWRMutation("doctors", put);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return <Loader />;
 
-  const sortedDoctors = [...doctors].sort((a, b) => a.id - b.id);
+  let filteredDoctors = doctors;
+  if (user && user.roles.includes("patient") && !user.roles.includes("admin")) {
+    return <Unauthorized />;
+  } else if (user && user.roles.includes("doctor") && !user.roles.includes("admin")) {
+    filteredDoctors = doctors.filter((doctor) => doctor.id === user.id);
+  }
+
+  const sortedDoctors = [...filteredDoctors].sort((a, b) => a.id - b.id);
 
   return (
     <>
@@ -33,9 +38,9 @@ const DoctorList = () => {
       <div className="doctor-list">
         {sortedDoctors.map((doctor) => (
           <div className="doctor-list__item" key={doctor.id}>
-            <AsyncData loading={isLoading} error={error || deleteError}>
-              <Doctor {...doctor} onDelete={deleteDoctor} onSave={updateDoctor} /> 
-            </AsyncData>
+          <AsyncData loading={isLoading} error={error || deleteError}>
+            <Doctor {...doctor} onDelete={deleteDoctor} onSave={updateDoctor} /> 
+          </AsyncData>
           </div>
         ))}
       </div>

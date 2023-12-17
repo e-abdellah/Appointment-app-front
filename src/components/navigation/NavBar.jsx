@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import SliderToggle from "../../contexts/SliderToggle";
 import { useAuth } from "../../contexts/Auth.context";
+import DropdownButton from "./DropdownButton";
 import "./navBar.css";
 
 const NavBar = () => {
@@ -36,21 +37,21 @@ const NavBar = () => {
 
   const handleProfileClick = (event) => {
     event.stopPropagation();
-    setShowProfileDropdown(!showProfileDropdown);
+    setShowProfileDropdown((prevState) => !prevState);
     setShowSignInDropdown(false);
     setShowSignUpDropdown(false);
   };
 
   const handleSignInClick = (event) => {
     event.stopPropagation();
-    setShowSignInDropdown(!showSignInDropdown);
+    setShowSignInDropdown((prevState) => !prevState);
     setShowProfileDropdown(false);
     setShowSignUpDropdown(false);
   };
 
   const handleSignUpClick = (event) => {
     event.stopPropagation();
-    setShowSignUpDropdown(!showSignUpDropdown);
+    setShowSignUpDropdown((prevState) => !prevState);
     setShowProfileDropdown(false);
     setShowSignInDropdown(false);
   };
@@ -60,32 +61,13 @@ const NavBar = () => {
     setShowProfileDropdown(false);
     setShowSignUpDropdown(false);
 
-    console.log("User Role:", user?.roles); // Add this line to check the user's role
-
-    // console.log("Selected option:", option);
-
-    // // Replace 'to' prop with the appropriate URLs
-    // if (option === "profile") {
-    //   // Link to the user's profile page
-    // } else if (option === "appointments") {
-    //   // Link to the appointments page
-    // } else if (option === "patients" && doctor) {
-    //   // Link to the doctor's patients page
-    // } else if (option === "doctors") {
-    //   // New Link to "Find a Doctor"
-    //   // return <Link to="/doctors">Doctors</Link>;
-    // } else if (option === "logout") {
-    //   // Link to the logout page
-    // } else if (option === "patient-login") {
-    //   // Link to the patient login page
-    // } else if (option === "doctor-login") {
-    //   // Link to the doctor login page
-    // } else if (option === "patient-signup") {
-    //   // Link to the patient signup page
-    // } else if (option === "doctor-signup") {
-    //   // Link to the doctor signup page
-    // }
+    console.log("User Role:", user?.roles);
   };
+
+  useEffect(() => {
+    // Your logic to handleOptionClick after showProfileDropdown state is updated
+    console.log("User Role:", user?.roles);
+  }, [showProfileDropdown, user]);
 
   return (
     <div className="app-navbar">
@@ -113,64 +95,44 @@ const NavBar = () => {
         <div className="app-navbar-sign-container">
           {!isAuthed ? (
             <div className="app-navbar-sign">
-              <button
-                type="button"
-                className="app-navbar-sign__button"
-                onClick={handleSignInClick}
-              >
-                Sign In
-              </button>
-              {showSignInDropdown && (
-                <div
-                  className="app-navbar-sign__dropdown"
-                  ref={signInDropdownRef}
-                >
-                  <Link
-                    to="/patients/login"
-                    className="app-navbar-sign__dropdown-button"
-                    onClick={() => handleOptionClick("patient-login")}
-                  >
-                    Patient
-                  </Link>
-                  <Link
-                    to="/doctors/login"
-                    className="app-navbar-sign__dropdown-button"
-                    onClick={() => handleOptionClick("doctor-login")}
-                  >
-                    Doctor
-                  </Link>
-                </div>
-              )}
-              {!showSignUpDropdown && (
-                <button
-                  type="button"
-                  className="app-navbar-sign__button"
-                  onClick={handleSignUpClick}
-                >
-                  Sign Up
-                </button>
-              )}
-              {showSignUpDropdown && (
-                <div
-                  className="app-navbar-sign__dropdown"
-                  ref={signUpDropdownRef}
-                >
-                  <Link
-                    to="/patients/register"
-                    className="app-navbar-sign__dropdown-button"
-                    onClick={() => handleOptionClick("patient-signup")}
-                  >
-                    Patient
-                  </Link>
-                  <Link
-                    to="/doctors/register"
-                    className="app-navbar-sign__dropdown-button"
-                    onClick={() => handleOptionClick("doctor-signup")}
-                  >
-                    Doctor
-                  </Link>
-                </div>
-              )}
+              <DropdownButton
+                showDropdown={showSignInDropdown}
+                setShowDropdown={setShowSignInDropdown}
+                dropdownRef={signInDropdownRef}
+                buttonText="Sign In"
+                dropdownOptions={[
+                  {
+                    key: "patient-signin",
+                    text: "Patient",
+                    path: "/patients/login",
+                  },
+                  {
+                    key: "doctor-signin",
+                    text: "Doctor",
+                    path: "/doctors/login",
+                  },
+                ]}
+                handleOptionClick={handleOptionClick}
+              />
+              <DropdownButton
+                showDropdown={showSignUpDropdown}
+                setShowDropdown={setShowSignUpDropdown}
+                dropdownRef={signUpDropdownRef}
+                buttonText="Sign Up"
+                dropdownOptions={[
+                  {
+                    key: "patient-signup",
+                    text: "Patient",
+                    path: "/patients/register",
+                  },
+                  {
+                    key: "doctor-signup",
+                    text: "Doctor",
+                    path: "/doctors/register",
+                  },
+                ]}
+                handleOptionClick={handleOptionClick}
+              />
             </div>
           ) : (
             <div className="app-navbar-profile" onClick={handleProfileClick}>
@@ -178,58 +140,24 @@ const NavBar = () => {
                 className="app-navbar-profile-photo"
                 style={{ backgroundImage: `url(${user?.photo})` }}
               />
-
-              {showProfileDropdown && (
-                <div
-                  className="app-navbar-profile__dropdown"
-                  ref={profileDropdownRef}
-                >
-                  <Link
-                    to="/my-profile"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => handleOptionClick("profile")}
-                  >
-                    Profile
-                  </Link>
-                  <Link
-                    to="/my-appointments"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => handleOptionClick("appointments")}
-                  >
-                    Appointments
-                  </Link>
-                  {user &&
-                    user.roles &&
-                    (user.roles.includes("doctor") ||
-                      user.roles.includes("admin")) && (
-                      <Link
-                        to="/all-patients"
-                        className="app-navbar-profile__dropdown-button"
-                        onClick={() => handleOptionClick("patients")}
-                      >
-                        Patients
-                      </Link>
-                    )}
-
-                  {user && user.roles && user.roles.includes("doctor") && (
-                    <Link
-                      to="/all-doctors"
-                      className="app-navbar-profile__dropdown-button"
-                      onClick={() => handleOptionClick("doctors")}
-                    >
-                      Doctors
-                    </Link>
-                  )}
-
-                  <Link
-                    to="/logout"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => handleOptionClick("logout")}
-                  >
-                    Logout
-                  </Link>
-                </div>
-              )}
+              <DropdownButton
+                showDropdown={showProfileDropdown}
+                setShowDropdown={setShowProfileDropdown}
+                dropdownRef={profileDropdownRef}
+                buttonText="Profile"
+                dropdownOptions={[
+                  { key: "profile", text: "Profile", path: "/my-profile" },
+                  {
+                    key: "appointments",
+                    text: "Appointments",
+                    path: "/my-appointments",
+                  },
+                  { key: "patients", text: "Patients", path: "/all-patients" },
+                  { key: "doctors", text: "Doctors", path: "/all-doctors" },
+                  { key: "logout", text: "Logout", path: "/logout" },
+                ]}
+                handleOptionClick={handleOptionClick}
+              />
             </div>
           )}
         </div>

@@ -5,9 +5,12 @@ import { getAll, deleteById, put } from "../../api";
 import Patient from "../../components/patients/Patient";
 import Error from "../../components/Error";
 import AsyncData from "../../components/AsyncData";
+import { useAuth } from "../../contexts/Auth.context";
 import "./PatientList.css";
+import Loader from "../../components/loader/Loader";
 
 const PatientList = () => {
+  const { user } = useAuth();
   const {
     data: patients = [],
     error,
@@ -22,9 +25,14 @@ const PatientList = () => {
     put
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
 
-  const sortedPatients = [...patients].sort((a, b) => a.id - b.id);
+  let filteredPatients = patients;
+  if (user && user.roles.includes("patient")) {
+    filteredPatients = patients.filter((patient) => patient.id === user.id);
+  }
+
+  const sortedPatients = [...filteredPatients].sort((a, b) => a.id - b.id);
 
   return (
     <>

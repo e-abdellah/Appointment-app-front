@@ -1,5 +1,6 @@
 import React, { useState, useCallback, memo, useEffect } from "react";
 import { FiCheckCircle, FiXCircle, FiEdit2, FiTrash2 } from "react-icons/fi";
+import { useAuth } from "../../contexts/Auth.context";
 import "./Patient.css";
 
 const PatientMemoized = memo(function Patient({
@@ -14,6 +15,7 @@ const PatientMemoized = memo(function Patient({
   onDelete,
   onSave,
 }) {
+  const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [editedPatient, setEditedPatient] = useState(null);
 
@@ -86,9 +88,7 @@ const PatientMemoized = memo(function Patient({
     <div className={`patient ${isEditing ? "editing" : ""}`}>
       {isEditing ? (
         <>
-          {/* Render id as text, not editable */}
           <p className="patient-field">Patient Id: {editedPatient.id}</p>
-          {/* Render input only for editable fields */}
           <label>
             Name:{" "}
             <input
@@ -108,7 +108,7 @@ const PatientMemoized = memo(function Patient({
                 setEditedPatient({ ...editedPatient, email: e.target.value })
               }
             />
-          </label>{" "}
+          </label>
           <label>
             Street:{" "}
             <input
@@ -156,8 +156,8 @@ const PatientMemoized = memo(function Patient({
             Birthdate:{" "}
             <input
               type="date"
-              max={today}
               value={editedPatient.birthdate}
+              max={today}
               onChange={(e) =>
                 setEditedPatient({
                   ...editedPatient,
@@ -166,20 +166,12 @@ const PatientMemoized = memo(function Patient({
               }
             />
           </label>
-          <div className="patient-actions">
-            <button
-              onClick={handleSave}
-              className="patient-button patient-button--edit"
-            >
-              <FiCheckCircle size={24} />
-            </button>
-            <button
-              onClick={handleCancel}
-              className="patient-button patient-button--remove"
-            >
-              <FiXCircle size={24} />
-            </button>
-          </div>
+          <button onClick={handleSave}>
+            <FiCheckCircle size={24} />
+          </button>
+          <button onClick={handleCancel}>
+            <FiXCircle size={24} />
+          </button>
         </>
       ) : (
         <>
@@ -191,20 +183,16 @@ const PatientMemoized = memo(function Patient({
           <p className="patient-field">Postal Code: {postalCode}</p>
           <p className="patient-field">City: {city}</p>
           <p className="patient-field">Birthdate: {birthdate}</p>
-          <div className="patient-actions">
-            <button
-              onClick={handleEdit}
-              className="patient-button patient-button--edit"
-            >
-              <FiEdit2 size={24} />
-            </button>
-            <button
-              onClick={handleDelete}
-              className="patient-button patient-button--remove"
-            >
-              <FiTrash2 size={24} />
-            </button>
-          </div>
+          {(user && user.roles.includes("admin")) || user.id === id ? (
+            <>
+              <button onClick={handleEdit}>
+                <FiEdit2 size={24} />
+              </button>
+              <button onClick={handleDelete}>
+                <FiTrash2 size={24} />
+              </button>
+            </>
+          ) : null}
         </>
       )}
     </div>
