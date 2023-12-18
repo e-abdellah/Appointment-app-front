@@ -234,7 +234,7 @@ const DoctorMemoized = memo(function Doctor({
             Time Slots:{" "}
             {timeSlots.map((slot) => `${slot.day}: ${slot.time}`).join(", ")}
           </p>
-          {(user && user.roles.includes("admin")) || user.id === id ? (
+          {(user && user.roles.includes("ADMIN")) || user.id === id ? (
             <>
               <button onClick={handleEdit}>
                 <FiEdit2 size={24} />
