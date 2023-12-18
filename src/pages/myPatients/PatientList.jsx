@@ -28,7 +28,7 @@ const PatientList = () => {
 
   let filteredPatients = patients;
 
-  if (user && user.roles.includes("patient") && !user.roles.includes("admin")) {
+  if (user && user.roles.includes("PATIENT") && !user.roles.includes("ADMIN")) {
     return <Unauthorized />;
   }
   const sortedPatients = [...filteredPatients].sort((a, b) => a.id - b.id);

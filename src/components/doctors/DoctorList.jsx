@@ -22,7 +22,7 @@ const DoctorList = () => {
   if (isLoading) return <Loader />;
 
   let filteredDoctors = doctors;
-  if (!user.roles.includes("admin")) {
+  if (!user.roles.includes("ADMIN")) {
     return <Unauthorized />;
   }
 
