@@ -8,13 +8,9 @@ const DoctorMemoized = memo(function Doctor({
   name,
   email,
   speciality,
-  numberOfPatients,
   photo,
   hospital,
-  numberOfRatings,
-  rating,
   about,
-  timeSlots,
   onDelete,
   onSave,
 }) {
@@ -38,13 +34,9 @@ const DoctorMemoized = memo(function Doctor({
       !editedDoctor.name ||
       !editedDoctor.email ||
       !editedDoctor.speciality ||
-      !editedDoctor.numberOfPatients ||
       !editedDoctor.photo ||
       !editedDoctor.hospital ||
-      !editedDoctor.numberOfRatings ||
-      !editedDoctor.rating ||
-      !editedDoctor.about ||
-      !editedDoctor.timeSlots
+      !editedDoctor.about
     ) {
       alert("Please fill in all fields");
       return;
@@ -54,13 +46,9 @@ const DoctorMemoized = memo(function Doctor({
       name: editedDoctor.name,
       email: editedDoctor.email,
       speciality: editedDoctor.speciality,
-      numberOfPatients: editedDoctor.numberOfPatients,
       photo: editedDoctor.photo,
       hospital: editedDoctor.hospital,
-      numberOfRatings: editedDoctor.numberOfRatings,
-      rating: editedDoctor.rating,
       about: editedDoctor.about,
-      timeSlots: editedDoctor.timeSlots,
     };
     await onSave(updatedDoctor);
     setIsEditing(false);
@@ -73,13 +61,9 @@ const DoctorMemoized = memo(function Doctor({
       name,
       email,
       speciality,
-      numberOfPatients,
       photo,
       hospital,
-      numberOfRatings,
-      rating,
       about,
-      timeSlots,
     });
   };
 
@@ -89,27 +73,11 @@ const DoctorMemoized = memo(function Doctor({
       name,
       email,
       speciality,
-      numberOfPatients,
       photo,
       hospital,
-      numberOfRatings,
-      rating,
       about,
-      timeSlots,
     });
-  }, [
-    id,
-    name,
-    email,
-    speciality,
-    numberOfPatients,
-    photo,
-    hospital,
-    numberOfRatings,
-    rating,
-    about,
-    timeSlots,
-  ]);
+  }, [id, name, email, speciality, photo, hospital, about]);
 
   return (
     <div className="doctor">
@@ -147,14 +115,10 @@ const DoctorMemoized = memo(function Doctor({
             />
           </label>
           <label>
-            Number of Patients:{" "}
             <input
-              type="number"
-              value={editedDoctor.numberOfPatients}
               onChange={(e) =>
                 setEditedDoctor({
                   ...editedDoctor,
-                  numberOfPatients: e.target.value,
                 })
               }
             />
@@ -180,26 +144,18 @@ const DoctorMemoized = memo(function Doctor({
             />
           </label>
           <label>
-            Number of Ratings:{" "}
             <input
-              type="number"
-              value={editedDoctor.numberOfRatings}
               onChange={(e) =>
                 setEditedDoctor({
                   ...editedDoctor,
-                  numberOfRatings: e.target.value,
                 })
               }
             />
           </label>
           <label>
-            Rating:{" "}
             <input
               type="text"
-              value={editedDoctor.rating}
-              onChange={(e) =>
-                setEditedDoctor({ ...editedDoctor, rating: e.target.value })
-              }
+              onChange={(e) => setEditedDoctor({ ...editedDoctor })}
             />
           </label>
           <label>
@@ -224,16 +180,10 @@ const DoctorMemoized = memo(function Doctor({
           <p>Name: {name}</p>
           <p>Email: {email}</p>
           <p>Speciality: {speciality}</p>
-          <p>Number of Patients: {numberOfPatients}</p>
           <p>Photo: {photo}</p>
           <p>Hospital: {hospital}</p>
-          <p>Number of Ratings: {numberOfRatings}</p>
-          <p>Rating: {rating}</p>
           <p>About: {about}</p>
-          <p>
-            Time Slots:{" "}
-            {timeSlots.map((slot) => `${slot.day}: ${slot.time}`).join(", ")}
-          </p>
+          <p></p>
           {(user && user.roles.includes("ADMIN")) || user.id === id ? (
             <>
               <button onClick={handleEdit}>

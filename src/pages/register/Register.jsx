@@ -80,15 +80,7 @@ const Register = () => {
               <label htmlFor={field.name} className="login__label">
                 {field.label}
               </label>
-              <Field
-                name={field.name}
-                component={
-                  field.type === "timeslots" ? TimeSlotsInput : "input"
-                }
-                placeholder={field.label}
-                type={field.type || "text"}
-                className="login__input"
-              />
+
               <ErrorMessage
                 name={field.name}
                 component="div"

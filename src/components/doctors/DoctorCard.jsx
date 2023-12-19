@@ -9,16 +9,15 @@ const DoctorCard = ({ doctor }) => {
   return (
     <div className="doctorCard">
       <Link to={`/doctors/${doctor.id}`}>
-        <img src={doctor.photo} alt={doctor.name} className="doctorCard__photo" />
+        <img
+          src={doctor.photo}
+          alt={doctor.name}
+          className="doctorCard__photo"
+        />
       </Link>
       <h2 className="doctorCard__name">{doctor.name}</h2>
-      <div className="doctorCard__speciality-rating-container">
+      <div className="doctorCard__speciality-container">
         <div className="doctorCard__speciality">{doctor.speciality}</div>
-        <div className="doctorCard__rating">
-          <IoStarSharp size={24} color="yellow" />
-          <span>{` ${doctor.rating}`}</span>
-          <span>{` (${doctor.numberOfRatings})`}</span>
-        </div>
       </div>
       <div className="doctorCard__hospital-button-container">
         <p className="doctorCard__hospital">{doctor.hospital}</p>
