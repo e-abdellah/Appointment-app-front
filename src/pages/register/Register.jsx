@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useAuth } from "../../contexts/Auth.context";
 import Error from "../../components/Error";
 import Loader from "../../components/loader/Loader";
+
 import "./Register.css";
 
 const validationRules = Yup.object().shape({
@@ -80,7 +81,13 @@ const Register = () => {
               <label htmlFor={field.name} className="login__label">
                 {field.label}
               </label>
-
+              <Field
+                name={field.name}
+                component="input"
+                placeholder={field.label}
+                type={field.type || "text"}
+                className="login__input"
+              />
               <ErrorMessage
                 name={field.name}
                 component="div"
