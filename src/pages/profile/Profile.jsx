@@ -18,7 +18,7 @@ const Profile = () => {
     data: userDetails,
     error,
     isLoading,
-  } = useSWR(user ? `/${user.roles[0]}s/${user.id}` : null, getById);
+  } = useSWR(user ? `/${user.roles[0].toLowerCase()}s/${user.id}` : null, getById);
 
   const { trigger: deletePatient } = useSWRMutation("patients", deleteById);
   const { trigger: updatePatient } = useSWRMutation("patients", put);

@@ -5,7 +5,28 @@ import "./BookingForm.css";
 
 const validationSchema = Yup.object({
   name: Yup.string().required().min(2),
-  date: Yup.date().required(),
+  date: Yup.date()
+    .required()
+    .min(new Date(), "Date cannot be in the past")
+    .max(
+      new Date(new Date().setMonth(new Date().getMonth() + 3)),
+      "Date cannot be more than 3 months in the future"
+    ),
+  time: Yup.string()
+    .required()
+    .test(
+      "is-valid-time",
+      "Time must be between 7:00-12:30 or 14:00-18:30",
+      (value) => {
+        const [hours, minutes] = value.split(":").map(Number);
+        return (
+          (hours >= 7 && hours < 12) ||
+          (hours === 12 && minutes <= 30) ||
+          (hours >= 14 && hours < 18) ||
+          (hours === 18 && minutes <= 30)
+        );
+      }
+    ),
   condition: Yup.string().required().min(5),
   description: Yup.string().required(),
 });
@@ -28,6 +49,7 @@ const BookingForm = ({ onSaveBooking }) => {
     initialValues: {
       name: "Sophia Davis",
       date: "2024-01-01",
+      time: "12:00",
       description: descriptions[0],
       condition: "Knee pain and difficulty walking",
       numberOfBeds: 1,
@@ -68,32 +90,47 @@ const BookingForm = ({ onSaveBooking }) => {
             </div>
           ) : null}
         </div>
-        {["name", "date", "condition", "numberOfBeds"].map((field) => (
+        {["name", "date", "time", "condition", "numberOfBeds"].map((field) => (
           <div key={field}>
             <label htmlFor={field} className="booking-form__label">
               {field}
             </label>
-            <input
-              id={field}
-              name={field}
-              type={
-                field === "date"
-                  ? "date"
-                  : field === "numberOfBeds"
-                  ? "number"
-                  : "text"
-              }
-              onChange={formik.handleChange}
-              value={formik.values[field]}
-              className={`booking-form__input ${
-                formik.errors[field] ? "input-error" : ""
-              }`}
-              placeholder={
-                field === "numberOfBeds"
-                  ? "Choose between a smaller or a larger room (if u have children)"
-                  : ""
-              }
-            />
+            {field === "time" ? (
+              <input
+                id={field}
+                name={field}
+                type="time"
+                min="07:00"
+                max="18:30"
+                onChange={formik.handleChange}
+                value={formik.values[field]}
+                className={`booking-form__input ${
+                  formik.errors[field] ? "input-error" : ""
+                }`}
+              />
+            ) : (
+              <input
+                id={field}
+                name={field}
+                type={
+                  field === "date" || field === "time"
+                    ? field
+                    : field === "numberOfBeds"
+                    ? "number"
+                    : "text"
+                }
+                onChange={formik.handleChange}
+                value={formik.values[field]}
+                className={`booking-form__input ${
+                  formik.errors[field] ? "input-error" : ""
+                }`}
+                placeholder={
+                  field === "numberOfBeds"
+                    ? "Choose between a smaller or a larger room (if u have children)"
+                    : ""
+                }
+              />
+            )}
             {formik.errors[field] ? (
               <div className="booking-form__error">{formik.errors[field]}</div>
             ) : null}

@@ -32,7 +32,7 @@ const DoctorMemoized = memo(function Doctor({
 
     if (
       !editedDoctor.name ||
-      !editedDoctor.email ||
+      // !editedDoctor.email ||
       !editedDoctor.speciality ||
       !editedDoctor.photo ||
       !editedDoctor.hospital ||
@@ -94,16 +94,7 @@ const DoctorMemoized = memo(function Doctor({
               }
             />
           </label>
-          <label>
-            Email:{" "}
-            <input
-              type="email"
-              value={editedDoctor.email}
-              onChange={(e) =>
-                setEditedDoctor({ ...editedDoctor, email: e.target.value })
-              }
-            />
-          </label>
+          <p>Email: {editedDoctor.email}</p>
           <label>
             Speciality:{" "}
             <input

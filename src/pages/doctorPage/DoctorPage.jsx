@@ -19,24 +19,27 @@ const DoctorPage = () => {
   const handleSaveBooking = useCallback(
     async (values) => {
       if (!doctorData) return;
-
-      const { date, condition, description, numberOfBeds } = values;
+  
+      const { date, time, condition, description, numberOfBeds } = values;
       try {
+        // Combine date and time into a single Date object
+        const dateTime = new Date(`${date}T${time}`);
+  
         await save("appointments", {
           arg: {
             description: description,
             numberOfBeds: numberOfBeds,
             condition: condition,
-            date: date,
+            date: dateTime,
             patientId: user.id,
             doctorId: doctorId,
           },
         });
-
+  
         alert(
-          `Appointment saved successfully!\n\nDate: ${date}\nDescription: ${description}`
+          `Appointment saved successfully!\n\nDate: ${dateTime}\nDescription: ${description}`
         );
-
+  
         navigate("/my-appointments");
       } catch (error) {
         console.error("Error saving appointment:", error);
