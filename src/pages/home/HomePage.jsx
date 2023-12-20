@@ -20,7 +20,8 @@ const HomePage = () => {
         </div>
         <div className="hero-image-container">
           <img
-            src="../../../../assets/imgs/hero.jpg"
+            // src="../../../../assets/imgs/hero.jpg"
+            src="/assets/imgs/hero.jpg"
             alt="Hero Image"
             className="hero-image"
           />

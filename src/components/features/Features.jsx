@@ -10,7 +10,7 @@ const Features = () => {
       <div className="feature-cards-container">
         <div className="feature-card">
           <img
-            src="../../../../../assets/imgs/schedule.png"
+            src="/assets/imgs/schedule.png"
             alt="Schedule Appointments"
             className="feature-card__image"
           />
@@ -21,7 +21,7 @@ const Features = () => {
         </div>
         <div className="feature-card">
           <img
-            src="../../../../../assets/imgs/history.png"
+            src="/assets/imgs/history.png"
             alt="Medical History"
             className="feature-card__image"
           />
@@ -32,7 +32,7 @@ const Features = () => {
         </div>
         <div className="feature-card">
           <img
-            src="../../../../../assets/imgs/doctors.png"
+            src="/assets/imgs/doctors.png"
             alt="Find Doctors"
             className="feature-card__image"
           />
