@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import SliderToggle from "../../contexts/SliderToggle";
+import logo from "../../../assets/imgs/logo.png";
 import { useAuth } from "../../contexts/Auth.context";
 import "./navBar.css";
 
@@ -23,14 +24,16 @@ const NavBar = () => {
 
   const handleDropdownClick = (dropdownName) => (event) => {
     event.stopPropagation();
-    setActiveDropdown((prevState) => (prevState === dropdownName ? "" : dropdownName));
+    setActiveDropdown((prevState) =>
+      prevState === dropdownName ? "" : dropdownName
+    );
   };
 
   return (
     <div className="app-navbar">
       <div className="app-navbar-links">
         <div className="app-navbar-links__logo">
-          <img src="../../../assets/imgs/logo.png" alt="logo" />
+          <img src={logo} alt="logo" />
         </div>
         <div className="app-navbar-links__container">
           <NavLink to="/" className="app-navbar-links__container-link">
@@ -59,10 +62,7 @@ const NavBar = () => {
                 Sign In
               </button>
               {activeDropdown === "signIn" && (
-                <div
-                  className="app-navbar-sign__dropdown"
-                  ref={dropdownRef}
-                >
+                <div className="app-navbar-sign__dropdown" ref={dropdownRef}>
                   <Link
                     to="/patients/login"
                     className="app-navbar-sign__dropdown-button"
@@ -87,10 +87,7 @@ const NavBar = () => {
                 Sign Up
               </button>
               {activeDropdown === "signUp" && (
-                <div
-                  className="app-navbar-sign__dropdown"
-                  ref={dropdownRef}
-                >
+                <div className="app-navbar-sign__dropdown" ref={dropdownRef}>
                   <Link
                     to="/patients/register"
                     className="app-navbar-sign__dropdown-button"
@@ -109,17 +106,17 @@ const NavBar = () => {
               )}
             </div>
           ) : (
-            <div className="app-navbar-profile" onClick={handleDropdownClick("profile")}>
+            <div
+              className="app-navbar-profile"
+              onClick={handleDropdownClick("profile")}
+            >
               <div
                 className="app-navbar-profile-photo"
                 style={{ backgroundImage: `url(${user?.photo})` }}
               />
 
               {activeDropdown === "profile" && (
-                <div
-                  className="app-navbar-profile__dropdown"
-                  ref={dropdownRef}
-                >
+                <div className="app-navbar-profile__dropdown" ref={dropdownRef}>
                   <Link
                     to="/my-profile"
                     className="app-navbar-profile__dropdown-button"
