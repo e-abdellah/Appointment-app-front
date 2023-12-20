@@ -41,8 +41,13 @@ const router = createBrowserRouter([
       { path: "my-profile", element: <Profile /> },
       { path: "logout", element: <Logout /> },
       { path: "services", element: <Services /> },
-      { path: "doctors", element: <FindADoctor /> },
+      // { path: "doctors", element: <FindADoctor /> },
       // { path: "doctors/:doctorId", element: <DoctorPage /> },
+      {
+        path: "doctors",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <FindADoctor /> }],
+      },
       {
         path: "doctors/:doctorId",
         element: <PrivateRoute />,
