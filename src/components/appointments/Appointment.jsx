@@ -36,18 +36,27 @@ const AppointmentMemoized = memo(function Appointment({
       alert("Please fill in all fields");
       return;
     }
+  
+    // Create a date object with the local timezone
+    const localDate = new Date(`${editedAppointment.date}T${editedAppointment.time}`);
+  
+    // Convert the date object to a string in the ISO format (in UTC)
+    const utcDate = localDate.toISOString();
+  
     const updatedAppointment = {
       id: editedAppointment.id,
       description: editedAppointment.description,
       numberOfBeds: editedAppointment.numberOfBeds,
       condition: editedAppointment.condition,
-      date: editedAppointment.date,
+      date: utcDate, // Use the UTC date-time string
       patientId: editedAppointment.patient.id,
       doctorId: editedAppointment.doctor.id,
     };
+  
     await onSave(updatedAppointment);
     setIsEditing(false);
   };
+  
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -68,7 +77,8 @@ const AppointmentMemoized = memo(function Appointment({
       description,
       numberOfBeds,
       condition,
-      date,
+      date: new Date(date).toISOString().split("T")[0], // Convert date to yyyy-mm-dd format
+      time: new Date(date).toISOString().split("T")[1].substring(0, 5), // Extract time in hh:mm format
       patient,
       doctor,
     });
@@ -129,6 +139,19 @@ const AppointmentMemoized = memo(function Appointment({
                 setEditedAppointment({
                   ...editedAppointment,
                   date: e.target.value,
+                })
+              }
+            />
+          </label>
+          <label>
+            Time:{" "}
+            <input
+              type="time"
+              value={editedAppointment.time}
+              onChange={(e) =>
+                setEditedAppointment({
+                  ...editedAppointment,
+                  time: e.target.value,
                 })
               }
             />
