@@ -171,7 +171,10 @@ const DoctorMemoized = memo(function Doctor({
           <p>Name: {name}</p>
           <p>Email: {email}</p>
           <p>Speciality: {speciality}</p>
-          <p>Photo: {photo}</p>
+          <img
+            src={`https://appointment-app-2023-24.onrender.com${photo}`}
+            alt={name}
+          />
           <p>Hospital: {hospital}</p>
           <p>About: {about}</p>
           <p></p>

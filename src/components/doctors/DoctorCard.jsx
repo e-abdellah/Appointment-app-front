@@ -10,7 +10,7 @@ const DoctorCard = ({ doctor }) => {
     <div className="doctorCard">
       <Link to={`/doctors/${doctor.id}`}>
         <img
-          src={doctor.photo}
+          src={`https://appointment-app-2023-24.onrender.com${doctor.photo}`}
           alt={doctor.name}
           className="doctorCard__photo"
         />
