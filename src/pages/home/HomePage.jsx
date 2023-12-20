@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import hero from "../../../assets/imgs/hero.jpg";
 import "./HomePage.css";
 import FAQSection from "../../components/FaQ/FaQSection";
 import Features from "../../components/features/Features";
@@ -19,12 +20,7 @@ const HomePage = () => {
           </Link>
         </div>
         <div className="hero-image-container">
-          <img
-            // src="../../../../assets/imgs/hero.jpg"
-            src="/assets/imgs/hero.jpg"
-            alt="Hero Image"
-            className="hero-image"
-          />
+          <img src={hero} alt="Hero Image" className="hero-image" />
         </div>
       </div>
       <Features />

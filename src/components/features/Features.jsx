@@ -1,4 +1,7 @@
 import React from "react";
+import schedule from "../../../assets/imgs/schedule.png";
+import history from "../../../assets/imgs/history.png";
+import doctors from "../../../assets/imgs/doctors.png";
 import "./Features.css";
 
 const Features = () => {
@@ -10,7 +13,7 @@ const Features = () => {
       <div className="feature-cards-container">
         <div className="feature-card">
           <img
-            src="/assets/imgs/schedule.png"
+            src={schedule}
             alt="Schedule Appointments"
             className="feature-card__image"
           />
@@ -21,7 +24,7 @@ const Features = () => {
         </div>
         <div className="feature-card">
           <img
-            src="/assets/imgs/history.png"
+            src={history}
             alt="Medical History"
             className="feature-card__image"
           />
@@ -32,7 +35,7 @@ const Features = () => {
         </div>
         <div className="feature-card">
           <img
-            src="/assets/imgs/doctors.png"
+            src={doctors}
             alt="Find Doctors"
             className="feature-card__image"
           />
