@@ -7,11 +7,10 @@ import Loader from "../../components/loader/Loader";
 
 const ProfileButton = () => {
   const { user } = useAuth();
-
-  const apiUrl =
-    user && user.roles.includes("DOCTOR") ? `/doctors/${user.id}` : null;
+  const apiUrl = user && user.roles.includes("DOCTOR") ? `/doctors/${user.id}` : null;
   const { data: doctorDetails, error, isLoading } = useSWR(apiUrl, getById);
-
+  const backendUrl = 'https://appointment-app-2023-24.onrender.com';
+  const photoUrl = `${backendUrl}${doctorDetails?.photo}`; 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
@@ -21,19 +20,20 @@ const ProfileButton = () => {
   console.log("User:", user);
   console.log("User roles:", user?.roles);
   console.log("Doctor:", doctorDetails);
-  console.log("photo url: ", doctorDetails?.photo);
   if (error) {
     console.error("Error fetching doctor details:", error);
   }
 
   if (isLoading) return <Loader />;
 
+  console.log("Photo URL:", doctorDetails?.photo);
+
   return (
     <div className="app-navbar-profile" onClick={toggleDropdown}>
       <div
         className="app-navbar-profile-photo"
-        style={{ backgroundImage: `url(${doctorDetails?.photo})` }}
-      />
+        style={{ backgroundImage: `url(${photoUrl})` }}
+        />
       {isDropdownVisible && (
         <div className="app-navbar-profile__dropdown">
           <Link
