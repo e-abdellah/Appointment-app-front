@@ -11,7 +11,6 @@ import "./Profile.css";
 const Profile = () => {
   const { user } = useAuth();
 
-  // Debug log to check the user roles
   console.log("User roles:", user?.roles);
 
   const {
@@ -23,14 +22,13 @@ const Profile = () => {
     getById
   );
 
+  if (isLoading) return <Loader />;
+  if (error) return <div className="profile-error">Error: {error.message}</div>;
+
   const { trigger: deletePatient } = useSWRMutation("patients", deleteById);
   const { trigger: updatePatient } = useSWRMutation("patients", put);
   const { trigger: deleteDoctor } = useSWRMutation("doctors", deleteById);
   const { trigger: updateDoctor } = useSWRMutation("doctors", put);
-
-  if (isLoading) return <Loader />;
-  if (error) return <div className="profile-error">Error: {error.message}</div>;
-
 
   return (
     <div className="profile-container">

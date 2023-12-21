@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import SliderToggle from "../../contexts/SliderToggle";
 import logo from "../../../assets/imgs/logo.png";
 import { useAuth } from "../../contexts/Auth.context";
+import ProfileButton from "./ProfileButton";
 import "./navBar.css";
 
 const NavBar = () => {
@@ -42,7 +43,11 @@ const NavBar = () => {
           <NavLink to="/services" className="app-navbar-links__container-link">
             Services
           </NavLink>
-          <NavLink to="/doctors" className="app-navbar-links__container-link" data-cy = "doctors-link">
+          <NavLink
+            to="/doctors"
+            className="app-navbar-links__container-link"
+            data-cy="doctors-link"
+          >
             Find a Doctor
           </NavLink>
           <NavLink to="/about" className="app-navbar-links__container-link">
@@ -67,7 +72,7 @@ const NavBar = () => {
                     to="/patients/login"
                     className="app-navbar-sign__dropdown-button"
                     onClick={() => setActiveDropdown("")}
-                    data-cy = "patient-login-btn"
+                    data-cy="patient-login-btn"
                   >
                     Patient
                   </Link>
@@ -75,7 +80,7 @@ const NavBar = () => {
                     to="/doctors/login"
                     className="app-navbar-sign__dropdown-button"
                     onClick={() => setActiveDropdown("")}
-                    data-cy = "doctor-login-btn"
+                    data-cy="doctor-login-btn"
                   >
                     Doctor
                   </Link>
@@ -108,63 +113,10 @@ const NavBar = () => {
               )}
             </div>
           ) : (
-            <div
-              className="app-navbar-profile"
-              onClick={handleDropdownClick("profile")}
-            >
-              <div
-                className="app-navbar-profile-photo"
-                style={{ backgroundImage: `url(${user?.photo})` }}
-              />
-
-              {activeDropdown === "profile" && (
-                <div className="app-navbar-profile__dropdown" ref={dropdownRef}>
-                  <Link
-                    to="/my-profile"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => setActiveDropdown("")}
-                    data-cy="my-profile-btn"
-                  >
-                    Profile
-                  </Link>
-                  <Link
-                    to="/my-appointments"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => setActiveDropdown("")}
-                    data-cy="my-appointments-btn"
-                  >
-                    Appointments
-                  </Link>
-
-                  <Link
-                    to="/all-patients"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => setActiveDropdown("")}
-                    data-cy="all-patients-btn"
-                  >
-                    Patients
-                  </Link>
-
-                  <Link
-                    to="/all-doctors"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => setActiveDropdown("")}
-                    data-cy="all-doctors-btn"
-                  >
-                    Doctors
-                  </Link>
-
-                  <Link
-                    to="/logout"
-                    className="app-navbar-profile__dropdown-button"
-                    onClick={() => setActiveDropdown("")}
-                    data-cy="logout-btn"
-                  >
-                    Logout
-                  </Link>
-                </div>
-              )}
-            </div>
+            <ProfileButton
+              activeDropdown={activeDropdown}
+              setActiveDropdown={setActiveDropdown}
+            />
           )}
         </div>
         <SliderToggle />
