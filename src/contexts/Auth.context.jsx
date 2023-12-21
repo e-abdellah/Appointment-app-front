@@ -10,9 +10,8 @@ import useSWRMutation from "swr/mutation";
 import * as api from "../api";
 
 const JWT_TOKEN_KEY = "jwtToken";
-// const PATIENT_ID_KEY = "patientId";
-// const DOCTOR_ID_KEY = "doctorId";
-const USER_ID_KEY = "userId";
+const PATIENT_ID_KEY = "patientId";
+const DOCTOR_ID_KEY = "doctorId";
 const ROLE_KEY = "role";
 
 export const AuthContext = createContext();
@@ -21,9 +20,8 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem(JWT_TOKEN_KEY));
-  // const patientId = localStorage.getItem(PATIENT_ID_KEY);
-  // const doctorId = localStorage.getItem(DOCTOR_ID_KEY);
-  const userId = localStorage.getItem(USER_ID_KEY);
+  const patientId = localStorage.getItem(PATIENT_ID_KEY);
+  const doctorId = localStorage.getItem(DOCTOR_ID_KEY);
 
   const [user, setUser] = useState(null);
   const [ready, setReady] = useState(false);
@@ -51,9 +49,9 @@ export const AuthProvider = ({ children }) => {
     async (email, password) => {
       try {
         let loginResult;
-        const role = localStorage.getItem(ROLE_KEY);
+        const url = window.location.href;
 
-        if (role === "patient") {
+        if (url.includes("/patients/login")) {
           console.log("doPatientLogin");
           loginResult = await doPatientLogin({ email, password });
         } else {
@@ -66,7 +64,15 @@ export const AuthProvider = ({ children }) => {
         setToken(token);
         setUser(user);
 
-        localStorage.setItem(USER_ID_KEY, user.id);
+        localStorage.setItem(JWT_TOKEN_KEY, token);
+        localStorage.setItem(ROLE_KEY, user.roles[0]);
+
+        if (user.role === "patient") {
+          localStorage.setItem(PATIENT_ID_KEY, user.id);
+        }
+        if (user.role === "doctor") {
+          localStorage.setItem(DOCTOR_ID_KEY, user.id);
+        }
 
         console.log("user", user);
         console.log("user id:", user.id);
@@ -89,7 +95,8 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
 
     localStorage.removeItem(JWT_TOKEN_KEY);
-    localStorage.removeItem(USER_ID_KEY);
+    localStorage.removeItem(PATIENT_ID_KEY);
+    localStorage.removeItem(DOCTOR_ID_KEY);
   }, []);
 
   const {
@@ -104,63 +111,60 @@ export const AuthProvider = ({ children }) => {
     trigger: doDoctorRegister,
   } = useSWRMutation("doctors/register", api.post);
 
-  const setSession = useCallback((token, user) => {
-    setToken(token);
-    setUser(user);
-
-    localStorage.setItem(JWT_TOKEN_KEY, token);
-    localStorage.setItem(USER_ID_KEY, user.id);
-  }, []);
-
-  const registerPatient = useCallback(
-    async (data) => {
-      try {
-        const { token, user } = await doPatientRegister(data);
-        setSession(token, user);
-        return true;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-    },
-    [doPatientRegister, setSession]
-  );
-
-  const registerDoctor = useCallback(
-    async (data) => {
-      try {
-        const { token, user } = await doDoctorRegister(data);
-        setSession(token, user);
-        return true;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-    },
-    [doDoctorRegister, setSession]
-  );
-
   const register = useCallback(
-    async (data) => {
-      const { role, ...values } = data;
-      console.log("role from auth", role);
-      if (role === "patient") {
-        return registerPatient(values);
-      } else if (role === "doctor") {
-        return registerDoctor(values);
-      } else {
-        console.error("Invalid role");
+    async (data, role) => {
+      try {
+        console.log(
+          "Register function called with data:",
+          data,
+          "and role:",
+          role
+        ); // Log the input values
+
+        let registerResult;
+        if (role === "patient") {
+          console.log("Registering patient..."); // Log the start of patient registration
+          registerResult = await doPatientRegister(data);
+        } else if (role === "doctor") {
+          console.log("Registering doctor..."); // Log the start of doctor registration
+          console.log(data);
+          registerResult = await doDoctorRegister(data);
+        } else {
+          throw new Error("Invalid role");
+        }
+
+        console.log("Registration result:", registerResult); // Log the result of the registration
+
+        const { token, user } = registerResult;
+
+        setToken(token);
+        setUser(user);
+
+        localStorage.setItem(JWT_TOKEN_KEY, token);
+
+        if (role === "patient") {
+          localStorage.setItem(PATIENT_ID_KEY, user.id);
+        } else if (role === "doctor") {
+          localStorage.setItem(DOCTOR_ID_KEY, user.id);
+        }
+
+        console.log("Registration successful"); // Log the success of the registration
+
+        return true;
+      } catch (error) {
+        console.error("Registration error:", error); // Log any errors
         return false;
       }
     },
-    [registerPatient, registerDoctor]
+    [doPatientRegister, doDoctorRegister, setToken, setUser]
   );
 
   const value = useMemo(
     () => ({
       token,
       user,
-      userId,
+      patientId,
+      doctorId,
       error,
       patientLoading,
       doctorError,
@@ -178,7 +182,8 @@ export const AuthProvider = ({ children }) => {
     [
       token,
       user,
-      userId,
+      patientId,
+      doctorId,
       error,
       patientLoading,
       doctorError,

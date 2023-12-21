@@ -53,6 +53,11 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [{ index: true, element: <DoctorPage /> }],
       },
+      // {
+      //   path: "my-profile",
+      //   element: <PrivateRoute />,
+      //   children: [{ index: true, element: <Profile /> }],
+      // },
       {
         path: "my-appointments",
         element: <PrivateRoute />,
