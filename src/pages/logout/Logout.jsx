@@ -13,7 +13,7 @@ const Logout = () => {
   return (
     <div className="logout">
       <h1 className="logout__title">Are you sure you want to logout?</h1>
-      <Link to="/" onClick={handleLogout} className="logout__button">
+      <Link to="/" onClick={handleLogout} className="logout__button" data-cy="logout-button">
         Logout
       </Link>
     </div>

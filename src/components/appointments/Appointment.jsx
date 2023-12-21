@@ -36,13 +36,15 @@ const AppointmentMemoized = memo(function Appointment({
       alert("Please fill in all fields");
       return;
     }
-  
+
     // Create a date object with the local timezone
-    const localDate = new Date(`${editedAppointment.date}T${editedAppointment.time}`);
-  
+    const localDate = new Date(
+      `${editedAppointment.date}T${editedAppointment.time}`
+    );
+
     // Convert the date object to a string in the ISO format (in UTC)
     const utcDate = localDate.toISOString();
-  
+
     const updatedAppointment = {
       id: editedAppointment.id,
       description: editedAppointment.description,
@@ -52,11 +54,10 @@ const AppointmentMemoized = memo(function Appointment({
       patientId: editedAppointment.patient.id,
       doctorId: editedAppointment.doctor.id,
     };
-  
+
     await onSave(updatedAppointment);
     setIsEditing(false);
   };
-  
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -85,11 +86,11 @@ const AppointmentMemoized = memo(function Appointment({
   }, [id, description, numberOfBeds, condition, date, patient, doctor]);
 
   return (
-    <div className="appointment">
+    <div className="appointment" data-cy={`appointment-${id}`}>
       {isEditing ? (
         <>
           {/* Render id as text, not editable */}
-          <p>Appointment Id: {editedAppointment.id}</p>
+          <p data-cy="appointment-id">Appointment Id: {editedAppointment.id}</p>
           {/* Render input only for editable fields */}
           <label>
             Description:{" "}
@@ -102,6 +103,7 @@ const AppointmentMemoized = memo(function Appointment({
                   description: e.target.value,
                 })
               }
+              data-cy="description-input"
             />
           </label>
           <label>
@@ -115,6 +117,7 @@ const AppointmentMemoized = memo(function Appointment({
                   numberOfBeds: e.target.value,
                 })
               }
+              data-cy="numberOfBeds-input"
             />
           </label>
           <label>
@@ -128,6 +131,7 @@ const AppointmentMemoized = memo(function Appointment({
                   condition: e.target.value,
                 })
               }
+              data-cy="condition-input"
             />
           </label>
           <label>
@@ -141,6 +145,7 @@ const AppointmentMemoized = memo(function Appointment({
                   date: e.target.value,
                 })
               }
+              data-cy="date-input"
             />
           </label>
           <label>
@@ -154,6 +159,7 @@ const AppointmentMemoized = memo(function Appointment({
                   time: e.target.value,
                 })
               }
+              data-cy="time-input"
             />
           </label>
           <label>
@@ -167,6 +173,7 @@ const AppointmentMemoized = memo(function Appointment({
                   patient: { ...editedAppointment.patient, id: e.target.value },
                 })
               }
+              data-cy="patient-id-input"
             />
           </label>
           <label>
@@ -183,6 +190,7 @@ const AppointmentMemoized = memo(function Appointment({
                   },
                 })
               }
+              data-cy="patient-name-input"
             />
           </label>
           <label>
@@ -196,6 +204,7 @@ const AppointmentMemoized = memo(function Appointment({
                   doctor: { ...editedAppointment.doctor, id: e.target.value },
                 })
               }
+              data-cy="doctor-id-input"
             />
           </label>
           <label>
@@ -209,16 +218,17 @@ const AppointmentMemoized = memo(function Appointment({
                   doctor: { ...editedAppointment.doctor, name: e.target.value },
                 })
               }
+              data-cy="doctor-name-input"
             />
           </label>
         </>
       ) : (
         <>
-          <p>Appointment Id: {id}</p>
-          <p>Description: {description}</p>
-          <p>Number of Beds: {numberOfBeds}</p>
-          <p>Condition: {condition}</p>
-          <p>
+          <p data-cy="appointment-id">Appointment Id: {id}</p>
+          <p data-cy="description">Description: {description}</p>
+          <p data-cy="numberOfBeds">Number of Beds: {numberOfBeds}</p>
+          <p data-cy="condition">Condition: {condition}</p>
+          <p data-cy="date">
             Date:{" "}
             {new Date(date).toLocaleDateString("en-US", {
               year: "numeric",
@@ -228,28 +238,28 @@ const AppointmentMemoized = memo(function Appointment({
               minute: "2-digit",
             })}
           </p>
-          <p>Patient Id: {patient.id}</p>
-          <p>Patient Name: {patient.name}</p>
-          <p>Doctor Id: {doctor.id}</p>
-          <p>Doctor Name: {doctor.name}</p>
+          <p data-cy="patient-id">Patient Id: {patient.id}</p>
+          <p data-cy="patient-name">Patient Name: {patient.name}</p>
+          <p data-cy="doctor-id">Doctor Id: {doctor.id}</p>
+          <p data-cy="doctor-name">Doctor Name: {doctor.name}</p>
         </>
       )}
-      <div className="appointment-actions">
+      <div className="appointment-actions" data-cy="appointment-actions">
         {isEditing ? (
           <>
-            <button onClick={handleSave}>
+            <button onClick={handleSave} data-cy="save-button">
               <FiCheckCircle size={24} />
             </button>
-            <button onClick={handleCancel}>
+            <button onClick={handleCancel} data-cy="cancel-button">
               <FiXCircle size={24} />
             </button>
           </>
         ) : (
           <>
-            <button onClick={handleEdit}>
+            <button onClick={handleEdit} data-cy="edit-button">
               <FiEdit2 size={24} />
             </button>
-            <button onClick={handleDelete}>
+            <button onClick={handleDelete} data-cy="delete-button">
               <FiTrash2 size={24} />
             </button>
           </>

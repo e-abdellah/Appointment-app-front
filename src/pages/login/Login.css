@@ -33,6 +33,10 @@
   color: black;
 }
 
+.login__input-container:first-child {
+  margin-top: 3em;
+}
+
 .login__input-container {
   margin-top: 1em;
 }
@@ -83,4 +87,20 @@
   color: red;
   font-size: 0.8em;
   margin-top: 0.5em;
+}
+
+.email__error{
+  font-size: 1.5rem;
+  padding: 20px;
+  margin: 0 auto;
+  width: 90%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }

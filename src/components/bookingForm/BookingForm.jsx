@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./BookingForm.css";
@@ -45,19 +45,29 @@ const BookingForm = ({ onSaveBooking }) => {
     "Neurology Consultation",
   ];
 
+  const [emptyFieldsError, setEmptyFieldsError] = useState(false);
+
   const formik = useFormik({
     initialValues: {
-      name: "Sophia Davis",
-      date: "2024-01-01",
-      time: "12:00",
+      // name: "Sophia Davis",
+      // date: "2024-01-01",
+      // time: "12:00",
       description: descriptions[0],
-      condition: "Knee pain and difficulty walking",
-      numberOfBeds: 1,
+      // condition: "Knee pain and difficulty walking",
+      // numberOfBeds: 1,
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
+      const emptyFields = Object.values(values).some((value) => !value);
+
+      if (emptyFields) {
+        setEmptyFieldsError(true);
+        return;
+      }
+
       onSaveBooking(values);
       resetForm();
+      setEmptyFieldsError(false);
     },
   });
 
@@ -65,6 +75,11 @@ const BookingForm = ({ onSaveBooking }) => {
     <div className="booking-form">
       <h1 className="booking-form__title">Book an appointment</h1>
       <form onSubmit={formik.handleSubmit}>
+        {emptyFieldsError && (
+          <div className="booking-form__error">
+            There are one or more empty fields.
+          </div>
+        )}
         <div>
           <label htmlFor="description" className="booking-form__label">
             description
@@ -77,6 +92,7 @@ const BookingForm = ({ onSaveBooking }) => {
             className={`booking-form__input ${
               formik.errors.description ? "input-error" : ""
             }`}
+            data-cy="description-input"
           >
             {descriptions.map((desc, index) => (
               <option key={index} value={desc}>
@@ -107,6 +123,7 @@ const BookingForm = ({ onSaveBooking }) => {
                 className={`booking-form__input ${
                   formik.errors[field] ? "input-error" : ""
                 }`}
+                data-cy={`${field}-input`}
               />
             ) : (
               <input
@@ -129,6 +146,7 @@ const BookingForm = ({ onSaveBooking }) => {
                     ? "Choose between a smaller or a larger room (if u have children)"
                     : ""
                 }
+                data-cy={`${field}-input`}
               />
             )}
             {formik.errors[field] ? (
@@ -140,6 +158,7 @@ const BookingForm = ({ onSaveBooking }) => {
           type="submit"
           disabled={formik.isSubmitting}
           className="booking-form__button"
+          data-cy="submit_appointment"
         >
           Book Appointment
         </button>

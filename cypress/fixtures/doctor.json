@@ -1,0 +1,10 @@
+{
+  "id": 10,
+  "email": "olivia.anderson@gmail.com",
+  "roles": ["DOCTOR"],
+  "name": "Dr. Olivia Anderson",
+  "speciality": "Cardiologist",
+  "photo": "/imgs/doc1.jpg",
+  "hospital": "AZ Groeninge",
+  "about": "Dr. Olivia Anderson is a dedicated and experienced cardiologist, currently practicing at AZ Groeninge. With a patient-first approach, she has successfully treated numerous patients, earning a 5-star rating. Her commitment to her profession is reflected in the positive health outcomes of her patients. She continually strives to provide the best cardiac care, keeping herself updated with the latest in cardiology."
+}

@@ -28,11 +28,15 @@ const AppointmentList = () => {
 
   return (
     <>
-      <Error error={error} />
+      <Error error={error || deleteError} />
       <h1 className="appointment-list__title">Appointments</h1>
       <div className="appointment-list">
         {sortedAppointments.map((appointment) => (
-          <div className="appointment-list__item" key={appointment.id}>
+          <div
+            className="appointment-list__item"
+            key={appointment.id}
+            data-cy="appointment"
+          >
             <AsyncData loading={isLoading} error={error || deleteError}>
               <Appointment
                 {...appointment}

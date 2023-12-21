@@ -14,7 +14,7 @@ const DoctorCards = () => {
       <AsyncData loading={isLoading} error={error}>
         <div className="doctorCards__list">
           {doctors.map((doctor) => (
-            <DoctorCard key={doctor.id} doctor={doctor} />
+            <DoctorCard key={doctor.id} doctor={doctor} data-cy="doctor-card" />
           ))}
         </div>
       </AsyncData>

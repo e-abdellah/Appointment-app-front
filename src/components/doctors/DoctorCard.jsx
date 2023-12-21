@@ -22,7 +22,7 @@ const DoctorCard = ({ doctor }) => {
       <div className="doctorCard__hospital-button-container">
         <p className="doctorCard__hospital">{doctor.hospital}</p>
         <Link to={`/doctors/${doctor.id}`}>
-          <button className="doctorCard__button">
+          <button className="doctorCard__button" data-cy="doctor-card-button">
             <div className="icon-container">
               <IoArrowForward size={24} />
             </div>

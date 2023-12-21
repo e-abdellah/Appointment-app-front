@@ -1,0 +1,140 @@
+{
+  "items": [
+    {
+      "id": 9,
+      "description": "Neurology Consultation",
+      "numberOfBeds": 3,
+      "condition": "Headaches and dizziness",
+      "date": "2023-10-15T14:00:00.000Z",
+      "patient": {
+        "id": 3,
+        "name": "Sophia Davis"
+      },
+      "doctor": {
+        "id": 12,
+        "name": "Dr. John Davis Wilson"
+      }
+    },
+    {
+      "id": 6,
+      "description": "Gastroenterology Checkup",
+      "numberOfBeds": 3,
+      "condition": "Abdominal pain and indigestion",
+      "date": "2023-10-25T09:15:00.000Z",
+      "patient": {
+        "id": 3,
+        "name": "Sophia Davis"
+      },
+      "doctor": {
+        "id": 12,
+        "name": "Dr. John Davis Wilson"
+      }
+    },
+    {
+      "id": 3,
+      "description": "Orthopedic Consultation",
+      "numberOfBeds": 1,
+      "condition": "Knee pain and difficulty walking",
+      "date": "2023-10-30T11:45:00.000Z",
+      "patient": {
+        "id": 3,
+        "name": "Sophia Davis"
+      },
+      "doctor": {
+        "id": 12,
+        "name": "Dr. John Davis Wilson"
+      }
+    },
+    {
+      "id": 8,
+      "description": "Pulmonology Evaluation",
+      "numberOfBeds": 2,
+      "condition": "Persistent cough and shortness of breath",
+      "date": "2023-11-10T12:20:00.000Z",
+      "patient": {
+        "id": 2,
+        "name": "David Brown"
+      },
+      "doctor": {
+        "id": 11,
+        "name": "Dr. Michael Brown Smith"
+      }
+    },
+    {
+      "id": 2,
+      "description": "Dental Cleaning",
+      "numberOfBeds": 2,
+      "condition": "Toothache and cavity",
+      "date": "2023-11-25T14:15:00.000Z",
+      "patient": {
+        "id": 2,
+        "name": "David Brown"
+      },
+      "doctor": {
+        "id": 11,
+        "name": "Dr. Michael Brown Smith"
+      }
+    },
+    {
+      "id": 5,
+      "description": "Allergy Consultation",
+      "numberOfBeds": 2,
+      "condition": "Persistent sneezing and itching",
+      "date": "2023-11-28T13:00:00.000Z",
+      "patient": {
+        "id": 2,
+        "name": "David Brown"
+      },
+      "doctor": {
+        "id": 11,
+        "name": "Dr. Michael Brown Smith"
+      }
+    },
+    {
+      "id": 7,
+      "description": "Cardiology Follow-up",
+      "numberOfBeds": 1,
+      "condition": "High blood pressure and palpitations",
+      "date": "2023-12-05T08:45:00.000Z",
+      "patient": {
+        "id": 1,
+        "name": "Emily Smith"
+      },
+      "doctor": {
+        "id": 10,
+        "name": "Dr. Olivia Anderson"
+      }
+    },
+    {
+      "id": 1,
+      "description": "Annual Health Checkup",
+      "numberOfBeds": 3,
+      "condition": "Chest pain and shortness of breath",
+      "date": "2023-12-15T07:15:00.000Z",
+      "patient": {
+        "id": 1,
+        "name": "Emily Smith"
+      },
+      "doctor": {
+        "id": 10,
+        "name": "Dr. Olivia Anderson"
+      }
+    },
+    {
+      "id": 4,
+      "description": "Eye Exam",
+      "numberOfBeds": 1,
+      "condition": "Blurred vision and eye irritation",
+      "date": "2023-12-18T09:30:00.000Z",
+      "patient": {
+        "id": 1,
+        "name": "Emily Smith"
+      },
+      "doctor": {
+        "id": 10,
+        "name": "Dr. Olivia Anderson"
+      }
+    }
+  ],
+  "count": 9
+}

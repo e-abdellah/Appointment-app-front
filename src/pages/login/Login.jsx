@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useCallback } from "react";
@@ -22,6 +22,7 @@ const Login = () => {
   const { login, error, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [theError, setTheError] = useState(null);
 
   const isPatientLogin = location.pathname.startsWith("/patients/login");
 
@@ -39,7 +40,10 @@ const Login = () => {
 
       const loggedIn = await login(values.email, values.password, values.role);
 
-      if (loggedIn) {
+      if (typeof loggedIn === 'string') {
+        // If the login function returns a string, it's an error message
+        setTheError(loggedIn);
+      } else if (loggedIn) {
         console.log("Logged in:", loggedIn);
         navigate({
           pathname: `/`,
@@ -70,6 +74,7 @@ const Login = () => {
               {isPatientLogin ? "Patient" : "Doctor"} Sign in
             </h1>
             <Error error={error} />
+            {theError && <div className="email__error">{theError}</div>}
 
             <div className="login__input-container">
               <label htmlFor="email" className="login__label">
@@ -81,6 +86,7 @@ const Login = () => {
                 name="email"
                 placeholder="your@email.com"
                 className="login__input"
+                data-cy="email-input"
               />
               <ErrorMessage
                 name="email"
@@ -98,6 +104,7 @@ const Login = () => {
                 id="password"
                 name="password"
                 className="login__input"
+                data-cy="password-input"
               />
               <ErrorMessage
                 name="password"
@@ -112,6 +119,7 @@ const Login = () => {
                   type="submit"
                   className="login__button login__button--primary"
                   disabled={isSubmitting}
+                  data-cy="login-button"
                 >
                   Sign in
                 </button>

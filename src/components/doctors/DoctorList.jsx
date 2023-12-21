@@ -34,7 +34,7 @@ const DoctorList = () => {
       <h1 className="doctor-list__title">Doctors</h1>
       <div className="doctor-list">
         {sortedDoctors.map((doctor) => (
-          <div className="doctor-list__item" key={doctor.id}>
+          <div className="doctor-list__item" key={doctor.id} data-cy="doctor">
             <AsyncData loading={isLoading} error={error || deleteError}>
               <Doctor
                 {...doctor}

@@ -18,7 +18,10 @@ const Profile = () => {
     data: userDetails,
     error,
     isLoading,
-  } = useSWR(user ? `/${user.roles[0].toLowerCase()}s/${user.id}` : null, getById);
+  } = useSWR(
+    user && user.roles ? `/${user.roles[0].toLowerCase()}s/${user.id}` : null,
+    getById
+  );
 
   const { trigger: deletePatient } = useSWRMutation("patients", deleteById);
   const { trigger: updatePatient } = useSWRMutation("patients", put);
@@ -27,6 +30,7 @@ const Profile = () => {
 
   if (isLoading) return <Loader />;
   if (error) return <div className="profile-error">Error: {error.message}</div>;
+
 
   return (
     <div className="profile-container">

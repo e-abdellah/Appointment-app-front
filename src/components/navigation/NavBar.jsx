@@ -42,7 +42,7 @@ const NavBar = () => {
           <NavLink to="/services" className="app-navbar-links__container-link">
             Services
           </NavLink>
-          <NavLink to="/doctors" className="app-navbar-links__container-link">
+          <NavLink to="/doctors" className="app-navbar-links__container-link" data-cy = "doctors-link">
             Find a Doctor
           </NavLink>
           <NavLink to="/about" className="app-navbar-links__container-link">
@@ -67,6 +67,7 @@ const NavBar = () => {
                     to="/patients/login"
                     className="app-navbar-sign__dropdown-button"
                     onClick={() => setActiveDropdown("")}
+                    data-cy = "patient-login-btn"
                   >
                     Patient
                   </Link>
@@ -74,6 +75,7 @@ const NavBar = () => {
                     to="/doctors/login"
                     className="app-navbar-sign__dropdown-button"
                     onClick={() => setActiveDropdown("")}
+                    data-cy = "doctor-login-btn"
                   >
                     Doctor
                   </Link>
@@ -121,6 +123,7 @@ const NavBar = () => {
                     to="/my-profile"
                     className="app-navbar-profile__dropdown-button"
                     onClick={() => setActiveDropdown("")}
+                    data-cy="my-profile-btn"
                   >
                     Profile
                   </Link>
@@ -128,6 +131,7 @@ const NavBar = () => {
                     to="/my-appointments"
                     className="app-navbar-profile__dropdown-button"
                     onClick={() => setActiveDropdown("")}
+                    data-cy="my-appointments-btn"
                   >
                     Appointments
                   </Link>
@@ -136,6 +140,7 @@ const NavBar = () => {
                     to="/all-patients"
                     className="app-navbar-profile__dropdown-button"
                     onClick={() => setActiveDropdown("")}
+                    data-cy="all-patients-btn"
                   >
                     Patients
                   </Link>
@@ -144,6 +149,7 @@ const NavBar = () => {
                     to="/all-doctors"
                     className="app-navbar-profile__dropdown-button"
                     onClick={() => setActiveDropdown("")}
+                    data-cy="all-doctors-btn"
                   >
                     Doctors
                   </Link>
@@ -152,6 +158,7 @@ const NavBar = () => {
                     to="/logout"
                     className="app-navbar-profile__dropdown-button"
                     onClick={() => setActiveDropdown("")}
+                    data-cy="logout-btn"
                   >
                     Logout
                   </Link>
