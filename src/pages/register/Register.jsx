@@ -25,7 +25,7 @@ const formConfig = [
 ];
 
 const Register = () => {
-  const { error, loading, register } = useAuth();
+  const { error, loading, register, ROLE_KEY } = useAuth();
   const navigate = useNavigate();
 
   const isDoctorRegister =
@@ -41,11 +41,13 @@ const Register = () => {
     async (values) => {
       console.log("Form submitted with values:", values);
       try {
-        const loggedIn = await register(
-          values,
-          isDoctorRegister ? "doctor" : "patient"
-        );
-
+        // Determine the role based on isDoctorRegister
+        const role = isDoctorRegister ? "doctor" : "patient";
+        console.log("Role from Register:", role);
+  
+        // Pass the role to the register function along with the other form values
+        const loggedIn = await register({ ...values, role });
+  
         if (loggedIn) {
           console.log("Navigating...");
           navigate({
@@ -87,6 +89,7 @@ const Register = () => {
                 placeholder={field.label}
                 type={field.type || "text"}
                 className="login__input"
+                data-cy={field.name + "-input"}
               />
               <ErrorMessage
                 name={field.name}
@@ -102,6 +105,7 @@ const Register = () => {
                 type="submit"
                 className="login__button"
                 disabled={loading}
+                data-cy="register-button"
               >
                 {loading ? "Registering..." : "Register"}
               </button>
