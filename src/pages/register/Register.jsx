@@ -41,13 +41,11 @@ const Register = () => {
     async (values) => {
       console.log("Form submitted with values:", values);
       try {
-        // Determine the role based on isDoctorRegister
-        const role = isDoctorRegister ? "doctor" : "patient";
-        console.log("Role from Register:", role);
-  
-        // Pass the role to the register function along with the other form values
-        const loggedIn = await register({ ...values, role });
-  
+        const loggedIn = await register(
+          values,
+          isDoctorRegister ? "doctor" : "patient"
+        );
+
         if (loggedIn) {
           console.log("Navigating...");
           navigate({
