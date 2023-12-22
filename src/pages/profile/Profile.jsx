@@ -12,14 +12,12 @@ import "./Profile.css";
 
 const Profile = () => {
   const { user } = useAuth();
-  
-  console.log("User object:", user);
-  console.log("User roles:", user?.roles);
+
+  // Skip fetching user details if the user is an admin
+  const shouldFetchUserDetails = user && user.roles && !user.roles.includes("ADMIN");
 
   const { data: userDetails, error, isLoading } = useSWR(
-    user && user.roles && user.roles[0]
-      ? `/${user.roles[0].toLowerCase()}s/${user.id}`
-      : null,
+    shouldFetchUserDetails ? `/${user.roles[0].toLowerCase()}s/${user.id}` : null,
     getById
   );
   const { trigger: deletePatient } = useSWRMutation("patients", deleteById);
@@ -50,6 +48,8 @@ const Profile = () => {
               onDelete={deleteDoctor}
               onSave={updateDoctor}
             />
+          ) : user && user.roles.includes("ADMIN") ? (
+            <div>Admins don't have a profile page.</div>
           ) : (
             <div>No roles assigned to this user.</div>
           )}
