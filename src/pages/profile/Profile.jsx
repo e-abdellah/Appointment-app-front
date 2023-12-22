@@ -22,34 +22,30 @@ const Profile = () => {
     getById
   );
 
-  if (isLoading) return <Loader />;
-  if (error) return <div className="profile-error">Error: {error.message}</div>;
-
   const { trigger: deletePatient } = useSWRMutation("patients", deleteById);
   const { trigger: updatePatient } = useSWRMutation("patients", put);
   const { trigger: deleteDoctor } = useSWRMutation("doctors", deleteById);
   const { trigger: updateDoctor } = useSWRMutation("doctors", put);
+
+  if (isLoading) return <Loader />;
+  if (error) return <div className="profile-error">Error: {error.message}</div>;
 
   return (
     <div className="profile-container">
       <h1 className="profile-title">Profile</h1>
       {user && user.roles && user.roles.length > 0 ? (
         user.roles.includes("PATIENT") ? (
-          <div className="patient-profile-component">
-            <Patient
-              {...userDetails}
-              onDelete={deletePatient}
-              onSave={updatePatient}
-            />
-          </div>
+          <Patient
+            {...userDetails}
+            onDelete={deletePatient}
+            onSave={updatePatient}
+          />
         ) : user.roles.includes("DOCTOR") ? (
-          <div className="doctor-profile-component">
-            <Doctor
-              {...userDetails}
-              onDelete={deleteDoctor}
-              onSave={updateDoctor}
-            />
-          </div>
+          <Doctor
+            {...userDetails}
+            onDelete={deleteDoctor}
+            onSave={updateDoctor}
+          />
         ) : (
           <div>No roles assigned to this user.</div>
         )
