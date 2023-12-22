@@ -21,9 +21,9 @@ import React from "react";
       
       if (isLoading) return <Loader />;
       
-      // if (!user || !user.roles.includes("ADMIN")) {
-      //   return <Unauthorized />;
-      // }
+      if (!user || !user.roles.includes("ADMIN")) {
+        return <Unauthorized />;
+      }
       const sortedDoctors = doctors.sort((a, b) => a.id - b.id);
 
       return (
