@@ -67,6 +67,21 @@ Cypress.Commands.add("registerDoctor", (email, password) => {
   cy.wait("@registerDoctor");
 });
 
+Cypress.Commands.add("registerPatient", (email, password) => {
+  Cypress.log({
+    name: "registerPatient",
+    displayName: "registerPatient",
+    message: "registerPatient",
+  });
+  cy.intercept("api/patients/register").as("registerPatient");
+  cy.visit("/patients/register");
+  cy.get('[data-cy="email-input"]').clear().type(email);
+  cy.get('[data-cy="password-input"]').clear().type(password);
+  cy.get('[data-cy="name-input"]').clear().type("New Patient");
+  cy.get('[data-cy="register-button"]').click();
+  cy.wait("@registerPatient");
+});
+
 Cypress.Commands.add("logout", () => {
   Cypress.log({
     name: "logout",

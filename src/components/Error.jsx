@@ -7,13 +7,14 @@ export default function Error({ error }) {
         <h4 className="alert-heading">Oops, something went wrong</h4>
         <p>
           {error.response?.data?.message || error.message}
-          {error.response?.data?.details && (
-            <>
-              :
-              <br />
-              {JSON.stringify(error.response.data.details)}
-            </>
-          )}
+          {error.response?.data?.details &&
+            Object.keys(error.response.data.details).length > 0 && (
+              <>
+                :
+                <br />
+                {JSON.stringify(error.response.data.details)}
+              </>
+            )}
         </p>
       </div>
     );

@@ -12,7 +12,7 @@ const DoctorPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { doctorId } = useParams();
-  const apiUrl = `doctors/${doctorId}`;
+  const apiUrl = `/doctors/${doctorId}`;
 
   const { data: doctorData, error } = useSWR(apiUrl, getById);
 

@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import './SliderToggle.css';
-import '../App.css';
-import { ThemeContext } from './Theme.context';
+import { ThemeContext } from '../../contexts/Theme.context';
 
 const SliderToggle = ({ className }) => {
   const { toggleTheme, theme } = useContext(ThemeContext);

@@ -25,12 +25,14 @@ export const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [ready, setReady] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isAuthed, setIsAuthed] = useState(false);
 
   useEffect(() => {
     api.setAuthToken(token);
     setIsAuthed(Boolean(token));
     setReady(true);
+    setLoading(false);
   }, [token]);
 
   const {
@@ -65,7 +67,6 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
 
         localStorage.setItem(JWT_TOKEN_KEY, token);
-        localStorage.setItem(ROLE_KEY, user.roles[0]);
 
         if (user.role === "patient") {
           localStorage.setItem(PATIENT_ID_KEY, user.id);
@@ -174,6 +175,7 @@ export const AuthProvider = ({ children }) => {
       doctorRegisterLoading,
       registerDoctorError,
       register,
+      loading,
     }),
     [
       token,
@@ -193,8 +195,9 @@ export const AuthProvider = ({ children }) => {
       doctorRegisterLoading,
       registerDoctorError,
       register,
+      loading,
     ]
   );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 };

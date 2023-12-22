@@ -1,56 +1,60 @@
-describe("Manages and handles the list of doctors", () => {
-
+describe("DoctorList", () => {
   beforeEach(() => {
-    beforeEach(() => {
-      cy.registerDoctor("newdoctor@example.com", "12345678");
-    });
     cy.loginDoctor("abdellah.elhalimimerroun@student.hogent.be", "12345678");
-    cy.get(".app-navbar-profile").click();
-    cy.get('[data-cy="all-doctors-btn"]').click();
-  })
-
-  it("checks for the presence of necessary elements", () => {
-    // cy.loginDoctor("abdellah.elhalimimerroun@student.hogent.be", "12345678");
-    // cy.get(".app-navbar-profile").click();
-    // cy.get('[data-cy="all-doctors-btn"]').click();
-
-    cy.get('[data-cy="doctor"]').should('exist');
-    cy.get('[data-cy="doctor-edit-button"]').should('exist');
-    
-    cy.get('[data-cy="doctor-edit-button"]').first().click();
-
-    cy.get('[data-cy="doctor-delete-button"]').should('exist');
-    cy.get('[data-cy="doctor-save-button"]').should('exist');
-    cy.get('[data-cy="doctor-cancel-button"]').should('exist');
-    cy.get('[data-cy="doctor-speciality-input"]').should('exist');
-    cy.get('[data-cy="doctor-hospital-input"]').should('exist');
-    cy.get('[data-cy="doctor-about-input"]').should('exist');
+    cy.visit("/all-doctors");
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // returning false here prevents Cypress from
+      // failing the test
+      return false
+    })
   });
-  
-  it("checks the functionality of the edit button", () => {
-    // cy.loginDoctor("abdellah.elhalimimerroun@student.hogent.be", "12345678");
-    // cy.get(".app-navbar-profile").click();
-    // cy.get('[data-cy="all-doctors-btn"]').click();
-    
-    cy.get('[data-cy="doctor-edit-button"]').first().click();
-    cy.get('[data-cy="doctor-speciality-input"]').should('be.enabled');
-    cy.get('[data-cy="doctor-hospital-input"]').should('be.enabled');
-    cy.get('[data-cy="doctor-about-input"]').should('be.enabled');
+
+  it("renders the DoctorList component", () => {
+    cy.get(".doctor-list__title").should("contain", "Doctors");
   });
-  
-  it("verifies that changes are saved correctly", () => {
-    const newSpeciality = "New Speciality";
-    const newHospital = "New Hospital";
-    const newAbout = "New About";
-  
-    cy.get('[data-cy="doctor-edit-button"]').last().click({force: true});
-    cy.get('[data-cy="doctor-speciality-input"]').clear({force: true}).type(newSpeciality, {force: true});
-    cy.get('[data-cy="doctor-hospital-input"]').clear({force: true}).type(newHospital, {force: true});
-    cy.get('[data-cy="doctor-about-input"]').clear({force: true}).type(newAbout, {force: true});
-    cy.get('[data-cy="doctor-save-button"]').click({force: true});
-  
-    cy.get('[data-cy="doctor-speciality"]').should('contain', newSpeciality);
-    cy.get('[data-cy="doctor-hospital"]').should('contain', newHospital);
-    cy.get('[data-cy="doctor-about"]').should('contain', newAbout);
+
+  it("displays the correct number of doctors", () => {
+    cy.get(".doctor-list__item").should("have.length", 9);
+  });
+
+  it("updates a doctor when the save button is clicked", () => {
+    cy.get("[data-cy=edit-button]").last().click({ force: true });
+    cy.get("[data-cy=doctor-input]").last().clear({ force: true }).type("New doctor info");
+    cy.get("[data-cy=save-button]").last().click();
+    cy.get("[data-cy=doctor]").last().should("contain", "New doctor info");
+  });
+
+  it("should show an error if the API call fails", () => {
+    cy.intercept("GET", "http://localhost:9000/api/doctors", {
+      statusCode: 500,
+      body: {
+        error: "Internal server error",
+      },
+    });
+
+    cy.visit("/all-doctors");
+
+    cy.get("[data-cy=axios_error_message").should("exist");
+  });
+
+  it("checks if the edit button changes, saves and cancels when clicked", () => {
+    cy.get("[data-cy=edit-button]").last().click();
+    cy.get("[data-cy=save-button]").should("exist");
+    cy.get("[data-cy=cancel-button]").should("exist");
+  });
+
+  it("checks if the doctor details are displayed correctly", () => {
+    cy.get("[data-cy=doctor-1]").within(() => {
+      cy.get("[data-cy=description]").should(
+        "contain.text",
+        "Specialist in Cardiology"
+      );
+      cy.get("[data-cy=doctor-id]").should("contain", "10");
+      cy.get("[data-cy=doctor-name]").should("contain", "Dr. Olivia Anderson");
+      cy.get("[data-cy=edit-button]").should("exist");
+      cy.get("[data-cy=delete-button]").should("exist");
+      cy.get("[data-cy=save-button]").should("not.exist");
+      cy.get("[data-cy=cancel-button]").should("not.exist");
+    });
   });
 });

@@ -183,7 +183,7 @@ const PatientMemoized = memo(function Patient({
           <p className="patient-field">Postal Code: {postalCode}</p>
           <p className="patient-field">City: {city}</p>
           <p className="patient-field">Birthdate: {birthdate}</p>
-          {(user && user.roles.includes("ADMIN")) || user.id === id ? (
+          {/* {(user && user.roles.includes("ADMIN")) || user.id === id ? ( */}
             <>
               <button onClick={handleEdit}>
                 <FiEdit2 size={24} />
@@ -192,7 +192,7 @@ const PatientMemoized = memo(function Patient({
                 <FiTrash2 size={24} />
               </button>
             </>
-          ) : null}
+          {/* ) : null} */}
         </>
       )}
     </div>

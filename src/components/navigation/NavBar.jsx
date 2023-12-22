@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import SliderToggle from "../../contexts/SliderToggle";
+import SliderToggle from "../slider/SliderToggle";
 import logo from "../../../assets/imgs/logo.png";
 import { useAuth } from "../../contexts/Auth.context";
 import ProfileButton from "./ProfileButton";

@@ -22,7 +22,6 @@ const Login = () => {
   const { login, error, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [theError, setTheError] = useState(null);
 
   const isPatientLogin = location.pathname.startsWith("/patients/login");
 
@@ -40,7 +39,7 @@ const Login = () => {
 
       const loggedIn = await login(values.email, values.password, values.role);
 
-      if (typeof loggedIn === 'string') {
+      if (typeof loggedIn === "string") {
         // If the login function returns a string, it's an error message
         setTheError(loggedIn);
       } else if (loggedIn) {
@@ -74,7 +73,6 @@ const Login = () => {
               {isPatientLogin ? "Patient" : "Doctor"} Sign in
             </h1>
             <Error error={error} />
-            {theError && <div className="email__error">{theError}</div>}
 
             <div className="login__input-container">
               <label htmlFor="email" className="login__label">

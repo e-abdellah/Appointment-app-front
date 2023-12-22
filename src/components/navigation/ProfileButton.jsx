@@ -6,10 +6,13 @@ import { getById } from "../../api";
 import Loader from "../../components/loader/Loader";
 
 const ProfileButton = () => {
+
   const { user } = useAuth();
   const apiUrl =
-  user && user.roles.includes("DOCTOR") && !user.roles.includes("ADMIN") ? `/doctors/${user.id}` : null;
-    
+  // user && user.roles.includes("DOCTOR") && !user.roles.includes("ADMIN") ? `/doctors/${user.id}` : null;
+  user && user.roles.includes("DOCTOR") ? `/doctors/${user.id}` : null;
+
+
   const { data: doctorDetails, error, isLoading } = useSWR(apiUrl, getById);
   const backendUrl = "https://appointment-app-2023-24.onrender.com";
   const photoUrl = `${backendUrl}${doctorDetails?.photo}`;

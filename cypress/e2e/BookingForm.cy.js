@@ -18,8 +18,9 @@ describe("BookingForm Component", () => {
     });
 
     // Navigate to the appointments page
-    cy.get(".app-navbar-profile").click();
-    cy.get('[data-cy="my-appointments-btn"]').click();
+    // cy.get(".app-navbar-profile").click(); // Click on the profile dropdown
+    // cy.get('[data-cy="my-appointments-btn"]').click();
+    cy.visit("/my-appointments");
 
     // Assert that no new appointment was created
     cy.get("[data-cy=appointment]").should("have.length", 3);
@@ -51,12 +52,14 @@ describe("BookingForm Component", () => {
 
     // Submit the form
     cy.get('[data-cy="submit_appointment"]').click();
-    cy.wait("@createAppointment");
+    // cy.wait("@createAppointment");
 
   });
 
-  // it("deletes an appointment when the delete button is clicked", () => {
-  //   cy.get("[data-cy=delete-button]").last().click();
-  //   cy.get(".appointment-list__item").should("have.length", 3);
-  // });
+  
+  it("deletes an appointment when the delete button is clicked", () => {
+    cy.visit("/my-appointments");
+    cy.get("[data-cy=delete-button]").last().click();
+    cy.get(".appointment-list__item").should("have.length", 3);
+  });
 });

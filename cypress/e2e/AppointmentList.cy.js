@@ -1,8 +1,9 @@
 describe("AppointmentList", () => {
   beforeEach(() => {
     cy.loginDoctor("abdellah.elhalimimerroun@student.hogent.be", "12345678");
-    cy.get(".app-navbar-profile").click(); // Click on the profile dropdown
-    cy.get('[data-cy="my-appointments-btn"]').click();
+    // cy.get(".app-navbar-profile").click(); // Click on the profile dropdown
+    // cy.get('[data-cy="my-appointments-btn"]').click();
+    cy.visit("/my-appointments");
   });
 
   it("renders the AppointmentList component", () => {
@@ -14,8 +15,8 @@ describe("AppointmentList", () => {
   });
 
   it("updates an appointment when the save button is clicked", () => {
-    cy.get("[data-cy=edit-button]").last().click();
-    cy.get("[data-cy=condition-input]").last().clear().type("New condition");
+    cy.get("[data-cy=edit-button]").last().click({ force: true });
+    cy.get("[data-cy=condition-input]").last().clear({ force: true }).type("New condition");
     cy.get("[data-cy=save-button]").last().click();
     cy.get("[data-cy=condition]").last().should("contain", "New condition");
   });
@@ -38,7 +39,7 @@ describe("AppointmentList", () => {
     cy.get("[data-cy=axios_error_message").should("exist");
   });
 
-  it("checks if the edit button changes to save and cancel buttons when clicked", () => {
+  it("checks if the edit button changes, saves and cancels when clicked", () => {
     cy.get("[data-cy=edit-button]").last().click();
     cy.get("[data-cy=save-button]").should("exist");
     cy.get("[data-cy=cancel-button]").should("exist");

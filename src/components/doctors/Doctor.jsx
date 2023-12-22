@@ -171,11 +171,8 @@ const DoctorMemoized = memo(function Doctor({
         </>
       ) : (
         <>
-          <p data-cy="doctor-id">Doctor Id: {id}</p>
-          <p data-cy="doctor-name">Name: {name}</p>
-          <p data-cy="doctor-email">Email: {email}</p>
-          <p data-cy="doctor-speciality">Speciality: {speciality}</p>
           <img
+            className="doctor-photo"
             data-cy="doctor-photo"
             src={
               photo
@@ -184,10 +181,14 @@ const DoctorMemoized = memo(function Doctor({
             }
             alt={name}
           />
+          <p data-cy="doctor-id">Doctor Id: {id}</p>
+          <p data-cy="doctor-name">Name: {name}</p>
+          <p data-cy="doctor-email">Email: {email}</p>
+          <p data-cy="doctor-speciality">Speciality: {speciality}</p>
           <p data-cy="doctor-hospital">Hospital: {hospital}</p>
           <p data-cy="doctor-about">About: {about}</p>
-          <p></p>
-          {(user && user.roles.includes("ADMIN")) || user.id === id ? (
+
+          {/* {(user && user.roles.includes("ADMIN")) || user.id === id ? ( */}
             <>
               <button onClick={handleEdit} data-cy="doctor-edit-button">
                 <FiEdit2 size={24} />
@@ -196,7 +197,7 @@ const DoctorMemoized = memo(function Doctor({
                 <FiTrash2 size={24} />
               </button>
             </>
-          ) : null}
+          {/* ) : null} */}
         </>
       )}
     </div>
