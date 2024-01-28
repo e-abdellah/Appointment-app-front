@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/Auth.context";
 
 export default function PrivateRoute() {
-  const { ready, isAuthed, role } = useAuth(); // Assuming you have 'role' in your authentication context
+  const { ready, isAuthed, role } = useAuth();
   const { pathname } = useLocation();
 
   const getLoginPath = () => {

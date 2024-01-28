@@ -4,11 +4,11 @@ import teamImage from "../../../assets/imgs/team.jpg";
 
 const AboutUs = () => {
   return (
-    <div className="about-us">
-      <div className="about-us__header">
+    <div className="about-us" data-cy="about-us">
+      <div className="about-us__header" data-cy="about-us-header">
         <h2>About HealthCare</h2>
       </div>
-      <div className="about-us__text">
+      <div className="about-us__text" data-cy="about-us-text">
         <p>
           Launched in 2016, HealthCare is on a mission to revolutionize
           healthcare. Our goal is to make finding and booking an appointment
@@ -21,7 +21,7 @@ const AboutUs = () => {
           possible.
         </p>
       </div>
-      <div className="about-us__why-healthCare">
+      <div className="about-us__why-healthCare" data-cy="about-us-why">
         <h2>Why HealthCare</h2>
         <p>
           HealthCare provides a multitude of advantages such as easy access to
@@ -31,7 +31,7 @@ const AboutUs = () => {
           healthcare more accessible and efficient.
         </p>
       </div>
-      <div className="about-us__our-culture">
+      <div className="about-us__our-culture" data-cy="about-us-culture">
         <h2>Our Culture</h2>
         <p>
           Each patient and practitioner is important at doctoranytime.be. We are
@@ -49,7 +49,7 @@ const AboutUs = () => {
           can realize their full potential.
         </p>
       </div>
-      <div className="about-us__expertise">
+      <div className="about-us__expertise" data-cy="about-us-expertise">
         <h2>Expertise</h2>
         <p>
           We never stop improving our services. As our customer deserves the
@@ -57,7 +57,7 @@ const AboutUs = () => {
           solutions.
         </p>
       </div>
-      <div className="about-us__team">
+      <div className="about-us__team" data-cy="about-us-team">
         <h2>Our Team</h2>
         <div className="about-us__team-image">
           <img src={teamImage} alt="Our Team" />

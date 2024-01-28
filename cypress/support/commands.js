@@ -88,9 +88,7 @@ Cypress.Commands.add("logout", () => {
     displayName: "logout",
     message: "logout",
   });
-  cy.visit("/");
-  cy.get(".app-navbar-profile").click();
-  cy.get('[data-cy="my-profile-btn"]').click();
-  cy.get('[data-cy="logout-btn"]').click();
+  cy.visit("/logout");
+  cy.get('[data-cy="logout-button"]').click();
   cy.visit("/");
 });

@@ -1,3 +1,4 @@
+// Contact.jsx
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -31,7 +32,7 @@ const Contact = () => {
 
   return (
     <div className="contact">
-      <div className="contact__container">
+      <div className="contact__container" data-cy="contact-container">
         <div className="contact__form-container">
           <h1 className="contact__title">Contact Us</h1>
           <Formik
@@ -56,11 +57,13 @@ const Contact = () => {
                   type="text"
                   placeholder="Enter your first name"
                   className="contact__input"
+                  data-cy="firstName"
                 />
                 <ErrorMessage
                   name="firstName"
                   component="div"
                   className="contact__error"
+                  data-cy="firstNameError"
                 />
 
                 <label htmlFor="lastName" className="contact__label">
@@ -71,11 +74,13 @@ const Contact = () => {
                   type="text"
                   placeholder="Enter your last name"
                   className="contact__input"
+                  data-cy="lastName"
                 />
                 <ErrorMessage
                   name="lastName"
                   component="div"
                   className="contact__error"
+                  data-cy="lastNameError"
                 />
 
                 <label htmlFor="email" className="contact__label">
@@ -86,11 +91,13 @@ const Contact = () => {
                   type="email"
                   placeholder="Enter your email address"
                   className="contact__input"
+                  data-cy="email"
                 />
                 <ErrorMessage
                   name="email"
                   component="div"
                   className="contact__error"
+                  data-cy="emailError"
                 />
 
                 <label htmlFor="phoneNumber" className="contact__label">
@@ -101,11 +108,13 @@ const Contact = () => {
                   type="text"
                   placeholder="Enter your phone number"
                   className="contact__input"
+                  data-cy="phoneNumber"
                 />
                 <ErrorMessage
                   name="phoneNumber"
                   component="div"
                   className="contact__error"
+                  data-cy="phoneNumberError"
                 />
 
                 <label htmlFor="message" className="contact__label">
@@ -116,17 +125,20 @@ const Contact = () => {
                   as="textarea"
                   placeholder="Enter your message"
                   className="contact__input"
+                  data-cy="message"
                 />
                 <ErrorMessage
                   name="message"
                   component="div"
                   className="contact__error"
+                  data-cy="messageError"
                 />
 
                 <button
                   type="submit"
                   className="contact__button"
                   disabled={isSubmitting}
+                  data-cy="submitButton"
                 >
                   Submit
                 </button>
@@ -134,7 +146,7 @@ const Contact = () => {
             )}
           </Formik>
         </div>
-        <div className="contact__info">
+        <div className="contact__info" data-cy="contactInfo">
           <h2>Address</h2>
           <p>HealthCare Belgium </p>
           <p>ZonneStraat 44,</p>
