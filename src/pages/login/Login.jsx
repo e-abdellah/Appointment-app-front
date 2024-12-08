@@ -25,14 +25,6 @@ const Login = () => {
 
   const isPatientLogin = location.pathname.startsWith("/patients/login");
 
-  const initialValues = {
-    email: isPatientLogin
-      ? "emily.smith@gmail.com"
-      : "abdellah.elhalimimerroun@student.hogent.be",
-    password: "12345678",
-    role: isPatientLogin ? "patient" : "doctor",
-  };
-
   const handleLogin = useCallback(
     async (values) => {
       console.log("Values:", values);
@@ -56,7 +48,6 @@ const Login = () => {
   return (
     <div className="login">
       <Formik
-        // initialValues={initialValues}
         validationSchema={validationRules}
         onSubmit={(values, { resetForm, setSubmitting }) => {
           setSubmitting(true);
