@@ -321,28 +321,23 @@ Mijn applicatie heeft ook een `test`-map met:
 
 ### Front-end Web Development
 
- - `react-error-boundary` voor het afhandelen van fouten in React-componenten.
-    Je kunt het npm-pakket hier vinden: [react-error-boundary](https://www.npmjs.com/package/react-error-boundary)
- - `Formik` en `Yup` voor het maken van formulieren.
-    Je kunt de npm-pakketten hier vinden:
-    - [Formik](https://www.npmjs.com/package/formik)
-    - [Yup](https://www.npmjs.com/package/yup)
+- `react-error-boundary` voor het afhandelen van fouten in React-componenten.
+  Je kunt het npm-pakket hier vinden: [react-error-boundary](https://www.npmjs.com/package/react-error-boundary)
+- `Formik` en `Yup` voor het maken van formulieren.
+  Je kunt de npm-pakketten hier vinden:
+  - [Formik](https://www.npmjs.com/package/formik)
+  - [Yup](https://www.npmjs.com/package/yup)
 
 ### Web Services
-
-> Wat is de extra technologie? Hoe werkt het? Voeg een link naar het npm package toe!
 
 - `koa-static` is een middleware die helpt bij het serveren van statische bestanden zoals afbeeldingen, CSS-bestanden en JavaScript-bestanden. In dit geval gebruik ik het om afbeeldingen van dokters te serveren, die toegankelijk zijn via URLs zoals `https://appointment-app-2023-24.onrender.com/imgs/doc1.jpg`.
   Je kunt het npm-pakket hier vinden: [koa-static](https://www.npmjs.com/package/koa-static)
 
 - Een van de uitdagingen die ik heb aangepakt, was het creëren van aparte login en registratiepagina's voor patiënten en dokters. Dit vereiste het maken van een nieuwe `user` tabel die rollen, ids, emails en wachtwoorden opslaat voor beide soorten gebruikers.
 
-
 ## Testresultaten
 
 ### Front-end Web Development
-
-> Schrijf hier een korte oplijsting en beschrijving van de geschreven testen
 
 - appointmentList.cy.js: De tests controleren het renderen van de component, het weergeven van afspraken, het bijwerken van een afspraak, en het correct weergeven van fouten. De code bevat ook een authenticatiesysteem voor gebruikersregistratie en -login.
 
@@ -356,8 +351,7 @@ Mijn applicatie heeft ook een `test`-map met:
 
 ### Web Services
 
-> Schrijf hier een korte oplijsting en beschrijving van de geschreven testen + voeg een screenshot van de coverage en uitvoering toe
-script: yarn test:coverage
+> script: yarn test:coverage
 
 - `appointments.spec.js` testbestand onderzoekt diverse endpoints van de afsprakenfunctionaliteit. Het verifieert of de endpoints correct reageren op verschillende HTTP-verzoeken, zoals GET, POST, PUT en DELETE. Daarnaast wordt gecontroleerd of de juiste statuscodes en response bodies worden geretourneerd. De test omvat ook validatie van de invoerparameters en controleert of de juiste foutmeldingen worden gegenereerd bij ongeldige invoer.
 
@@ -365,19 +359,12 @@ script: yarn test:coverage
 
 - Het `patient.spec.js` testbestand lijkt specifiek gericht op functionaliteiten van het patiënt-endpoint. Het verifieert of het endpoint correct reageert op verschillende HTTP-verzoeken, zoals GET, POST, PUT en DELETE. Daarbij wordt gecontroleerd of de juiste statuscodes en response bodies worden geretourneerd. De test omvat hoogstwaarschijnlijk ook validatie van invoerparameters en controleert of de juiste foutmeldingen worden gegenereerd bij ongeldige invoer. Bovendien kan het testbestand andere specifieke functionaliteiten van het patiënt-endpoint behandelen, afhankelijk van de implementatie in uw codebase.
 
-
-
-
 ![Alt text](assets/imgs/coverage.png)
-
 
 ## Gekende bugs
 
 ### Front-end Web Development
 
-Een bug is dat de command: cy.visit("/url") soms werkt niet, dus sommige testen falen;
+Een bug is dat de command: cy.visit("/url") soms niet werkt, waarvoor sommige testen falen;
 
 ### Web Services
-
-> Zijn er gekende bugs?
-

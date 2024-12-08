@@ -21,10 +21,10 @@ describe("AppointmentList", () => {
     cy.get("[data-cy=condition]").last().should("contain", "New condition");
   });
 
-  // it("deletes an appointment when the delete button is clicked", () => {
-  //   cy.get("[data-cy=delete-button]").last().click();
-  //   cy.get(".appointment-list__item").should("have.length", 8);
-  // });
+  it("deletes an appointment when the delete button is clicked", () => {
+    cy.get("[data-cy=delete-button]").last().click();
+    cy.get(".appointment-list__item").should("have.length", 8);
+  });
 
   it("should show an error if the API call fails", () => {
     cy.intercept("GET", "http://localhost:9000/api/appointments", {
