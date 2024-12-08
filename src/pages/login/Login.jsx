@@ -56,7 +56,7 @@ const Login = () => {
   return (
     <div className="login">
       <Formik
-        initialValues={initialValues}
+        // initialValues={initialValues}
         validationSchema={validationRules}
         onSubmit={(values, { resetForm, setSubmitting }) => {
           setSubmitting(true);
