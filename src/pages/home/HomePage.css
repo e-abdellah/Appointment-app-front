@@ -1,60 +1,173 @@
 .home-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .hero-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
-  /* padding: 50px; */
-  /* margin-top: 100px; */
+  min-height: 90vh;
+  padding: 0 5%;
+  gap: 4rem;
+  background: linear-gradient(135deg, var(--glacier-50) 0%, var(--glacier-100) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+[theme="dark"] .hero-section {
+  background: linear-gradient(135deg, var(--glacier-950) 0%, var(--glacier-900) 100%);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--glacier-200) 0%, transparent 70%);
+  opacity: 0.3;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
 }
 
 .hero-text-container {
-  width: 25%;
+  flex: 1;
+  max-width: 600px;
   text-align: left;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .hero-text-container h1 {
-  font-size: 3em;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
   color: var(--secondary_color);
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--glacier-950) 0%, var(--glacier-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[theme="dark"] .hero-text-container h1 {
+  background: linear-gradient(135deg, var(--glacier-100) 0%, var(--glacier-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-text-container p {
-  font-size: 1.5em;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   color: var(--header-color);
-  max-width: 600px;
-  margin-bottom: 40px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
 }
 
 .hero-text-container_button {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: var(--glacier-500);
-  color: var(--glacier-200);
-  border-radius: 8px;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--glacier-500) 0%, var(--glacier-600) 100%);
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
   text-decoration: none;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(62, 136, 156, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-text-container_button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.hero-text-container_button:hover::before {
+  left: 100%;
 }
 
 .hero-text-container_button:hover {
-  background-color: var(--glacier-700);
-  transform: translate(-4px, -4px);
-  border-radius: 12px;
-  box-shadow: 4px 4px 0px var(--secondary_color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(62, 136, 156, 0.4);
+}
+
+.hero-text-container_button:active {
+  transform: translateY(-1px);
 }
 
 .hero-image-container {
-  width: 70%;
+  flex: 1;
+  max-width: 650px;
+  animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .hero-image-container .hero-image {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.hero-image-container .hero-image:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 968px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 3rem 5%;
+    gap: 3rem;
+  }
+  
+  .hero-text-container {
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .hero-image-container {
+    max-width: 100%;
+  }
 }
