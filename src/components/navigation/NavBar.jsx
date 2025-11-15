@@ -1,15 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
-import SliderToggle from "../slider/SliderToggle";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/imgs/logo.png";
 import { useAuth } from "../../contexts/Auth.context";
+import SliderToggle from "../slider/SliderToggle";
 import ProfileButton from "./ProfileButton";
 import "./navBar.css";
 
 const NavBar = () => {
   const { isAuthed, user, doctor } = useAuth();
   const [activeDropdown, setActiveDropdown] = useState("");
+  const [indicatorStyle, setIndicatorStyle] = useState({});
   const dropdownRef = useRef(null);
+  const navRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -23,6 +25,48 @@ const NavBar = () => {
     };
   }, [dropdownRef]);
 
+  useEffect(() => {
+    // Set indicator position on active link
+    if (navRef.current) {
+      const activeLink = navRef.current.querySelector(
+        ".app-navbar-links__container-link.active"
+      );
+      if (activeLink) {
+        updateIndicator(activeLink);
+      }
+    }
+  }, []);
+
+  const updateIndicator = (element) => {
+    if (element && navRef.current) {
+      const navContainer = navRef.current.querySelector(
+        ".app-navbar-links__container"
+      );
+      const containerRect = navContainer.getBoundingClientRect();
+      const linkRect = element.getBoundingClientRect();
+
+      setIndicatorStyle({
+        width: `${linkRect.width}px`,
+        transform: `translateX(${linkRect.left - containerRect.left}px)`,
+      });
+    }
+  };
+
+  const handleMouseEnter = (e) => {
+    updateIndicator(e.currentTarget);
+  };
+
+  const handleMouseLeave = () => {
+    if (navRef.current) {
+      const activeLink = navRef.current.querySelector(
+        ".app-navbar-links__container-link.active"
+      );
+      if (activeLink) {
+        updateIndicator(activeLink);
+      }
+    }
+  };
+
   const handleDropdownClick = (dropdownName) => (event) => {
     event.stopPropagation();
     setActiveDropdown((prevState) =>
@@ -31,26 +75,47 @@ const NavBar = () => {
   };
 
   return (
-    <div className="app-navbar">
+    <div className="app-navbar" ref={navRef}>
       <div className="app-navbar-links">
         <div className="app-navbar-links__logo">
           <img src={logo} alt="logo" />
         </div>
         <div className="app-navbar-links__container">
-          <NavLink to="/" className="app-navbar-links__container-link">
+          <div
+            className="app-navbar-links__indicator"
+            style={indicatorStyle}
+          ></div>
+          <NavLink
+            to="/"
+            className="app-navbar-links__container-link"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             Home
           </NavLink>
-          <NavLink to="/services" className="app-navbar-links__container-link">
+          <NavLink
+            to="/services"
+            className="app-navbar-links__container-link"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             Services
           </NavLink>
           <NavLink
             to="/doctors"
             className="app-navbar-links__container-link"
             data-cy="doctors-link"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             Find a Doctor
           </NavLink>
-          <NavLink to="/about" className="app-navbar-links__container-link">
+          <NavLink
+            to="/about"
+            className="app-navbar-links__container-link"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             About Us
           </NavLink>
         </div>

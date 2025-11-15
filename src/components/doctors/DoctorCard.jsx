@@ -1,16 +1,23 @@
-import React from "react";
-import useSWR from "swr";
-import "./DoctorCard.css";
-import { IoArrowForward, IoStarSharp } from "react-icons/io5";
+import { IoArrowForward } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import AsyncData from "../AsyncData";
+import "./DoctorCard.css";
 
 const DoctorCard = ({ doctor }) => {
+  const getImageUrl = (photoPath) => {
+    if (!photoPath) return "";
+    if (photoPath.startsWith("http")) return photoPath;
+    const baseUrl = import.meta.env.VITE_API_URL.replace("/api/", "").replace(
+      "/api",
+      ""
+    );
+    return `${baseUrl}${photoPath}`;
+  };
+
   return (
     <div className="doctorCard">
       <Link to={`/doctors/${doctor.id}`}>
         <img
-          src={`https://appointment-app-2023-24.onrender.com${doctor.photo}`}
+          src={getImageUrl(doctor.photo)}
           alt={doctor.name}
           className="doctorCard__photo"
         />

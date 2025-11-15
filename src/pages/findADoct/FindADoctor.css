@@ -2,48 +2,71 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding-top: 10%;
+  min-height: 100vh;
+  padding: 120px 5% 3rem;
+  background-color: var(--body_bg);
 }
 
 .findADoctor__title {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--secondary_color);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .findADoctor__searchBar {
   display: flex;
   width: 100%;
-  max-width: 25rem;
+  max-width: 600px;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
 }
 
 .findADoctor__searchInput {
   flex-grow: 1;
-  padding: 0.5rem;
-  color: black;
-  border-radius: 0.25rem;
+  padding: 0.85rem 1.25rem;
+  color: var(--body_color);
+  background: var(--input_bg);
+  border: 1.5px solid var(--input_border);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.findADoctor__searchInput:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.findADoctor__searchInput::placeholder {
+  color: var(--gray-400);
 }
 
 .findADoctor__searchButton {
-  padding: 0.5rem;
+  padding: 0.85rem 1.75rem;
   border: none;
-  background-color: var(--glacier-500);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
   color: white;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .findADoctor__searchButton:hover {
-  background-color: var(--glacier-700);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 .findADoctor__results {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
   width: 100%;
+  max-width: 1400px;
 }
 
 .footer {

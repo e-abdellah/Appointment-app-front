@@ -2,59 +2,103 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: var(--card_color);
+  padding: 1.5rem;
+  border-radius: 20px;
+  background-color: var(--card_bg);
+  border: 1px solid var(--card_border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.doctorCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+  border-color: var(--primary-300);
 }
 
 .doctorCard__photo {
   width: 150px;
   height: 150px;
   object-fit: cover;
-  border-radius: 70%;
+  border-radius: 50%;
+  border: 4px solid var(--primary-200);
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.doctorCard:hover .doctorCard__photo {
+  transform: scale(1.05);
+  border-color: var(--primary-400);
 }
 
 .doctorCard__name {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
-  color: var(--glacier-100)}
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary_color);
+  text-align: center;
+}
 
 .doctorCard__speciality-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
+  margin-bottom: 0.75rem;
 }
 
 .doctorCard__speciality {
-  display: flex;
-  background-color: var(--glacier-400);
-  color: var(--glacier-100);
-  font-weight: bold;
-  padding: 5px;
-  margin-top: 10px;
-  margin-right: 30px;
-  border-radius: 5px;
+  display: inline-flex;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
 }
 
 .doctorCard__hospital-button-container {
-  margin-top: 10px;
+  margin-top: 0.75rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--card_border);
+}
+
+.doctorCard__hospital {
+  color: var(--header-color);
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .doctorCard__button {
-  background-color: transparent;
+  background: var(--primary-50);
   border: none;
-  color: black;
+  color: var(--primary-700);
   border-radius: 50%;
-  padding: 10px;
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .doctorCard__button:hover {
-  background-color: var(--glacier-400);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: white;
+  transform: translateX(4px);
+}
+
+[theme="dark"] .doctorCard__button {
+  background: var(--primary-900);
+  color: var(--primary-300);
+}
+
+[theme="dark"] .doctorCard__button:hover {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
   color: white;
 }

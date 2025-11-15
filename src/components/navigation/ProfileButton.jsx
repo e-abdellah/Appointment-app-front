@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/Auth.context";
 import useSWR from "swr";
 import { getById } from "../../api";
 import Loader from "../../components/loader/Loader";
+import { useAuth } from "../../contexts/Auth.context";
 
 const ProfileButton = () => {
-
   const { user } = useAuth();
   const apiUrl =
-  // user && user.roles.includes("DOCTOR") && !user.roles.includes("ADMIN") ? `/doctors/${user.id}` : null;
-  user && user.roles.includes("DOCTOR") ? `/doctors/${user.id}` : null;
-
+    // user && user.roles.includes("DOCTOR") && !user.roles.includes("ADMIN") ? `/doctors/${user.id}` : null;
+    user && user.roles.includes("DOCTOR") ? `/doctors/${user.id}` : null;
 
   const { data: doctorDetails, error, isLoading } = useSWR(apiUrl, getById);
-  const backendUrl = "https://appointment-app-2023-24.onrender.com";
-  const photoUrl = `${backendUrl}${doctorDetails?.photo}`;
+
+  const getImageUrl = (photoPath) => {
+    if (!photoPath) return "";
+    if (photoPath.startsWith("http")) return photoPath;
+    const baseUrl = import.meta.env.VITE_API_URL.replace("/api/", "").replace(
+      "/api",
+      ""
+    );
+    return `${baseUrl}${photoPath}`;
+  };
+
+  const photoUrl = getImageUrl(doctorDetails?.photo);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {

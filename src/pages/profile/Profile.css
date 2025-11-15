@@ -1,33 +1,32 @@
 .profile-container {
-  width: 50%; /* Set the width to 50% */
-  margin: auto; /* Center the container */
-  padding-top: 5%;
-  padding-bottom: 15%;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px 5% 3rem;
+  min-height: 100vh;
 }
 
-
 .profile-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 3rem;
-  padding-left: 10%;
-  width: 100%;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 2rem;
   color: var(--secondary_color);
+  text-align: center;
 }
 
 .profile-error {
-  padding-top: 10%;
-  padding-bottom: 10%;
+  padding: 3rem 0;
   text-align: center;
+  color: var(--error);
 }
 
 .patient-profile-component,
 .doctor-profile-component {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 600px;
+  flex-direction: column;
+  background: var(--card_bg);
+  border: 1px solid var(--card_border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-
-

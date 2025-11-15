@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useCallback } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../contexts/Auth.context";
+import { useLocation, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import Error from "../../components/Error";
-import "./Login.css";
 import Loader from "../../components/loader/Loader";
+import { useAuth } from "../../contexts/Auth.context";
+import "./Login.css";
 
 const validationRules = Yup.object().shape({
   email: Yup.string()
@@ -48,6 +47,11 @@ const Login = () => {
   return (
     <div className="login">
       <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          role: isPatientLogin ? "patient" : "doctor",
+        }}
         validationSchema={validationRules}
         onSubmit={(values, { resetForm, setSubmitting }) => {
           setSubmitting(true);
@@ -55,7 +59,6 @@ const Login = () => {
             setSubmitting(false);
             resetForm();
           });
-          resetForm();
         }}
       >
         {({ isSubmitting }) => (

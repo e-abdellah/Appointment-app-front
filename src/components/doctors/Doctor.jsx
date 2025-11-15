@@ -1,5 +1,5 @@
-import React, { useState, useCallback, memo, useEffect } from "react";
-import { FiCheckCircle, FiXCircle, FiEdit2, FiTrash2 } from "react-icons/fi";
+import { memo, useCallback, useEffect, useState } from "react";
+import { FiCheckCircle, FiEdit2, FiTrash2, FiXCircle } from "react-icons/fi";
 import defaultPhoto from "../../../assets/imgs/default_profile_photo.png";
 import { useAuth } from "../../contexts/Auth.context";
 import "./Doctor.css";
@@ -18,6 +18,16 @@ const DoctorMemoized = memo(function Doctor({
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [editedDoctor, setEditedDoctor] = useState(null);
+
+  const getImageUrl = (photoPath) => {
+    if (!photoPath) return defaultPhoto;
+    if (photoPath.startsWith("http")) return photoPath;
+    const baseUrl = import.meta.env.VITE_API_URL.replace("/api/", "").replace(
+      "/api",
+      ""
+    );
+    return `${baseUrl}${photoPath}`;
+  };
 
   const handleEdit = () => {
     console.log("Editing doctor:", id);
@@ -174,11 +184,7 @@ const DoctorMemoized = memo(function Doctor({
           <img
             className="doctor-photo"
             data-cy="doctor-photo"
-            src={
-              photo
-                ? `https://appointment-app-2023-24.onrender.com${photo}`
-                : defaultPhoto
-            }
+            src={getImageUrl(photo)}
             alt={name}
           />
           <p data-cy="doctor-id">Doctor Id: {id}</p>
@@ -189,15 +195,14 @@ const DoctorMemoized = memo(function Doctor({
           <p data-cy="doctor-about">About: {about}</p>
 
           {/* {(user && user.roles.includes("ADMIN")) || user.id === id ? ( */}
-            <>
-              <button onClick={handleEdit} data-cy="doctor-edit-button">
-                <FiEdit2 size={24} />
-              </button>
-              <button onClick={handleDelete} data-cy="doctor-delete-button">
-                <FiTrash2 size={24} />
-              </button>
-            </>
-          {/* ) : null} */}
+          <>
+            <button onClick={handleEdit} data-cy="doctor-edit-button">
+              <FiEdit2 size={24} />
+            </button>
+            <button onClick={handleDelete} data-cy="doctor-delete-button">
+              <FiTrash2 size={24} />
+            </button>
+          </>
         </>
       )}
     </div>
