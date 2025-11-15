@@ -3,73 +3,118 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 10%;
-  padding-bottom: 10%;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--primary-50) 0%, #ffffff 100%);
 }
 
-.login__title {
-  font-size: 2em;
-  margin-bottom: 2em;
-  color: #333;
+[theme="dark"] .register {
+  background: linear-gradient(135deg, var(--gray-950) 0%, var(--gray-900) 100%);
+}
+
+.register .login__title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: var(--secondary_color);
+  text-align: center;
   text-transform: uppercase;
-  font-weight: bold;
 }
 
-.login__form {
+.register .login__form {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  background-color: var(--glacier-300);
-  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--card_bg);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--card_border);
+}
+
+.register .login__label {
+  font-weight: 600;
+  color: var(--body_color);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.register .login__input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid var(--input_border);
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  color: #333;
+  background: var(--input_bg);
+  color: var(--body_color);
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
 }
 
-.login__input {
-  margin-bottom: 2em;
-  padding: 0.5em;
-  font-size: 1em;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  color: black;
+.register .login__input:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-.login__button {
-  padding: 0.5em;
-  font-size: 1em;
+.register .login__input::placeholder {
+  color: var(--gray-400);
+}
+
+.register .login__button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-top: 10px;
   margin-right: 10px;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: #fff;
-  color: #333;
-  border: 1px solid var(--glacier-600);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-.login__button:hover {
-  background-color: var(--glacier-600);
-  color: #fff;
+.register .login__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
-.login__input-container {
+.register .login__button:not(:first-of-type) {
+  background-color: transparent;
+  color: var(--body_color);
+  border: 1.5px solid var(--input_border);
+  box-shadow: none;
+}
+
+.register .login__button:not(:first-of-type):hover {
+  background-color: var(--gray-100);
+  border-color: var(--gray-400);
+  transform: none;
+}
+
+[theme="dark"] .register .login__button:not(:first-of-type):hover {
+  background-color: var(--gray-800);
+}
+
+.register .login__input-container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 0.5rem;
 }
 
-.login__error {
-  color: red;
+.register .login__error {
+  color: var(--error);
   font-size: 0.8em;
   margin-top: 0.5em;
 }
 
-.login__input-container > div {
+.register .login__input-container > div {
   display: flex;
   flex-direction: column;
 }
 
-.login__input-container > div > div {
-  margin-top: 1.5em; /* Add more space between the checkbox and the start time */
+.register .login__input-container > div > div {
+  margin-top: 1.5em;
 }
