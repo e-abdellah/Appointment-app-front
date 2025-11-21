@@ -77,9 +77,9 @@ const NavBar = () => {
   return (
     <div className="app-navbar" ref={navRef}>
       <div className="app-navbar-links">
-        <div className="app-navbar-links__logo">
+        <Link to="/" className="app-navbar-links__logo">
           <img src={logo} alt="logo" />
-        </div>
+        </Link>
         <div className="app-navbar-links__container">
           <div
             className="app-navbar-links__indicator"
